@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Belfry 2026 — Staðan</title>
+<meta property="og:title" content="Belfry 2026 — Staðan" />
+<meta property="og:description" content="Lifandi staða — Stableford punktar, Ryder Cup, fuglar, næst holu og fleira." />
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: #f5f6f8; color: #1d2433;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1500px; margin: 0 auto; padding: 20px; }
+  header.app-header {
+    position: relative; color: #fff;
+    padding: 32px 28px; border-radius: 14px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(26,58,95,.18);
+    overflow: hidden; min-height: 140px;
+  }
+  header.app-header .header-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  header.app-header .header-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(20,38,66,.65) 0%, rgba(20,38,66,.35) 60%, rgba(20,38,66,.15) 100%);
+    z-index: 1;
+  }
+  header.app-header .header-content { position: relative; z-index: 2; }
+  header.app-header h1 { margin: 0; font-size: 28px; letter-spacing: 0.3px; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
+  header.app-header .sub { opacity: .95; margin-top: 6px; font-size: 14px; text-shadow: 0 1px 4px rgba(0,0,0,.4); }
+
+  /* Ryder banner */
+  .ryder-banner {
+    background: #fff; border: 1px solid #e8eaef; border-radius: 14px;
+    padding: 20px 24px; margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+  }
+  .ryder-banner .banner-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 16px; flex-wrap: wrap; gap: 8px;
+  }
+  .ryder-banner h2 {
+    margin: 0; font-size: 14px; font-weight: 600;
+    color: #5b6478; text-transform: uppercase; letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ryder-banner h2 .icon { font-size: 18px; }
+  .ryder-banner .banner-note { color: #98a0b0; font-size: 12px; }
+  .ryder-banner .banner-body { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: stretch; }
+  .ryder-banner .team {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 18px 16px; border-radius: 14px; min-width: 0;
+  }
+  .ryder-banner .team.hafn { background: linear-gradient(135deg, #fcecec 0%, #f5dada 100%); color: #9b2d2d; }
+  .ryder-banner .team.rest { background: linear-gradient(135deg, #e8eef7 0%, #d4def0 100%); color: #1e4880; }
+  .ryder-banner .team h3 {
+    margin: 0 0 8px; font-size: clamp(13px, 1.4vw, 16px); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.4px; text-align: center; width: 100%; line-height: 1.2;
+  }
+  .ryder-banner .team .score {
+    font-size: clamp(44px, 7vw, 72px); font-weight: 700;
+    font-variant-numeric: tabular-nums; line-height: 1; margin: 4px 0;
+  }
+  .ryder-banner .vs {
+    font-size: clamp(18px, 2.4vw, 28px); font-weight: 700;
+    color: #98a0b0; text-transform: uppercase; letter-spacing: 1px; align-self: center;
+  }
+  @media (max-width: 560px) {
+    .ryder-banner .banner-body { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  .stats-filter { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .stats-filter .label { font-size: 13px; color: #5b6478; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+  .stats-filter .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .stats-filter button {
+    border: 1px solid #d3d8e0; background: #fff; color: #1d2433;
+    padding: 5px 12px; border-radius: 999px; cursor: pointer;
+    font-size: 13px; font-weight: 500; transition: all .15s;
+  }
+  .stats-filter button:hover { border-color: #c19b56; color: #8a6e3a; }
+  .stats-filter button.active { background: #c19b56; color: #fff; border-color: #c19b56; }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px; margin-bottom: 24px;
+  }
+  .card {
+    background: #fff; border: 1px solid #e8eaef; border-radius: 12px;
+    padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.04);
+  }
+  .card h2 {
+    margin: 0 0 12px 0; font-size: 14px; font-weight: 600;
+    color: #5b6478; text-transform: uppercase; letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card h2 .icon { font-size: 18px; }
+  .card .filter-tag { font-size: 10px; color: #c19b56; font-weight: 700; background: #fdf5e6; padding: 1px 8px; border-radius: 999px; margin-left: auto; }
+  .card .all-tag { font-size: 10px; color: #98a0b0; font-weight: 600; background: #f0f1f4; padding: 1px 8px; border-radius: 999px; margin-left: auto; }
+
+  .lb { list-style: none; padding: 0; margin: 0; }
+  .lb li { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f1f4; font-size: 14px; }
+  .lb li:last-child { border-bottom: 0; }
+  .lb .rank { color: #98a0b0; font-weight: 600; font-size: 13px; }
+  .lb .name { font-weight: 500; }
+  .lb .val { font-weight: 600; color: #1a3a5f; font-variant-numeric: tabular-nums; }
+  .lb .gold .rank { color: #c19b56; }
+  .lb .gold .name { color: #c19b56; font-weight: 700; }
+
+  .show-all-btn {
+    display: none; width: 100%; margin-top: 10px; padding: 6px 0;
+    background: none; border: none; border-top: 1px solid #f0f1f4;
+    cursor: pointer; font-size: 12px; font-weight: 600; color: #1a3a5f; transition: color .15s;
+  }
+  .show-all-btn:hover { color: #c19b56; }
+  .show-all-btn.visible { display: block; }
+
+  .table-wrap { background: #fff; border: 1px solid #e8eaef; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .table-wrap .table-header { padding: 16px 16px 12px; border-bottom: 1px solid #e8eaef; }
+  .table-wrap h2 { margin: 0; font-size: 16px; }
+  .table-wrap .hint { color: #5b6478; font-size: 13px; margin-top: 4px; }
+
+  .day-tabs { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
+  .day-tabs button {
+    border: 1px solid #d3d8e0; background: #fff; color: #1d2433;
+    padding: 6px 14px; border-radius: 999px; cursor: pointer;
+    font-size: 13px; font-weight: 500; transition: all .15s;
+  }
+  .day-tabs button:hover { border-color: #1a3a5f; }
+  .day-tabs button.active { background: #1a3a5f; color: #fff; border-color: #1a3a5f; }
+  .day-tabs button .num { font-weight: 700; }
+  .day-meta { margin-top: 10px; font-size: 13px; color: #5b6478; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .day-meta strong { color: #1a3a5f; }
+  .day-meta .course-badge { padding: 2px 10px; border-radius: 999px; background: #eef2f8; color: #1a3a5f; font-weight: 600; font-size: 12px; }
+  .day-meta .ryder-tag { background: #fcecec; color: #9b2d2d; }
+
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th {
+    background: #fafbfc; text-align: left; padding: 10px 8px; font-weight: 600;
+    color: #5b6478; font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px;
+    border-bottom: 1px solid #e8eaef; white-space: nowrap;
+    cursor: pointer; user-select: none; position: relative;
+  }
+  thead th.num { text-align: right; }
+  thead th:hover { color: #1a3a5f; background: #f0f3f7; }
+  thead th .sort-arrow { display: inline-block; margin-left: 4px; color: #c3c8d2; font-size: 10px; }
+  thead th.sort-asc, thead th.sort-desc { color: #1a3a5f; background: #eef2f8; }
+  thead th.sort-asc .sort-arrow, thead th.sort-desc .sort-arrow { color: #1a3a5f; }
+
+  thead th.group-start, tbody td.group-start { border-left: 2px solid #e1e5ec; }
+  thead th.day-col, tbody td.day-col { background: #fff8ec; }
+  thead th.day-col:hover { background: #fdedc9; }
+
+  tbody td { padding: 6px 10px; border-bottom: 1px solid #f0f1f4; vertical-align: middle; }
+  tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:hover { background: #fafbfc; }
+  tbody tr:hover td.day-col { background: #fcf2da; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+  .badge.hafn { background: #fcecec; color: #9b2d2d; }
+  .badge.rest { background: #e8eef7; color: #1e4880; }
+  .computed { font-weight: 600; color: #1a3a5f; }
+  .empty { color: #c3c8d2; }
+
+  footer {
+    text-align: center; color: #98a0b0; font-size: 12px;
+    padding: 24px 0; margin-top: 16px;
+  }
+  footer a { color: #1a3a5f; }
+
+  @media (max-width: 720px) {
+    header.app-header h1 { font-size: 22px; }
+    .wrap { padding: 12px; }
+    thead th, tbody td { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="app-header">
+    <svg class="header-bg" viewBox="0 0 1400 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a3a5f"/>
+          <stop offset="55%" stop-color="#4d6f96"/>
+          <stop offset="100%" stop-color="#dfb986"/>
+        </linearGradient>
+        <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4a7045"/><stop offset="100%" stop-color="#2e4a2d"/>
+        </linearGradient>
+        <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2e4a2d"/><stop offset="100%" stop-color="#1c2e1c"/>
+        </linearGradient>
+        <linearGradient id="fairway" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3f6132"/><stop offset="100%" stop-color="#1c2e1c"/>
+        </linearGradient>
+        <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a6b96"/><stop offset="100%" stop-color="#1a3a5f"/>
+        </linearGradient>
+      </defs>
+      <rect width="1400" height="280" fill="url(#sky)"/>
+      <circle cx="1100" cy="105" r="55" fill="#ffe5b5" opacity="0.18"/>
+      <circle cx="1100" cy="105" r="38" fill="#fff3d4" opacity="0.32"/>
+      <path d="M0,175 Q150,145 350,162 Q480,170 560,160 L585,160 L585,135 L595,135 L595,128 L610,128 L610,135 L620,135 L620,160 L660,160 Q820,140 1050,160 T1400,170 L1400,280 L0,280 Z" fill="url(#hillFar)" opacity="0.92"/>
+      <rect x="595" y="128" width="15" height="32" fill="#3a4d52" opacity="0.55"/>
+      <polygon points="595,128 610,128 602.5,118" fill="#3a4d52" opacity="0.55"/>
+      <path d="M0,210 Q300,180 600,200 T1200,205 L1400,200 L1400,280 L0,280 Z" fill="url(#hillMid)"/>
+      <g opacity="0.75" fill="#152419">
+        <circle cx="40" cy="200" r="11"/><circle cx="68" cy="204" r="9"/>
+        <circle cx="92" cy="200" r="13"/><circle cx="120" cy="204" r="10"/>
+        <circle cx="148" cy="202" r="11"/>
+        <circle cx="1255" cy="200" r="10"/><circle cx="1285" cy="203" r="13"/>
+        <circle cx="1320" cy="200" r="9"/><circle cx="1348" cy="202" r="11"/>
+      </g>
+      <ellipse cx="950" cy="248" rx="220" ry="20" fill="url(#water)" opacity="0.85"/>
+      <path d="M0,245 Q260,225 540,235 Q680,240 800,242 L1080,243 Q1190,240 1280,238 T1400,237 L1400,280 L0,280 Z" fill="url(#fairway)"/>
+      <line x1="880" y1="180" x2="880" y2="215" stroke="#3d2818" stroke-width="1.5"/>
+      <path d="M880,180 L900,184 L880,189 Z" fill="#c19b56"/>
+    </svg>
+    <div class="header-overlay"></div>
+    <div class="header-content">
+      <h1>Belfry 2026 — Lifandi staðan</h1>
+      <div class="sub">14.–18. maí · 32 leikmenn · Síðast uppfært: <span id="last-updated">—</span></div>
+    </div>
+  </header>
+
+  <!-- Ryder banner -->
+  <div class="ryder-banner">
+    <div class="banner-header">
+      <h2><span class="icon">🤝</span> Ryder Cup</h2>
+      <div class="banner-note">Hafnarfjörður gegn restinni · Hámark 24 vinningar (lau. 8 + sun. 16)</div>
+    </div>
+    <div class="banner-body">
+      <div class="team hafn"><h3>Hafnarfjörður</h3><div class="score" id="ryder-hafn">0</div></div>
+      <div class="vs">vs</div>
+      <div class="team rest"><h3>Restin</h3><div class="score" id="ryder-rest">0</div></div>
+    </div>
+  </div>
+
+  <div class="stats-filter">
+    <span class="label">Sía tölfræði</span>
+    <div class="filter-tabs" id="stats-filter-tabs"></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2><span class="icon">🏆</span> Belfry 2026 meistarinn <span id="top3-tag"></span></h2>
+      <ol class="lb" id="lb-top3"></ol>
+      <button class="show-all-btn" data-card="top3">Sýna alla</button>
+    </div>
+    <div class="card">
+      <h2><span class="icon">🏠</span> Besta herbergið <span id="rooms-tag"></span></h2>
+      <ol class="lb" id="lb-rooms"></ol>
+      <button class="show-all-btn" data-card="rooms">Sýna alla</button>
+    </div>
+    <div class="card">
+      <h2><span class="icon">⛳</span> Besti kylfingurinn <span id="strokes-tag"></span></h2>
+      <ol class="lb" id="lb-strokes"></ol>
+      <button class="show-all-btn" data-card="strokes">Sýna alla</button>
+    </div>
+    <div class="card">
+      <h2><span class="icon">🐦</span> Fuglasöngvarinn <span id="birdies-tag"></span></h2>
+      <ol class="lb" id="lb-birdies"></ol>
+      <button class="show-all-btn" data-card="birdies">Sýna alla</button>
+    </div>
+    <div class="card">
+      <h2><span class="icon">🎯</span> Næstur holu (cm) <span class="all-tag">heild</span></h2>
+      <ol class="lb" id="lb-ctp-cm"></ol>
+      <button class="show-all-btn" data-card="ctpCm">Sýna alla</button>
+    </div>
+    <div class="card">
+      <h2><span class="icon">🏌️</span> Holumeistarinn <span class="all-tag">heild</span></h2>
+      <ol class="lb" id="lb-ctp-count"></ol>
+      <button class="show-all-btn" data-card="ctpCount">Sýna alla</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-header">
+      <h2>Leikmenn — skor og hliðarkeppnir</h2>
+      <div class="hint">Veldu dag til að sjá þann hring. Smelltu á dálkfyrirsögn til að raða.</div>
+      <div class="day-tabs" id="day-tabs"></div>
+      <div class="day-meta" id="day-meta"></div>
+    </div>
+    <div class="scroll">
+      <table id="player-table">
+        <thead>
+          <tr>
+            <th data-sort="id">#<span class="sort-arrow">↕</span></th>
+            <th data-sort="name">Nafn<span class="sort-arrow">↕</span></th>
+            <th class="num" data-sort="room">Hbg<span class="sort-arrow">↕</span></th>
+            <th data-sort="team">Lið<span class="sort-arrow">↕</span></th>
+            <th class="num" data-sort="hcp">Forgj.<span class="sort-arrow">↕</span></th>
+            <th class="num group-start day-col" data-sort="strokesDay">Högg<span class="sort-arrow">↕</span></th>
+            <th class="num day-col" data-sort="ptsDay">Punktar<span class="sort-arrow">↕</span></th>
+            <th class="num day-col" data-sort="fDay">Fuglar<span class="sort-arrow">↕</span></th>
+            <th class="num group-start" data-sort="top3">Top 3 pts<span class="sort-arrow">↕</span></th>
+            <th class="num" data-sort="totalPts">Σ pts<span class="sort-arrow">↕</span></th>
+            <th class="num" data-sort="totalStrokes">Σ högg<span class="sort-arrow">↕</span></th>
+            <th class="num" data-sort="fugTotal">Σ fuglar<span class="sort-arrow">↕</span></th>
+            <th class="group-start" data-sort="ctpInput">CTP (cm)<span class="sort-arrow">↕</span></th>
+            <th class="num" data-sort="ctpBest">Næst<span class="sort-arrow">↕</span></th>
+            <th class="num" data-sort="ctpCount">Holu#<span class="sort-arrow">↕</span></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    Belfry 2026 — Hafnfirðingaferð · Mótsstjóri: Gummi Óskarsson
+  </footer>
+</div>
+
+<!-- Snapshot data — uppfært handvirkt eftir hvern hring -->
+<script type="application/json" id="snapshot">
+{
+  "lastUpdated": "2026-05-12T22:00:00",
+  "ryder": { "hafn": 5, "rest": 3 },
+  "players": {
+    "8": {
+      "strokes": { "s1": 47 },
+      "points":  { "h1": 12 },
+      "birdies": { "r1": 1 },
+      "ctp": [1100, 88]
+    }
+  }
+}
+</script>
+
+<script>
+(function () {
+  // Roster
+  const PLAYERS = [
+    { id: 6,  name: "Gísli Sigurbergsson",         room: 15, hcp: 7,    team: "H" },
+    { id: 14, name: "Ívar Ásgrímsson",             room: 1,  hcp: 8,    team: "H" },
+    { id: 18, name: "Rúnar Guðjónsson",            room: 1,  hcp: 8,    team: "H" },
+    { id: 8,  name: "Guðmundur Örn Óskarsson",     room: 9,  hcp: 10,   team: "H" },
+    { id: 4,  name: "Björn Þorfinnsson",           room: 14, hcp: 11,   team: "H" },
+    { id: 31, name: "Tryggvi Jónsson",             room: 8,  hcp: 12,   team: "H" },
+    { id: 25, name: "Sturla Jónsson",              room: 8,  hcp: 13,   team: "H" },
+    { id: 27, name: "Þorgils Ragnarsson",          room: 15, hcp: 13,   team: "H" },
+    { id: 5,  name: "Friðleifur Hallgrímsson",     room: 13, hcp: 13.7, team: "H" },
+    { id: 10, name: "Henning Freyr Henningsson",   room: 16, hcp: 15,   team: "H" },
+    { id: 2,  name: "Ásgeir Ólafsson",             room: 16, hcp: 16,   team: "H" },
+    { id: 16, name: "Reynir Kristjánsson",         room: 10, hcp: 18,   team: "H" },
+    { id: 9,  name: "Haraldur Sæmundsson",         room: 13, hcp: 18.2, team: "H" },
+    { id: 11, name: "Hörður Pétursson",            room: 10, hcp: 24,   team: "H" },
+    { id: 30, name: "Þorvaldur Ólafsson",          room: 14, hcp: 24.2, team: "H" },
+    { id: 7,  name: "Gísli Þór Magnússon",         room: 9,  hcp: 33,   team: "H" },
+    { id: 26, name: "Sveinn Bjarnason",            room: 2,  hcp: 5,    team: "R" },
+    { id: 21, name: "Sigurður Páll Steindórsson",  room: 3,  hcp: 7.9,  team: "R" },
+    { id: 3,  name: "Bjartmar Halldórsson",        room: 4,  hcp: 10,   team: "R" },
+    { id: 22, name: "Sigurður Sigurjónsson",       room: 12, hcp: 15,   team: "R" },
+    { id: 24, name: "Steinþór Óli Hilmarsson",     room: 5,  hcp: 16,   team: "R" },
+    { id: 13, name: "Ingvar Rafn Gunnarsson",      room: 3,  hcp: 18.9, team: "R" },
+    { id: 19, name: "Sigurður Guðjón Jónsson",     room: 7,  hcp: 18.9, team: "R" },
+    { id: 32, name: "Valur Oddgeir Bjarnason",     room: 6,  hcp: 20.6, team: "R" },
+    { id: 17, name: "Rúnar D. Bjarnason",          room: 2,  hcp: 21.2, team: "R" },
+    { id: 15, name: "Jón Jónsson",                 room: 5,  hcp: 23.4, team: "R" },
+    { id: 12, name: "Ingþór Björgvinsson",         room: 4,  hcp: 25,   team: "R" },
+    { id: 23, name: "Skapti Valsson",              room: 12, hcp: 25,   team: "R" },
+    { id: 29, name: "Þorsteinn Lárus Vigfússon",   room: 7,  hcp: 25,   team: "R" },
+    { id: 28, name: "Þóroddur Bjarnason",          room: 6,  hcp: 27.5, team: "R" },
+    { id: 1,  name: "Ásgeir Kr Sigurðsson",        room: 11, hcp: 34,   team: "R" },
+    { id: 20, name: "Sigurður Gunnarsson",         room: 11, hcp: 36,   team: "R" },
+  ];
+
+  // Disambiguated short names (Sigurður St. etc.) for room labels
+  const DISPLAY_NAMES = (function () {
+    const groups = {};
+    PLAYERS.forEach(p => {
+      const first = p.name.split(" ")[0];
+      (groups[first] = groups[first] || []).push(p);
+    });
+    const map = {};
+    Object.entries(groups).forEach(([first, members]) => {
+      if (members.length === 1) { map[members[0].id] = first; return; }
+      members.forEach(m => {
+        const surname = m.name.split(" ").slice(-1)[0];
+        let len = 1;
+        while (len <= surname.length) {
+          const prefix = surname.slice(0, len);
+          const conflict = members.some(o => o !== m && o.name.split(" ").slice(-1)[0].slice(0, len) === prefix);
+          if (!conflict) break;
+          len++;
+        }
+        const suffix = len < surname.length ? "." : "";
+        map[m.id] = `${first} ${surname.slice(0, len)}${suffix}`;
+      });
+    });
+    return map;
+  })();
+
+  const DAYS = [
+    { num: 1, short: "D1", weekday: "Fimmtudagur", date: "14. maí", course: "Brabazon" },
+    { num: 2, short: "D2", weekday: "Föstudagur",  date: "15. maí", course: "Derby" },
+    { num: 3, short: "D3", weekday: "Laugardagur", date: "16. maí", course: "Brabazon",     tag: "Ryder dagur 1" },
+    { num: 4, short: "D4", weekday: "Sunnudagur",  date: "17. maí", course: "PGA National", tag: "Ryder dagur 2" },
+    { num: 5, short: "D5", weekday: "Mánudagur",   date: "18. maí", course: "Brabazon" },
+  ];
+
+  // ---------- Load snapshot data ----------
+  const snapshot = (function () {
+    try { return JSON.parse(document.getElementById("snapshot").textContent); }
+    catch (e) { return { lastUpdated: null, ryder: { hafn: 0, rest: 0 }, players: {} }; }
+  })();
+
+  function getPlayerData(id) {
+    return snapshot.players[id] || { strokes: {}, points: {}, birdies: {}, ctp: [] };
+  }
+  function getPoints(id)  { return getPlayerData(id).points  || {}; }
+  function getStrokes(id) { return getPlayerData(id).strokes || {}; }
+  function getBirdies(id) { return getPlayerData(id).birdies || {}; }
+  function getCtps(id)    { return getPlayerData(id).ctp     || []; }
+
+  // ---------- UI state (in-memory only) ----------
+  const ui = {
+    activeDay: 1,
+    statsFilter: "all",
+    cardExpanded: { top3:false, rooms:false, strokes:false, birdies:false, ctpCm:false, ctpCount:false },
+    sort: { col: null, dir: "asc" }
+  };
+  // Restore from localStorage (per-viewer preferences)
+  try {
+    const saved = JSON.parse(localStorage.getItem("belfry_view_prefs") || "{}");
+    if (saved.activeDay)   ui.activeDay = saved.activeDay;
+    if (saved.statsFilter) ui.statsFilter = saved.statsFilter;
+    if (saved.cardExpanded) Object.assign(ui.cardExpanded, saved.cardExpanded);
+  } catch (e) {}
+  function saveUi() {
+    try { localStorage.setItem("belfry_view_prefs", JSON.stringify(ui)); } catch (e) {}
+  }
+
+  // ---------- Helpers ----------
+  function asNum(v) { return (v == null || v === "") ? null : Number(v); }
+  function fmt(v) { return v == null ? '<span class="empty">—</span>' : String(v); }
+  function topN(arr, n) { const a = arr.filter(v => typeof v === "number"); a.sort((x,y) => y-x); return a.slice(0,n).reduce((s,v) => s+v, 0); }
+  function sumNums(obj) { return Object.values(obj).filter(v => typeof v === "number").reduce((s,v) => s+v, 0); }
+  function activeStatsDays() { return ui.statsFilter === "all" ? [1,2,3,4,5] : [Number(ui.statsFilter)]; }
+  function filterTagHtml() { return ui.statsFilter === "all" ? '<span class="all-tag">5 dagar</span>' : `<span class="filter-tag">D${ui.statsFilter} eingöngu</span>`; }
+  function filteredPoints(pts) { return activeStatsDays().reduce((s,d) => s + (typeof pts["h"+d] === "number" ? pts["h"+d] : 0), 0); }
+  function filteredStrokes(st) { return activeStatsDays().reduce((s,d) => s + (typeof st["s"+d] === "number" ? st["s"+d] : 0), 0); }
+  function filteredBirdies(fr) { return activeStatsDays().reduce((s,d) => s + (typeof fr["r"+d] === "number" ? fr["r"+d] : 0), 0); }
+  function filteredTop3(pts) {
+    const v = activeStatsDays().map(d => pts["h"+d]).filter(x => typeof x === "number");
+    v.sort((a,b) => b-a);
+    return v.slice(0,3).reduce((s,x) => s+x, 0);
+  }
+  function filteredRounds(obj, key) {
+    return activeStatsDays().filter(d => typeof obj[key + d] === "number").length;
+  }
+  function bestCtp(list) { return (!list || list.length === 0) ? null : Math.min.apply(null, list); }
+
+  // ---------- Sorting ----------
+  function sortValue(p, col) {
+    const pts = getPoints(p.id), st = getStrokes(p.id), fr = getBirdies(p.id), ctps = getCtps(p.id), d = ui.activeDay;
+    switch (col) {
+      case "id": return p.id;
+      case "name": return p.name;
+      case "room": return p.room;
+      case "team": return p.team;
+      case "hcp": return p.hcp;
+      case "strokesDay": return asNum(st["s"+d]);
+      case "ptsDay": return asNum(pts["h"+d]);
+      case "fDay": return asNum(fr["r"+d]);
+      case "top3": return topN(Object.values(pts), 3) || null;
+      case "totalPts": return sumNums(pts) || null;
+      case "totalStrokes": return sumNums(st) || null;
+      case "fugTotal": return sumNums(fr) || null;
+      case "ctpInput": return ctps.length > 0 ? ctps.join(",") : null;
+      case "ctpBest": return bestCtp(ctps);
+      case "ctpCount": return ctps.length || null;
+      default: return p.id;
+    }
+  }
+  function getSortedPlayers() {
+    if (!ui.sort.col) return PLAYERS.slice();
+    const col = ui.sort.col, dir = ui.sort.dir === "desc" ? -1 : 1;
+    const isStr = (col === "name" || col === "team" || col === "ctpInput");
+    return PLAYERS.slice().sort((a,b) => {
+      const va = sortValue(a, col), vb = sortValue(b, col);
+      if (va == null && vb == null) return a.id - b.id;
+      if (va == null) return 1;
+      if (vb == null) return -1;
+      if (isStr) return va.localeCompare(vb, "is") * dir;
+      return (va - vb) * dir;
+    });
+  }
+  function updateSortArrows() {
+    document.querySelectorAll("#player-table thead th[data-sort]").forEach(th => {
+      th.classList.remove("sort-asc", "sort-desc");
+      const arrow = th.querySelector(".sort-arrow");
+      if (ui.sort.col === th.dataset.sort) {
+        th.classList.add(ui.sort.dir === "desc" ? "sort-desc" : "sort-asc");
+        arrow.textContent = ui.sort.dir === "desc" ? "↓" : "↑";
+      } else arrow.textContent = "↕";
+    });
+  }
+
+  // ---------- Render player table ----------
+  const tbody = document.querySelector("#player-table tbody");
+  function buildRow(p) {
+    const d = ui.activeDay;
+    const pts = getPoints(p.id), st = getStrokes(p.id), fr = getBirdies(p.id), ctps = getCtps(p.id);
+    const tr = document.createElement("tr");
+    tr.dataset.pid = p.id;
+    const t3 = topN(Object.values(pts), 3);
+    const tPts = sumNums(pts), tSt = sumNums(st), tF = sumNums(fr);
+    tr.innerHTML = `
+      <td class="num">${p.id}</td>
+      <td>${p.name}</td>
+      <td class="num">${p.room}</td>
+      <td><span class="badge ${p.team === "H" ? "hafn" : "rest"}">${p.team === "H" ? "Hafn." : "Rest"}</span></td>
+      <td class="num">${p.hcp}</td>
+      <td class="num group-start day-col">${fmt(st["s"+d])}</td>
+      <td class="num day-col">${fmt(pts["h"+d])}</td>
+      <td class="num day-col">${fmt(fr["r"+d])}</td>
+      <td class="num computed group-start">${t3 || '<span class="empty">—</span>'}</td>
+      <td class="num computed">${tPts || '<span class="empty">—</span>'}</td>
+      <td class="num computed">${tSt || '<span class="empty">—</span>'}</td>
+      <td class="num computed">${tF || '<span class="empty">—</span>'}</td>
+      <td class="group-start">${ctps.length ? ctps.join(", ") : '<span class="empty">—</span>'}</td>
+      <td class="num computed">${bestCtp(ctps) != null ? bestCtp(ctps) : '<span class="empty">—</span>'}</td>
+      <td class="num computed">${ctps.length || '<span class="empty">—</span>'}</td>
+    `;
+    return tr;
+  }
+  function renderTable() {
+    tbody.innerHTML = "";
+    getSortedPlayers().forEach(p => tbody.appendChild(buildRow(p)));
+    updateSortArrows();
+  }
+  document.querySelectorAll("#player-table thead th[data-sort]").forEach(th => {
+    th.addEventListener("click", () => {
+      const col = th.dataset.sort;
+      const startsDesc = ["strokesDay","ptsDay","fDay","top3","totalPts","fugTotal","ctpCount"].includes(col);
+      const startsAsc = ["totalStrokes","ctpBest"].includes(col);
+      const defaultDir = startsDesc ? "desc" : (startsAsc ? "asc" : "asc");
+      if (ui.sort.col !== col) ui.sort = { col, dir: defaultDir };
+      else if ((startsDesc && ui.sort.dir === "desc") || (!startsDesc && ui.sort.dir === "asc")) ui.sort.dir = ui.sort.dir === "asc" ? "desc" : "asc";
+      else ui.sort = { col: null, dir: "asc" };
+      renderTable();
+    });
+  });
+
+  // ---------- Day tabs ----------
+  function renderDayTabs() {
+    const wrap = document.getElementById("day-tabs");
+    wrap.innerHTML = "";
+    DAYS.forEach(d => {
+      const btn = document.createElement("button");
+      if (d.num === ui.activeDay) btn.classList.add("active");
+      btn.innerHTML = `<span class="num">${d.short}</span> · ${d.weekday.slice(0,3)}.`;
+      btn.title = `${d.weekday} ${d.date} — ${d.course}`;
+      btn.addEventListener("click", () => {
+        ui.activeDay = d.num;
+        saveUi();
+        renderDayTabs();
+        renderDayMeta();
+        renderTable();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+  function renderDayMeta() {
+    const d = DAYS.find(x => x.num === ui.activeDay) || DAYS[0];
+    document.getElementById("day-meta").innerHTML = `
+      <strong>${d.weekday} ${d.date}</strong>
+      <span class="course-badge">${d.course}</span>
+      ${d.tag ? `<span class="course-badge ryder-tag">${d.tag}</span>` : ""}
+    `;
+  }
+
+  // ---------- Leaderboards ----------
+  const COLLAPSED = 5;
+  function lb(cardKey, targetId, rows, valueFmt) {
+    const ol = document.getElementById(targetId);
+    ol.innerHTML = "";
+    if (rows.length === 0) {
+      ol.innerHTML = '<li><span></span><span class="name empty">Engin gögn enn</span><span></span></li>';
+    } else {
+      const limit = ui.cardExpanded[cardKey] ? rows.length : COLLAPSED;
+      rows.slice(0, limit).forEach((r, i) => {
+        const li = document.createElement("li");
+        if (i === 0) li.classList.add("gold");
+        li.innerHTML = `<span class="rank">${i+1}.</span><span class="name">${r.name}</span><span class="val">${valueFmt(r.value)}</span>`;
+        ol.appendChild(li);
+      });
+    }
+    const btn = document.querySelector(`.show-all-btn[data-card="${cardKey}"]`);
+    if (btn) {
+      if (rows.length > COLLAPSED) {
+        btn.classList.add("visible");
+        btn.textContent = ui.cardExpanded[cardKey] ? `Sýna færri (${COLLAPSED})` : `Sýna alla (${rows.length})`;
+      } else btn.classList.remove("visible");
+    }
+  }
+  function renderLeaderboards() {
+    document.getElementById("top3-tag").innerHTML    = filterTagHtml();
+    document.getElementById("rooms-tag").innerHTML   = filterTagHtml();
+    document.getElementById("strokes-tag").innerHTML = filterTagHtml();
+    document.getElementById("birdies-tag").innerHTML = filterTagHtml();
+
+    const top3 = PLAYERS.map(p => ({
+      name: p.name,
+      value: filteredTop3(getPoints(p.id)),
+      played: filteredRounds(getPoints(p.id), "h")
+    })).filter(r => r.played > 0).sort((a,b) => b.value - a.value);
+    lb("top3", "lb-top3", top3, v => `${v} pts`);
+
+    const roomMap = {};
+    PLAYERS.forEach(p => {
+      const total = filteredPoints(getPoints(p.id));
+      const played = filteredRounds(getPoints(p.id), "h");
+      if (!roomMap[p.room]) roomMap[p.room] = { room: p.room, players: [], value: 0, played: 0 };
+      roomMap[p.room].players.push(p);
+      roomMap[p.room].value += total;
+      roomMap[p.room].played += played;
+    });
+    const rooms = Object.values(roomMap).filter(r => r.played > 0)
+      .map(r => ({ name: `H${r.room} ${r.players.map(p => DISPLAY_NAMES[p.id]).join("-")}`, value: r.value }))
+      .sort((a,b) => b.value - a.value);
+    lb("rooms", "lb-rooms", rooms, v => `${v} pts`);
+
+    const strokes = PLAYERS.map(p => ({
+      name: p.name,
+      value: filteredStrokes(getStrokes(p.id)),
+      played: filteredRounds(getStrokes(p.id), "s")
+    })).filter(r => r.played > 0).sort((a,b) => a.value - b.value);
+    lb("strokes", "lb-strokes", strokes, v => `${v} högg`);
+
+    const birdies = PLAYERS.map(p => ({ name: p.name, value: filteredBirdies(getBirdies(p.id)) }))
+      .filter(r => r.value > 0).sort((a,b) => b.value - a.value);
+    lb("birdies", "lb-birdies", birdies, v => `${v}`);
+
+    const ctpCm = PLAYERS.map(p => ({ name: p.name, value: bestCtp(getCtps(p.id)) }))
+      .filter(r => typeof r.value === "number").sort((a,b) => a.value - b.value);
+    lb("ctpCm", "lb-ctp-cm", ctpCm, v => `${v} cm`);
+
+    const ctpCount = PLAYERS.map(p => ({ name: p.name, value: getCtps(p.id).length }))
+      .filter(r => r.value > 0).sort((a,b) => b.value - a.value);
+    lb("ctpCount", "lb-ctp-count", ctpCount, v => `${v}×`);
+
+    document.getElementById("ryder-hafn").textContent = snapshot.ryder.hafn || 0;
+    document.getElementById("ryder-rest").textContent = snapshot.ryder.rest || 0;
+  }
+  document.querySelectorAll(".show-all-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.card;
+      ui.cardExpanded[key] = !ui.cardExpanded[key];
+      saveUi();
+      renderLeaderboards();
+    });
+  });
+
+  // ---------- Stats filter ----------
+  function renderStatsFilter() {
+    const wrap = document.getElementById("stats-filter-tabs");
+    wrap.innerHTML = "";
+    [{v:"all",l:"Allir dagar"},{v:"1",l:"D1"},{v:"2",l:"D2"},{v:"3",l:"D3"},{v:"4",l:"D4"},{v:"5",l:"D5"}].forEach(o => {
+      const btn = document.createElement("button");
+      if (ui.statsFilter === o.v) btn.classList.add("active");
+      btn.textContent = o.l;
+      btn.addEventListener("click", () => {
+        ui.statsFilter = o.v;
+        saveUi();
+        renderStatsFilter();
+        renderLeaderboards();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  // ---------- Last updated label ----------
+  function renderLastUpdated() {
+    const el = document.getElementById("last-updated");
+    if (!snapshot.lastUpdated) { el.textContent = "—"; return; }
+    try {
+      const d = new Date(snapshot.lastUpdated);
+      const days = ["sunnudagur","mánudagur","þriðjudagur","miðvikudagur","fimmtudagur","föstudagur","laugardagur"];
+      const months = ["jan","feb","mar","apr","maí","jún","júl","ágú","sep","okt","nóv","des"];
+      const hh = String(d.getHours()).padStart(2,"0");
+      const mm = String(d.getMinutes()).padStart(2,"0");
+      el.textContent = `${days[d.getDay()]} ${d.getDate()}. ${months[d.getMonth()]} kl. ${hh}:${mm}`;
+    } catch (e) { el.textContent = snapshot.lastUpdated; }
+  }
+
+  // ---------- Init ----------
+  renderLastUpdated();
+  renderStatsFilter();
+  renderDayTabs();
+  renderDayMeta();
+  renderTable();
+  renderLeaderboards();
+})();
+</script>
+</body>
+</html>
