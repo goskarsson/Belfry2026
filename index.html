@@ -5,177 +5,160 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Belfry 2026 — Staðan</title>
 <meta property="og:title" content="Belfry 2026 — Staðan" />
-<meta property="og:description" content="Lifandi staða — Stableford punktar, Ryder Cup, fuglar, næst holu og fleira." />
+<meta property="og:description" content="Lifandi staða — Stableford punktar, Ryder Cup, Drykkurinn, fuglar, næst holu og fleira." />
 <style>
-  :root { color-scheme: light; }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    background: #f5f6f8; color: #1d2433;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 1500px; margin: 0 auto; padding: 20px; }
-  header.app-header {
-    position: relative; color: #fff;
-    padding: 32px 28px; border-radius: 14px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 12px rgba(26,58,95,.18);
-    overflow: hidden; min-height: 140px;
-  }
-  header.app-header .header-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-  header.app-header .header-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(90deg, rgba(20,38,66,.65) 0%, rgba(20,38,66,.35) 60%, rgba(20,38,66,.15) 100%);
-    z-index: 1;
-  }
-  header.app-header .header-content { position: relative; z-index: 2; }
-  header.app-header h1 { margin: 0; font-size: 28px; letter-spacing: 0.3px; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
-  header.app-header .sub { opacity: .95; margin-top: 6px; font-size: 14px; text-shadow: 0 1px 4px rgba(0,0,0,.4); }
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; background: #f5f6f8; color: #1d2433; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1500px; margin: 0 auto; padding: 20px; }
+header.app-header { position: relative; color: #fff; padding: 32px 28px; border-radius: 14px; margin-bottom: 24px; box-shadow: 0 4px 12px rgba(26,58,95,.18); overflow: hidden; min-height: 140px; }
+header.app-header .header-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+header.app-header .header-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,38,66,.65) 0%, rgba(20,38,66,.35) 60%, rgba(20,38,66,.15) 100%); z-index: 1; }
+header.app-header .header-content { position: relative; z-index: 2; }
+header.app-header h1 { margin: 0; font-size: 28px; letter-spacing: 0.3px; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
+header.app-header .sub { opacity: .95; margin-top: 6px; font-size: 14px; text-shadow: 0 1px 4px rgba(0,0,0,.4); }
 
-  /* Ryder banner */
-  .ryder-banner {
-    background: #fff; border: 1px solid #e8eaef; border-radius: 14px;
-    padding: 20px 24px; margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.04);
-  }
-  .ryder-banner .banner-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 16px; flex-wrap: wrap; gap: 8px;
-  }
-  .ryder-banner h2 {
-    margin: 0; font-size: 14px; font-weight: 600;
-    color: #5b6478; text-transform: uppercase; letter-spacing: 0.5px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .ryder-banner h2 .icon { font-size: 18px; }
-  .ryder-banner .banner-note { color: #98a0b0; font-size: 12px; }
-  .ryder-banner .banner-body { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: stretch; }
-  .ryder-banner .team {
-    display: flex; flex-direction: column; align-items: center;
-    padding: 18px 16px; border-radius: 14px; min-width: 0;
-  }
-  .ryder-banner .team.hafn { background: linear-gradient(135deg, #fcecec 0%, #f5dada 100%); color: #9b2d2d; }
-  .ryder-banner .team.rest { background: linear-gradient(135deg, #e8eef7 0%, #d4def0 100%); color: #1e4880; }
-  .ryder-banner .team h3 {
-    margin: 0 0 8px; font-size: clamp(13px, 1.4vw, 16px); font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.4px; text-align: center; width: 100%; line-height: 1.2;
-  }
-  .ryder-banner .team .score {
-    font-size: clamp(44px, 7vw, 72px); font-weight: 700;
-    font-variant-numeric: tabular-nums; line-height: 1; margin: 4px 0;
-  }
-  .ryder-banner .vs {
-    font-size: clamp(18px, 2.4vw, 28px); font-weight: 700;
-    color: #98a0b0; text-transform: uppercase; letter-spacing: 1px; align-self: center;
-  }
-  @media (max-width: 560px) {
-    .ryder-banner .banner-body { grid-template-columns: 1fr; gap: 12px; }
-  }
+.ryder-banner { background: #fff; border: 1px solid #e8eaef; border-radius: 14px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.ryder-banner .banner-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+.ryder-banner h2 { margin: 0; font-size: 14px; font-weight: 600; color: #5b6478; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
+.ryder-banner h2 .icon { font-size: 18px; }
+.ryder-banner .banner-note { color: #98a0b0; font-size: 12px; }
+.ryder-banner .banner-body { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: stretch; }
+.ryder-banner .team { display: flex; flex-direction: column; align-items: center; padding: 18px 16px; border-radius: 14px; min-width: 0; }
+.ryder-banner .team.hafn { background: linear-gradient(135deg, #fcecec 0%, #f5dada 100%); color: #9b2d2d; }
+.ryder-banner .team.rest { background: linear-gradient(135deg, #e8eef7 0%, #d4def0 100%); color: #1e4880; }
+.ryder-banner .team h3 { margin: 0 0 8px; font-size: clamp(13px, 1.4vw, 16px); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; text-align: center; width: 100%; line-height: 1.2; }
+.ryder-banner .team .score { font-size: clamp(44px, 7vw, 72px); font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; margin: 4px 0; }
+.ryder-banner .vs { font-size: clamp(18px, 2.4vw, 28px); font-weight: 700; color: #98a0b0; text-transform: uppercase; letter-spacing: 1px; align-self: center; }
+@media (max-width: 560px) { .ryder-banner .banner-body { grid-template-columns: 1fr; gap: 12px; } }
 
-  .stats-filter { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
-  .stats-filter .label { font-size: 13px; color: #5b6478; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
-  .stats-filter .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
-  .stats-filter button {
-    border: 1px solid #d3d8e0; background: #fff; color: #1d2433;
-    padding: 5px 12px; border-radius: 999px; cursor: pointer;
-    font-size: 13px; font-weight: 500; transition: all .15s;
-  }
-  .stats-filter button:hover { border-color: #c19b56; color: #8a6e3a; }
-  .stats-filter button.active { background: #c19b56; color: #fff; border-color: #c19b56; }
+.stats-filter { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.stats-filter .label { font-size: 13px; color: #5b6478; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+.stats-filter .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.stats-filter button { border: 1px solid #d3d8e0; background: #fff; color: #1d2433; padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all .15s; }
+.stats-filter button:hover { border-color: #c19b56; color: #8a6e3a; }
+.stats-filter button.active { background: #c19b56; color: #fff; border-color: #c19b56; }
 
-  .grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px; margin-bottom: 24px;
-  }
-  .card {
-    background: #fff; border: 1px solid #e8eaef; border-radius: 12px;
-    padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.04);
-  }
-  .card h2 {
-    margin: 0 0 12px 0; font-size: 14px; font-weight: 600;
-    color: #5b6478; text-transform: uppercase; letter-spacing: 0.5px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .card h2 .icon { font-size: 18px; }
-  .card .filter-tag { font-size: 10px; color: #c19b56; font-weight: 700; background: #fdf5e6; padding: 1px 8px; border-radius: 999px; margin-left: auto; }
-  .card .all-tag { font-size: 10px; color: #98a0b0; font-weight: 600; background: #f0f1f4; padding: 1px 8px; border-radius: 999px; margin-left: auto; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.card { background: #fff; border: 1px solid #e8eaef; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.card h2 { margin: 0 0 12px 0; font-size: 14px; font-weight: 600; color: #5b6478; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
+.card h2 .icon { font-size: 18px; }
+.card .filter-tag { font-size: 10px; color: #c19b56; font-weight: 700; background: #fdf5e6; padding: 1px 8px; border-radius: 999px; margin-left: auto; }
+.card .all-tag { font-size: 10px; color: #98a0b0; font-weight: 600; background: #f0f1f4; padding: 1px 8px; border-radius: 999px; margin-left: auto; }
 
-  .lb { list-style: none; padding: 0; margin: 0; }
-  .lb li { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f1f4; font-size: 14px; }
-  .lb li:last-child { border-bottom: 0; }
-  .lb .rank { color: #98a0b0; font-weight: 600; font-size: 13px; }
-  .lb .name { font-weight: 500; }
-  .lb .val { font-weight: 600; color: #1a3a5f; font-variant-numeric: tabular-nums; }
-  .lb .gold .rank { color: #c19b56; }
-  .lb .gold .name { color: #c19b56; font-weight: 700; }
+.lb { list-style: none; padding: 0; margin: 0; }
+.lb li { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f1f4; font-size: 14px; }
+.lb li:last-child { border-bottom: 0; }
+.lb .rank { color: #98a0b0; font-weight: 600; font-size: 13px; }
+.lb .name { font-weight: 500; }
+.lb .val { font-weight: 600; color: #1a3a5f; font-variant-numeric: tabular-nums; }
+.lb .gold .rank { color: #c19b56; }
+.lb .gold .name { color: #c19b56; font-weight: 700; }
 
-  .show-all-btn {
-    display: none; width: 100%; margin-top: 10px; padding: 6px 0;
-    background: none; border: none; border-top: 1px solid #f0f1f4;
-    cursor: pointer; font-size: 12px; font-weight: 600; color: #1a3a5f; transition: color .15s;
-  }
-  .show-all-btn:hover { color: #c19b56; }
-  .show-all-btn.visible { display: block; }
+.show-all-btn { display: none; width: 100%; margin-top: 10px; padding: 6px 0; background: none; border: none; border-top: 1px solid #f0f1f4; cursor: pointer; font-size: 12px; font-weight: 600; color: #1a3a5f; transition: color .15s; }
+.show-all-btn:hover { color: #c19b56; }
+.show-all-btn.visible { display: block; }
 
-  .table-wrap { background: #fff; border: 1px solid #e8eaef; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
-  .table-wrap .table-header { padding: 16px 16px 12px; border-bottom: 1px solid #e8eaef; }
-  .table-wrap h2 { margin: 0; font-size: 16px; }
-  .table-wrap .hint { color: #5b6478; font-size: 13px; margin-top: 4px; }
+.rank-delta { display: inline-block; min-width: 26px; font-size: 11px; font-weight: 700; margin-right: 4px; font-variant-numeric: tabular-nums; }
+.rank-delta.up { color: #1a7a3c; }
+.rank-delta.down { color: #9b2d2d; }
+.rank-delta.same { color: #c3c8d2; }
+.rank-delta.new { color: #c19b56; }
+.day-delta { display: inline-block; margin-left: 4px; font-size: 10px; font-weight: 700; font-variant-numeric: tabular-nums; vertical-align: middle; }
+.day-delta.up { color: #1a7a3c; }
+.day-delta.down { color: #9b2d2d; }
 
-  .day-tabs { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
-  .day-tabs button {
-    border: 1px solid #d3d8e0; background: #fff; color: #1d2433;
-    padding: 6px 14px; border-radius: 999px; cursor: pointer;
-    font-size: 13px; font-weight: 500; transition: all .15s;
-  }
-  .day-tabs button:hover { border-color: #1a3a5f; }
-  .day-tabs button.active { background: #1a3a5f; color: #fff; border-color: #1a3a5f; }
-  .day-tabs button .num { font-weight: 700; }
-  .day-meta { margin-top: 10px; font-size: 13px; color: #5b6478; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .day-meta strong { color: #1a3a5f; }
-  .day-meta .course-badge { padding: 2px 10px; border-radius: 999px; background: #eef2f8; color: #1a3a5f; font-weight: 600; font-size: 12px; }
-  .day-meta .ryder-tag { background: #fcecec; color: #9b2d2d; }
+.movers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.movers .col h4 { margin: 0 0 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
+.movers .col.up h4 { color: #1a7a3c; }
+.movers .col.down h4 { color: #9b2d2d; }
+.movers .col ul { list-style: none; padding: 0; margin: 0; }
+.movers .col li { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 5px 0; border-bottom: 1px solid #f0f1f4; font-size: 13px; }
+.movers .col li:last-child { border-bottom: 0; }
+.movers .col li .nm { font-weight: 500; }
+.movers .col li .dl { font-weight: 700; font-variant-numeric: tabular-nums; }
+.movers .col.up li .dl { color: #1a7a3c; }
+.movers .col.down li .dl { color: #9b2d2d; }
+.movers .empty-row { color: #c3c8d2; font-style: italic; font-size: 12px; padding: 4px 0; }
 
-  .scroll { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead th {
-    background: #fafbfc; text-align: left; padding: 10px 8px; font-weight: 600;
-    color: #5b6478; font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px;
-    border-bottom: 1px solid #e8eaef; white-space: nowrap;
-    cursor: pointer; user-select: none; position: relative;
-  }
-  thead th.num { text-align: right; }
-  thead th:hover { color: #1a3a5f; background: #f0f3f7; }
-  thead th .sort-arrow { display: inline-block; margin-left: 4px; color: #c3c8d2; font-size: 10px; }
-  thead th.sort-asc, thead th.sort-desc { color: #1a3a5f; background: #eef2f8; }
-  thead th.sort-asc .sort-arrow, thead th.sort-desc .sort-arrow { color: #1a3a5f; }
+.has-tip { position: relative; cursor: help; }
+.has-tip .tip { position: absolute; bottom: calc(100% + 6px); left: 0; background: #1a3a5f; color: #fff; padding: 10px 12px; border-radius: 8px; font-size: 12px; line-height: 1.5; font-weight: 500; white-space: nowrap; max-width: 280px; opacity: 0; pointer-events: none; transition: opacity .15s; z-index: 9999; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+.has-tip .tip::after { content: ""; position: absolute; top: 100%; left: 20px; border: 5px solid transparent; border-top-color: #1a3a5f; }
+.has-tip:hover .tip { opacity: 1; }
+.has-tip .tip .row { display: block; }
+.has-tip .tip .row .day { color: #c19b56; font-weight: 700; margin-right: 4px; }
+.has-tip .tip .row.win { color: #a8e6a8; }
+.has-tip .tip .row.loss { color: #ffc4c4; }
+.has-tip .tip .row.tie { color: #c3c8d2; }
+.has-tip .tip .total { display: block; margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,.2); font-weight: 700; }
+.movers .col.down .has-tip .tip { left: auto; right: 0; }
+.movers .col.down .has-tip .tip::after { left: auto; right: 20px; }
 
-  thead th.group-start, tbody td.group-start { border-left: 2px solid #e1e5ec; }
-  thead th.day-col, tbody td.day-col { background: #fff8ec; }
-  thead th.day-col:hover { background: #fdedc9; }
+.table-wrap { background: #fff; border: 1px solid #e8eaef; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.table-wrap .table-header { padding: 16px 16px 12px; border-bottom: 1px solid #e8eaef; }
+.table-wrap h2 { margin: 0; font-size: 16px; }
+.table-wrap .hint { color: #5b6478; font-size: 13px; margin-top: 4px; }
+.day-tabs { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
+.day-tabs button { border: 1px solid #d3d8e0; background: #fff; color: #1d2433; padding: 6px 14px; border-radius: 999px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all .15s; }
+.day-tabs button:hover { border-color: #1a3a5f; }
+.day-tabs button.active { background: #1a3a5f; color: #fff; border-color: #1a3a5f; }
+.day-tabs button .num { font-weight: 700; }
+.day-meta { margin-top: 10px; font-size: 13px; color: #5b6478; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.day-meta strong { color: #1a3a5f; }
+.day-meta .course-badge { padding: 2px 10px; border-radius: 999px; background: #eef2f8; color: #1a3a5f; font-weight: 600; font-size: 12px; }
+.day-meta .ryder-tag { background: #fcecec; color: #9b2d2d; }
 
-  tbody td { padding: 6px 10px; border-bottom: 1px solid #f0f1f4; vertical-align: middle; }
-  tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
-  tbody tr:hover { background: #fafbfc; }
-  tbody tr:hover td.day-col { background: #fcf2da; }
-  .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
-  .badge.hafn { background: #fcecec; color: #9b2d2d; }
-  .badge.rest { background: #e8eef7; color: #1e4880; }
-  .computed { font-weight: 600; color: #1a3a5f; }
-  .empty { color: #c3c8d2; }
+.scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { background: #fafbfc; text-align: left; padding: 10px 8px; font-weight: 600; color: #5b6478; font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px; border-bottom: 1px solid #e8eaef; white-space: nowrap; cursor: pointer; user-select: none; position: relative; }
+thead th.num { text-align: right; }
+thead th:hover { color: #1a3a5f; background: #f0f3f7; }
+thead th .sort-arrow { display: inline-block; margin-left: 4px; color: #c3c8d2; font-size: 10px; }
+thead th.sort-asc, thead th.sort-desc { color: #1a3a5f; background: #eef2f8; }
+thead th.sort-asc .sort-arrow, thead th.sort-desc .sort-arrow { color: #1a3a5f; }
+thead th.group-start, tbody td.group-start { border-left: 2px solid #e1e5ec; }
+thead th.day-col, tbody td.day-col { background: #fff8ec; }
+thead th.day-col:hover { background: #fdedc9; }
+tbody td { padding: 6px 10px; border-bottom: 1px solid #f0f1f4; vertical-align: middle; }
+tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
+tbody tr:hover { background: #fafbfc; }
+tbody tr:hover td.day-col { background: #fcf2da; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+.badge.hafn { background: #fcecec; color: #9b2d2d; }
+.badge.rest { background: #e8eef7; color: #1e4880; }
+.computed { font-weight: 600; color: #1a3a5f; }
+.empty { color: #c3c8d2; }
 
-  footer {
-    text-align: center; color: #98a0b0; font-size: 12px;
-    padding: 24px 0; margin-top: 16px;
-  }
-  footer a { color: #1a3a5f; }
+.drinks-section { margin-top: 20px; background: #fff; border: 1px solid #e8eaef; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.drinks-section summary { cursor: pointer; font-weight: 600; font-size: 14px; color: #1a3a5f; list-style: none; padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+.drinks-section summary::-webkit-details-marker { display: none; }
+.drinks-section summary::before { content: "▶"; font-size: 10px; color: #98a0b0; transition: transform .15s; }
+.drinks-section[open] summary::before { transform: rotate(90deg); }
+.drinks-section .drinks-day { margin-top: 14px; }
+.drinks-section .drinks-day h4 { margin: 0 0 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: #5b6478; display: flex; align-items: center; gap: 10px; }
+.drinks-section .stake { font-size: 11px; color: #c19b56; background: #fdf5e6; padding: 1px 8px; border-radius: 999px; font-weight: 700; text-transform: none; letter-spacing: 0; }
+.drinks-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.drinks-table tr { border-bottom: 1px solid #f0f1f4; }
+.drinks-table tr:last-child { border: 0; }
+.drinks-table td { padding: 6px 8px; vertical-align: middle; }
+.drinks-table .name-a, .drinks-table .name-b { width: 40%; }
+.drinks-table .name-a { text-align: right; }
+.drinks-table .name-b { text-align: left; }
+.drinks-table .name-a.winner, .drinks-table .name-b.winner { font-weight: 700; color: #1a7a3c; }
+.drinks-table .name-a.loser, .drinks-table .name-b.loser { color: #98a0b0; text-decoration: line-through; }
+.drinks-table .flow { text-align: center; width: 20%; font-size: 12px; color: #5b6478; white-space: nowrap; }
+.drinks-table .flow .drink { color: #c19b56; font-weight: 700; }
+.drinks-table .flow.tie { color: #98a0b0; font-style: italic; }
+.drinks-table .empty { color: #c3c8d2; font-style: italic; text-align: center; padding: 16px 0; }
 
-  @media (max-width: 720px) {
-    header.app-header h1 { font-size: 22px; }
-    .wrap { padding: 12px; }
-    thead th, tbody td { font-size: 12px; }
-  }
+footer { text-align: center; color: #98a0b0; font-size: 12px; padding: 24px 0; margin-top: 16px; }
+footer a { color: #1a3a5f; }
+
+@media (max-width: 720px) {
+  header.app-header h1 { font-size: 22px; }
+  .wrap { padding: 12px; }
+  thead th, tbody td { font-size: 12px; }
+}
 </style>
 </head>
 <body>
@@ -183,23 +166,11 @@
   <header class="app-header">
     <svg class="header-bg" viewBox="0 0 1400 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#1a3a5f"/>
-          <stop offset="55%" stop-color="#4d6f96"/>
-          <stop offset="100%" stop-color="#dfb986"/>
-        </linearGradient>
-        <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#4a7045"/><stop offset="100%" stop-color="#2e4a2d"/>
-        </linearGradient>
-        <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#2e4a2d"/><stop offset="100%" stop-color="#1c2e1c"/>
-        </linearGradient>
-        <linearGradient id="fairway" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#3f6132"/><stop offset="100%" stop-color="#1c2e1c"/>
-        </linearGradient>
-        <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#3a6b96"/><stop offset="100%" stop-color="#1a3a5f"/>
-        </linearGradient>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a3a5f"/><stop offset="55%" stop-color="#4d6f96"/><stop offset="100%" stop-color="#dfb986"/></linearGradient>
+        <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a7045"/><stop offset="100%" stop-color="#2e4a2d"/></linearGradient>
+        <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2e4a2d"/><stop offset="100%" stop-color="#1c2e1c"/></linearGradient>
+        <linearGradient id="fairway" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3f6132"/><stop offset="100%" stop-color="#1c2e1c"/></linearGradient>
+        <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a6b96"/><stop offset="100%" stop-color="#1a3a5f"/></linearGradient>
       </defs>
       <rect width="1400" height="280" fill="url(#sky)"/>
       <circle cx="1100" cy="105" r="55" fill="#ffe5b5" opacity="0.18"/>
@@ -208,13 +179,7 @@
       <rect x="595" y="128" width="15" height="32" fill="#3a4d52" opacity="0.55"/>
       <polygon points="595,128 610,128 602.5,118" fill="#3a4d52" opacity="0.55"/>
       <path d="M0,210 Q300,180 600,200 T1200,205 L1400,200 L1400,280 L0,280 Z" fill="url(#hillMid)"/>
-      <g opacity="0.75" fill="#152419">
-        <circle cx="40" cy="200" r="11"/><circle cx="68" cy="204" r="9"/>
-        <circle cx="92" cy="200" r="13"/><circle cx="120" cy="204" r="10"/>
-        <circle cx="148" cy="202" r="11"/>
-        <circle cx="1255" cy="200" r="10"/><circle cx="1285" cy="203" r="13"/>
-        <circle cx="1320" cy="200" r="9"/><circle cx="1348" cy="202" r="11"/>
-      </g>
+      <g opacity="0.75" fill="#152419"><circle cx="40" cy="200" r="11"/><circle cx="68" cy="204" r="9"/><circle cx="92" cy="200" r="13"/><circle cx="120" cy="204" r="10"/><circle cx="148" cy="202" r="11"/><circle cx="1255" cy="200" r="10"/><circle cx="1285" cy="203" r="13"/><circle cx="1320" cy="200" r="9"/><circle cx="1348" cy="202" r="11"/></g>
       <ellipse cx="950" cy="248" rx="220" ry="20" fill="url(#water)" opacity="0.85"/>
       <path d="M0,245 Q260,225 540,235 Q680,240 800,242 L1080,243 Q1190,240 1280,238 T1400,237 L1400,280 L0,280 Z" fill="url(#fairway)"/>
       <line x1="880" y1="180" x2="880" y2="215" stroke="#3d2818" stroke-width="1.5"/>
@@ -227,7 +192,6 @@
     </div>
   </header>
 
-  <!-- Ryder banner -->
   <div class="ryder-banner">
     <div class="banner-header">
       <h2><span class="icon">🤝</span> Ryder Cup</h2>
@@ -250,6 +214,15 @@
       <h2><span class="icon">🏆</span> Belfry 2026 meistarinn <span id="top3-tag"></span></h2>
       <ol class="lb" id="lb-top3"></ol>
       <button class="show-all-btn" data-card="top3">Sýna alla</button>
+    </div>
+    <div class="card">
+      <h2><span class="icon">📈</span> Hreyfingar dagsins <span id="movers-tag" class="all-tag"></span></h2>
+      <div class="movers"><div class="col up"><h4>▲ Bætt sig</h4><ul id="movers-up"></ul></div><div class="col down"><h4>▼ Versnað</h4><ul id="movers-down"></ul></div></div>
+    </div>
+    <div class="card">
+      <h2><span class="icon">🍻</span> Drykkurinn <span class="all-tag">D1+D2</span></h2>
+      <div class="movers"><div class="col up"><h4>▲ Inneign</h4><ul id="drinks-up"></ul></div><div class="col down"><h4>▼ Skuld</h4><ul id="drinks-down"></ul></div></div>
+      <button class="show-all-btn" data-card="drinks">Sýna alla</button>
     </div>
     <div class="card">
       <h2><span class="icon">🏠</span> Besta herbergið <span id="rooms-tag"></span></h2>
@@ -287,119 +260,173 @@
     </div>
     <div class="scroll">
       <table id="player-table">
-        <thead>
-          <tr>
-            <th data-sort="id">#<span class="sort-arrow">↕</span></th>
-            <th data-sort="name">Nafn<span class="sort-arrow">↕</span></th>
-            <th class="num" data-sort="room">Hbg<span class="sort-arrow">↕</span></th>
-            <th data-sort="team">Lið<span class="sort-arrow">↕</span></th>
-            <th class="num" data-sort="hcp">Forgj.<span class="sort-arrow">↕</span></th>
-            <th class="num group-start day-col" data-sort="strokesDay">Högg<span class="sort-arrow">↕</span></th>
-            <th class="num day-col" data-sort="ptsDay">Punktar<span class="sort-arrow">↕</span></th>
-            <th class="num day-col" data-sort="fDay">Fuglar<span class="sort-arrow">↕</span></th>
-            <th class="num group-start" data-sort="top3">Top 3 pts<span class="sort-arrow">↕</span></th>
-            <th class="num" data-sort="totalPts">Σ pts<span class="sort-arrow">↕</span></th>
-            <th class="num" data-sort="totalStrokes">Σ högg<span class="sort-arrow">↕</span></th>
-            <th class="num" data-sort="fugTotal">Σ fuglar<span class="sort-arrow">↕</span></th>
-            <th class="group-start" data-sort="ctpInput">CTP (cm)<span class="sort-arrow">↕</span></th>
-            <th class="num" data-sort="ctpBest">Næst<span class="sort-arrow">↕</span></th>
-            <th class="num" data-sort="ctpCount">Holu#<span class="sort-arrow">↕</span></th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th data-sort="id">#<span class="sort-arrow">↕</span></th>
+          <th data-sort="name">Nafn<span class="sort-arrow">↕</span></th>
+          <th class="num" data-sort="room">Hbg<span class="sort-arrow">↕</span></th>
+          <th data-sort="team">Lið<span class="sort-arrow">↕</span></th>
+          <th class="num" data-sort="hcp">Forgj.<span class="sort-arrow">↕</span></th>
+          <th class="num" data-sort="leikHcp">Leikfgj.<span class="sort-arrow">↕</span></th>
+          <th class="num group-start day-col" data-sort="strokesDay">Högg<span class="sort-arrow">↕</span></th>
+          <th class="num day-col" data-sort="ptsDay">Punktar<span class="sort-arrow">↕</span></th>
+          <th class="num day-col" data-sort="fDay">Fuglar<span class="sort-arrow">↕</span></th>
+          <th class="num group-start" data-sort="top3">Top 3 pts<span class="sort-arrow">↕</span></th>
+          <th class="num" data-sort="totalPts">Σ pts<span class="sort-arrow">↕</span></th>
+          <th class="num" data-sort="totalStrokes">Σ högg<span class="sort-arrow">↕</span></th>
+          <th class="num" data-sort="fugTotal">Σ fuglar<span class="sort-arrow">↕</span></th>
+          <th class="group-start" data-sort="ctpInput">CTP (cm)<span class="sort-arrow">↕</span></th>
+          <th class="num" data-sort="ctpBest">Næst<span class="sort-arrow">↕</span></th>
+          <th class="num" data-sort="ctpCount">Holu#<span class="sort-arrow">↕</span></th>
+          <th class="num group-start" data-sort="drinks">🍻<span class="sort-arrow">↕</span></th>
+        </tr></thead>
         <tbody></tbody>
       </table>
     </div>
   </div>
 
-  <footer>
-    Belfry 2026 — Hafnfirðingaferð · Mótsstjóri: Gummi Óskarsson
-  </footer>
+  <details class="drinks-section" id="drinks-section" open>
+    <summary>🍻 Drykkurinn matchsheet — hver borgar hverjum</summary>
+    <div class="drinks-day"><h4>Dagur 1 <span class="stake">1 drykkur í veði</span></h4><table class="drinks-table" id="drinks-d1"></table></div>
+    <div class="drinks-day"><h4>Dagur 2 <span class="stake">2 drykkir í veði</span></h4><table class="drinks-table" id="drinks-d2"></table></div>
+  </details>
+
+  <footer>Belfry 2026 — Hafnfirðingaferð · Mótsstjóri: Gummi Óskarsson</footer>
 </div>
 
-<!-- Snapshot data — uppfært handvirkt eftir hvern hring -->
 <script type="application/json" id="snapshot">
 {
-  "lastUpdated": "2026-05-12T22:30:00",
+  "lastUpdated": "2026-05-12T23:00:00",
   "ryder": {
     "hafn": 7,
     "rest": 5
   },
   "players": {
-    "1": {
+    "6": {
       "strokes": {
-        "s1": 110,
-        "s2": 77,
-        "s3": 71,
-        "s4": 117,
-        "s5": 87
+        "s1": 95,
+        "s2": 87,
+        "s3": 74,
+        "s4": 83,
+        "s5": 106
       },
       "points": {
-        "h1": 33,
-        "h2": 32,
-        "h3": 26,
-        "h4": 24,
-        "h5": 23
-      },
-      "birdies": {
-        "r1": 3,
-        "r2": 0,
-        "r3": 0,
-        "r4": 0,
-        "r5": 1
-      },
-      "ctp": [
-        104,
-        1199,
-        457
-      ]
-    },
-    "2": {
-      "strokes": {
-        "s1": 115,
-        "s2": 111,
-        "s3": 114,
-        "s4": 104,
-        "s5": 96
-      },
-      "points": {
-        "h1": 32,
-        "h2": 46,
-        "h3": 35,
-        "h4": 18,
-        "h5": 28
-      },
-      "birdies": {
-        "r1": 3,
-        "r2": 2,
-        "r3": 2,
-        "r4": 1,
-        "r5": 1
-      },
-      "ctp": []
-    },
-    "3": {
-      "strokes": {
-        "s1": 91,
-        "s2": 76,
-        "s3": 75,
-        "s4": 94,
-        "s5": 76
-      },
-      "points": {
-        "h1": 40,
-        "h2": 40,
-        "h3": 34,
-        "h4": 20,
+        "h1": 38,
+        "h2": 31,
+        "h3": 49,
+        "h4": 43,
         "h5": 47
       },
       "birdies": {
-        "r1": 0,
+        "r1": 1,
+        "r2": 2,
+        "r3": 1,
+        "r4": 1,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 7,
+        "ph2": 6,
+        "ph3": 6,
+        "ph4": 6,
+        "ph5": 8
+      }
+    },
+    "14": {
+      "strokes": {
+        "s1": 73,
+        "s2": 113,
+        "s3": 111,
+        "s4": 111,
+        "s5": 76
+      },
+      "points": {
+        "h1": 21,
+        "h2": 43,
+        "h3": 39,
+        "h4": 24,
+        "h5": 33
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 1,
+        "r3": 3,
+        "r4": 1,
+        "r5": 3
+      },
+      "ctp": [
+        561,
+        204
+      ],
+      "playingHcp": {
+        "ph1": 7,
+        "ph2": 8,
+        "ph3": 9,
+        "ph4": 8,
+        "ph5": 10
+      }
+    },
+    "18": {
+      "strokes": {
+        "s1": 83,
+        "s2": 112,
+        "s3": 115,
+        "s4": 90,
+        "s5": 85
+      },
+      "points": {
+        "h1": 34,
+        "h2": 43,
+        "h3": 26,
+        "h4": 37,
+        "h5": 47
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 0,
+        "r3": 0,
+        "r4": 3,
+        "r5": 0
+      },
+      "ctp": [
+        1086
+      ],
+      "playingHcp": {
+        "ph1": 8,
+        "ph2": 8,
+        "ph3": 8,
+        "ph4": 7,
+        "ph5": 10
+      }
+    },
+    "8": {
+      "strokes": {
+        "s1": 105,
+        "s2": 70,
+        "s3": 113,
+        "s4": 116,
+        "s5": 77
+      },
+      "points": {
+        "h1": 35,
+        "h2": 39,
+        "h3": 25,
+        "h4": 36,
+        "h5": 45
+      },
+      "birdies": {
+        "r1": 1,
         "r2": 3,
         "r3": 0,
         "r4": 2,
-        "r5": 2
+        "r5": 1
       },
-      "ctp": []
+      "playingHcp": {
+        "ph1": 9,
+        "ph2": 10,
+        "ph3": 11,
+        "ph4": 9,
+        "ph5": 11
+      }
     },
     "4": {
       "strokes": {
@@ -427,513 +454,44 @@
         596,
         1487,
         1449
-      ]
+      ],
+      "playingHcp": {
+        "ph1": 12,
+        "ph2": 10,
+        "ph3": 13,
+        "ph4": 11,
+        "ph5": 12
+      }
     },
-    "5": {
+    "31": {
       "strokes": {
-        "s1": 111,
-        "s2": 74,
-        "s3": 108,
-        "s4": 110,
-        "s5": 80
-      },
-      "points": {
-        "h1": 33,
-        "h2": 28,
-        "h3": 47,
-        "h4": 42,
-        "h5": 35
-      },
-      "birdies": {
-        "r1": 1,
-        "r2": 2,
-        "r3": 0,
-        "r4": 1,
-        "r5": 0
-      },
-      "ctp": []
-    },
-    "6": {
-      "strokes": {
-        "s1": 95,
+        "s1": 110,
         "s2": 87,
-        "s3": 74,
-        "s4": 83,
-        "s5": 106
+        "s3": 119,
+        "s4": 119,
+        "s5": 103
       },
       "points": {
-        "h1": 38,
-        "h2": 31,
-        "h3": 49,
-        "h4": 43,
-        "h5": 47
-      },
-      "birdies": {
-        "r1": 1,
-        "r2": 2,
-        "r3": 1,
-        "r4": 1,
-        "r5": 2
-      },
-      "ctp": []
-    },
-    "7": {
-      "strokes": {
-        "s1": 97,
-        "s2": 107,
-        "s3": 95,
-        "s4": 93,
-        "s5": 84
-      },
-      "points": {
-        "h1": 26,
-        "h2": 50,
-        "h3": 49,
-        "h4": 23,
-        "h5": 21
-      },
-      "birdies": {
-        "r1": 0,
-        "r2": 1,
-        "r3": 1,
-        "r4": 3,
-        "r5": 0
-      },
-      "ctp": [
-        1008,
-        1133,
-        564
-      ]
-    },
-    "8": {
-      "strokes": {
-        "s1": 105,
-        "s2": 70,
-        "s3": 113,
-        "s4": 116,
-        "s5": 77
-      },
-      "points": {
-        "h1": 35,
-        "h2": 39,
-        "h3": 25,
-        "h4": 36,
-        "h5": 45
-      },
-      "birdies": {
-        "r1": 1,
-        "r2": 3,
-        "r3": 0,
-        "r4": 2,
-        "r5": 1
-      },
-      "ctp": []
-    },
-    "9": {
-      "strokes": {
-        "s1": 76,
-        "s2": 110,
-        "s3": 89,
-        "s4": 110,
-        "s5": 102
-      },
-      "points": {
-        "h1": 30,
-        "h2": 27,
-        "h3": 41,
-        "h4": 28,
-        "h5": 18
-      },
-      "birdies": {
-        "r1": 2,
-        "r2": 3,
-        "r3": 0,
-        "r4": 0,
-        "r5": 2
-      },
-      "ctp": []
-    },
-    "10": {
-      "strokes": {
-        "s1": 89,
-        "s2": 85,
-        "s3": 73,
-        "s4": 85,
-        "s5": 106
-      },
-      "points": {
-        "h1": 23,
-        "h2": 23,
-        "h3": 49,
-        "h4": 22,
-        "h5": 26
-      },
-      "birdies": {
-        "r1": 1,
-        "r2": 3,
-        "r3": 1,
-        "r4": 2,
-        "r5": 3
-      },
-      "ctp": []
-    },
-    "11": {
-      "strokes": {
-        "s1": 104,
-        "s2": 118,
-        "s3": 116,
-        "s4": 114,
-        "s5": 82
-      },
-      "points": {
-        "h1": 37,
-        "h2": 43,
-        "h3": 41,
+        "h1": 49,
+        "h2": 33,
+        "h3": 35,
         "h4": 46,
-        "h5": 46
-      },
-      "birdies": {
-        "r1": 0,
-        "r2": 1,
-        "r3": 1,
-        "r4": 0,
-        "r5": 2
-      },
-      "ctp": [
-        521,
-        1255,
-        501
-      ]
-    },
-    "12": {
-      "strokes": {
-        "s1": 70,
-        "s2": 74,
-        "s3": 115,
-        "s4": 110,
-        "s5": 73
-      },
-      "points": {
-        "h1": 32,
-        "h2": 22,
-        "h3": 20,
-        "h4": 39,
         "h5": 22
       },
       "birdies": {
-        "r1": 1,
-        "r2": 2,
-        "r3": 3,
-        "r4": 1,
-        "r5": 1
-      },
-      "ctp": []
-    },
-    "13": {
-      "strokes": {
-        "s1": 106,
-        "s2": 106,
-        "s3": 100,
-        "s4": 85,
-        "s5": 120
-      },
-      "points": {
-        "h1": 48,
-        "h2": 44,
-        "h3": 30,
-        "h4": 24,
-        "h5": 24
-      },
-      "birdies": {
-        "r1": 3,
-        "r2": 2,
-        "r3": 3,
-        "r4": 3,
-        "r5": 3
-      },
-      "ctp": []
-    },
-    "14": {
-      "strokes": {
-        "s1": 73,
-        "s2": 113,
-        "s3": 111,
-        "s4": 111,
-        "s5": 76
-      },
-      "points": {
-        "h1": 21,
-        "h2": 43,
-        "h3": 39,
-        "h4": 24,
-        "h5": 33
-      },
-      "birdies": {
-        "r1": 1,
+        "r1": 2,
         "r2": 1,
-        "r3": 3,
-        "r4": 1,
-        "r5": 3
-      },
-      "ctp": [
-        561,
-        204
-      ]
-    },
-    "15": {
-      "strokes": {
-        "s1": 98,
-        "s2": 105,
-        "s3": 76,
-        "s4": 73,
-        "s5": 111
-      },
-      "points": {
-        "h1": 18,
-        "h2": 23,
-        "h3": 33,
-        "h4": 28,
-        "h5": 44
-      },
-      "birdies": {
-        "r1": 3,
-        "r2": 3,
-        "r3": 1,
-        "r4": 3,
-        "r5": 0
-      },
-      "ctp": [
-        849
-      ]
-    },
-    "16": {
-      "strokes": {
-        "s1": 86,
-        "s2": 120,
-        "s3": 120,
-        "s4": 99,
-        "s5": 88
-      },
-      "points": {
-        "h1": 45,
-        "h2": 49,
-        "h3": 27,
-        "h4": 30,
-        "h5": 36
-      },
-      "birdies": {
-        "r1": 1,
-        "r2": 0,
-        "r3": 0,
-        "r4": 2,
-        "r5": 0
-      },
-      "ctp": [
-        1079,
-        1137
-      ]
-    },
-    "17": {
-      "strokes": {
-        "s1": 80,
-        "s2": 73,
-        "s3": 102,
-        "s4": 75,
-        "s5": 81
-      },
-      "points": {
-        "h1": 22,
-        "h2": 22,
-        "h3": 33,
-        "h4": 43,
-        "h5": 25
-      },
-      "birdies": {
-        "r1": 1,
-        "r2": 0,
-        "r3": 0,
-        "r4": 3,
-        "r5": 2
-      },
-      "ctp": []
-    },
-    "18": {
-      "strokes": {
-        "s1": 83,
-        "s2": 112,
-        "s3": 115,
-        "s4": 90,
-        "s5": 85
-      },
-      "points": {
-        "h1": 34,
-        "h2": 43,
-        "h3": 26,
-        "h4": 37,
-        "h5": 47
-      },
-      "birdies": {
-        "r1": 2,
-        "r2": 0,
-        "r3": 0,
-        "r4": 3,
-        "r5": 0
-      },
-      "ctp": [
-        1086
-      ]
-    },
-    "19": {
-      "strokes": {
-        "s1": 86,
-        "s2": 78,
-        "s3": 92,
-        "s4": 74,
-        "s5": 85
-      },
-      "points": {
-        "h1": 41,
-        "h2": 36,
-        "h3": 28,
-        "h4": 46,
-        "h5": 37
-      },
-      "birdies": {
-        "r1": 0,
-        "r2": 2,
-        "r3": 0,
-        "r4": 1,
-        "r5": 2
-      },
-      "ctp": [
-        1183
-      ]
-    },
-    "20": {
-      "strokes": {
-        "s1": 79,
-        "s2": 87,
-        "s3": 88,
-        "s4": 108,
-        "s5": 83
-      },
-      "points": {
-        "h1": 39,
-        "h2": 31,
-        "h3": 34,
-        "h4": 50,
-        "h5": 49
-      },
-      "birdies": {
-        "r1": 2,
-        "r2": 0,
-        "r3": 0,
-        "r4": 3,
-        "r5": 2
-      },
-      "ctp": [
-        317,
-        1354
-      ]
-    },
-    "21": {
-      "strokes": {
-        "s1": 86,
-        "s2": 80,
-        "s3": 117,
-        "s4": 98,
-        "s5": 105
-      },
-      "points": {
-        "h1": 45,
-        "h2": 18,
-        "h3": 25,
-        "h4": 22,
-        "h5": 27
-      },
-      "birdies": {
-        "r1": 0,
-        "r2": 2,
-        "r3": 1,
-        "r4": 3,
-        "r5": 1
-      },
-      "ctp": [
-        131,
-        782
-      ]
-    },
-    "22": {
-      "strokes": {
-        "s1": 83,
-        "s2": 113,
-        "s3": 85,
-        "s4": 112,
-        "s5": 76
-      },
-      "points": {
-        "h1": 40,
-        "h2": 44,
-        "h3": 27,
-        "h4": 33,
-        "h5": 28
-      },
-      "birdies": {
-        "r1": 1,
-        "r2": 3,
-        "r3": 0,
-        "r4": 1,
-        "r5": 2
-      },
-      "ctp": []
-    },
-    "23": {
-      "strokes": {
-        "s1": 96,
-        "s2": 112,
-        "s3": 117,
-        "s4": 85,
-        "s5": 87
-      },
-      "points": {
-        "h1": 28,
-        "h2": 24,
-        "h3": 42,
-        "h4": 20,
-        "h5": 48
-      },
-      "birdies": {
-        "r1": 1,
-        "r2": 1,
-        "r3": 3,
-        "r4": 2,
-        "r5": 2
-      },
-      "ctp": []
-    },
-    "24": {
-      "strokes": {
-        "s1": 84,
-        "s2": 84,
-        "s3": 71,
-        "s4": 112,
-        "s5": 82
-      },
-      "points": {
-        "h1": 43,
-        "h2": 39,
-        "h3": 35,
-        "h4": 22,
-        "h5": 35
-      },
-      "birdies": {
-        "r1": 2,
-        "r2": 3,
         "r3": 2,
-        "r4": 0,
-        "r5": 0
+        "r4": 2,
+        "r5": 2
       },
-      "ctp": []
+      "playingHcp": {
+        "ph1": 12,
+        "ph2": 12,
+        "ph3": 11,
+        "ph4": 10,
+        "ph5": 11
+      }
     },
     "25": {
       "strokes": {
@@ -957,35 +515,13 @@
         "r4": 2,
         "r5": 0
       },
-      "ctp": []
-    },
-    "26": {
-      "strokes": {
-        "s1": 70,
-        "s2": 103,
-        "s3": 104,
-        "s4": 113,
-        "s5": 116
-      },
-      "points": {
-        "h1": 30,
-        "h2": 41,
-        "h3": 45,
-        "h4": 22,
-        "h5": 39
-      },
-      "birdies": {
-        "r1": 2,
-        "r2": 0,
-        "r3": 2,
-        "r4": 2,
-        "r5": 3
-      },
-      "ctp": [
-        655,
-        1185,
-        310
-      ]
+      "playingHcp": {
+        "ph1": 15,
+        "ph2": 13,
+        "ph3": 13,
+        "ph4": 15,
+        "ph5": 13
+      }
     },
     "27": {
       "strokes": {
@@ -1013,33 +549,643 @@
         487,
         1096,
         1019
-      ]
+      ],
+      "playingHcp": {
+        "ph1": 15,
+        "ph2": 12,
+        "ph3": 12,
+        "ph4": 15,
+        "ph5": 12
+      }
     },
-    "28": {
+    "5": {
       "strokes": {
-        "s1": 120,
-        "s2": 120,
-        "s3": 117,
-        "s4": 80,
-        "s5": 112
+        "s1": 111,
+        "s2": 74,
+        "s3": 108,
+        "s4": 110,
+        "s5": 80
       },
       "points": {
-        "h1": 23,
-        "h2": 36,
-        "h3": 50,
-        "h4": 39,
-        "h5": 23
+        "h1": 33,
+        "h2": 28,
+        "h3": 47,
+        "h4": 42,
+        "h5": 35
       },
       "birdies": {
         "r1": 1,
         "r2": 2,
+        "r3": 0,
+        "r4": 1,
+        "r5": 0
+      },
+      "playingHcp": {
+        "ph1": 15,
+        "ph2": 14,
+        "ph3": 16,
+        "ph4": 15,
+        "ph5": 14
+      }
+    },
+    "10": {
+      "strokes": {
+        "s1": 89,
+        "s2": 85,
+        "s3": 73,
+        "s4": 85,
+        "s5": 106
+      },
+      "points": {
+        "h1": 23,
+        "h2": 23,
+        "h3": 49,
+        "h4": 22,
+        "h5": 26
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 3,
         "r3": 1,
+        "r4": 2,
+        "r5": 3
+      },
+      "playingHcp": {
+        "ph1": 13,
+        "ph2": 13,
+        "ph3": 15,
+        "ph4": 16,
+        "ph5": 13
+      }
+    },
+    "2": {
+      "strokes": {
+        "s1": 115,
+        "s2": 111,
+        "s3": 114,
+        "s4": 104,
+        "s5": 96
+      },
+      "points": {
+        "h1": 32,
+        "h2": 46,
+        "h3": 35,
+        "h4": 18,
+        "h5": 28
+      },
+      "birdies": {
+        "r1": 3,
+        "r2": 2,
+        "r3": 2,
         "r4": 1,
         "r5": 1
       },
+      "playingHcp": {
+        "ph1": 16,
+        "ph2": 14,
+        "ph3": 15,
+        "ph4": 14,
+        "ph5": 15
+      }
+    },
+    "16": {
+      "strokes": {
+        "s1": 86,
+        "s2": 120,
+        "s3": 120,
+        "s4": 99,
+        "s5": 88
+      },
+      "points": {
+        "h1": 45,
+        "h2": 49,
+        "h3": 27,
+        "h4": 30,
+        "h5": 36
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 0,
+        "r3": 0,
+        "r4": 2,
+        "r5": 0
+      },
       "ctp": [
-        1023
-      ]
+        1079,
+        1137
+      ],
+      "playingHcp": {
+        "ph1": 18,
+        "ph2": 17,
+        "ph3": 19,
+        "ph4": 16,
+        "ph5": 17
+      }
+    },
+    "9": {
+      "strokes": {
+        "s1": 76,
+        "s2": 110,
+        "s3": 89,
+        "s4": 110,
+        "s5": 102
+      },
+      "points": {
+        "h1": 30,
+        "h2": 27,
+        "h3": 41,
+        "h4": 28,
+        "h5": 18
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 3,
+        "r3": 0,
+        "r4": 0,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 17,
+        "ph2": 18,
+        "ph3": 19,
+        "ph4": 18,
+        "ph5": 19
+      }
+    },
+    "11": {
+      "strokes": {
+        "s1": 104,
+        "s2": 118,
+        "s3": 116,
+        "s4": 114,
+        "s5": 82
+      },
+      "points": {
+        "h1": 37,
+        "h2": 43,
+        "h3": 41,
+        "h4": 46,
+        "h5": 46
+      },
+      "birdies": {
+        "r1": 0,
+        "r2": 1,
+        "r3": 1,
+        "r4": 0,
+        "r5": 2
+      },
+      "ctp": [
+        521,
+        1255,
+        501
+      ],
+      "playingHcp": {
+        "ph1": 26,
+        "ph2": 23,
+        "ph3": 25,
+        "ph4": 24,
+        "ph5": 25
+      }
+    },
+    "30": {
+      "strokes": {
+        "s1": 105,
+        "s2": 85,
+        "s3": 77,
+        "s4": 99,
+        "s5": 78
+      },
+      "points": {
+        "h1": 47,
+        "h2": 38,
+        "h3": 46,
+        "h4": 50,
+        "h5": 45
+      },
+      "birdies": {
+        "r1": 3,
+        "r2": 1,
+        "r3": 3,
+        "r4": 3,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 25,
+        "ph2": 24,
+        "ph3": 23,
+        "ph4": 23,
+        "ph5": 23
+      }
+    },
+    "7": {
+      "strokes": {
+        "s1": 97,
+        "s2": 107,
+        "s3": 95,
+        "s4": 93,
+        "s5": 84
+      },
+      "points": {
+        "h1": 26,
+        "h2": 50,
+        "h3": 49,
+        "h4": 23,
+        "h5": 21
+      },
+      "birdies": {
+        "r1": 0,
+        "r2": 1,
+        "r3": 1,
+        "r4": 3,
+        "r5": 0
+      },
+      "ctp": [
+        1008,
+        1133,
+        564
+      ],
+      "playingHcp": {
+        "ph1": 32,
+        "ph2": 32,
+        "ph3": 32,
+        "ph4": 33,
+        "ph5": 34
+      }
+    },
+    "26": {
+      "strokes": {
+        "s1": 70,
+        "s2": 103,
+        "s3": 104,
+        "s4": 113,
+        "s5": 116
+      },
+      "points": {
+        "h1": 30,
+        "h2": 41,
+        "h3": 45,
+        "h4": 22,
+        "h5": 39
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 0,
+        "r3": 2,
+        "r4": 2,
+        "r5": 3
+      },
+      "ctp": [
+        655,
+        1185,
+        310
+      ],
+      "playingHcp": {
+        "ph1": 6,
+        "ph2": 6,
+        "ph3": 3,
+        "ph4": 6,
+        "ph5": 4
+      }
+    },
+    "21": {
+      "strokes": {
+        "s1": 86,
+        "s2": 80,
+        "s3": 117,
+        "s4": 98,
+        "s5": 105
+      },
+      "points": {
+        "h1": 45,
+        "h2": 18,
+        "h3": 25,
+        "h4": 22,
+        "h5": 27
+      },
+      "birdies": {
+        "r1": 0,
+        "r2": 2,
+        "r3": 1,
+        "r4": 3,
+        "r5": 1
+      },
+      "ctp": [
+        131,
+        782
+      ],
+      "playingHcp": {
+        "ph1": 6,
+        "ph2": 7,
+        "ph3": 8,
+        "ph4": 6,
+        "ph5": 7
+      }
+    },
+    "3": {
+      "strokes": {
+        "s1": 91,
+        "s2": 76,
+        "s3": 75,
+        "s4": 94,
+        "s5": 76
+      },
+      "points": {
+        "h1": 40,
+        "h2": 40,
+        "h3": 34,
+        "h4": 20,
+        "h5": 47
+      },
+      "birdies": {
+        "r1": 0,
+        "r2": 3,
+        "r3": 0,
+        "r4": 2,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 10,
+        "ph2": 11,
+        "ph3": 10,
+        "ph4": 10,
+        "ph5": 9
+      }
+    },
+    "22": {
+      "strokes": {
+        "s1": 83,
+        "s2": 113,
+        "s3": 85,
+        "s4": 112,
+        "s5": 76
+      },
+      "points": {
+        "h1": 40,
+        "h2": 44,
+        "h3": 27,
+        "h4": 33,
+        "h5": 28
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 3,
+        "r3": 0,
+        "r4": 1,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 13,
+        "ph2": 17,
+        "ph3": 17,
+        "ph4": 16,
+        "ph5": 15
+      }
+    },
+    "24": {
+      "strokes": {
+        "s1": 84,
+        "s2": 84,
+        "s3": 71,
+        "s4": 112,
+        "s5": 82
+      },
+      "points": {
+        "h1": 43,
+        "h2": 39,
+        "h3": 35,
+        "h4": 22,
+        "h5": 35
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 3,
+        "r3": 2,
+        "r4": 0,
+        "r5": 0
+      },
+      "playingHcp": {
+        "ph1": 16,
+        "ph2": 15,
+        "ph3": 17,
+        "ph4": 17,
+        "ph5": 15
+      }
+    },
+    "13": {
+      "strokes": {
+        "s1": 106,
+        "s2": 106,
+        "s3": 100,
+        "s4": 85,
+        "s5": 120
+      },
+      "points": {
+        "h1": 48,
+        "h2": 44,
+        "h3": 30,
+        "h4": 24,
+        "h5": 24
+      },
+      "birdies": {
+        "r1": 3,
+        "r2": 2,
+        "r3": 3,
+        "r4": 3,
+        "r5": 3
+      },
+      "playingHcp": {
+        "ph1": 20,
+        "ph2": 20,
+        "ph3": 18,
+        "ph4": 20,
+        "ph5": 20
+      }
+    },
+    "19": {
+      "strokes": {
+        "s1": 86,
+        "s2": 78,
+        "s3": 92,
+        "s4": 74,
+        "s5": 85
+      },
+      "points": {
+        "h1": 41,
+        "h2": 36,
+        "h3": 28,
+        "h4": 46,
+        "h5": 37
+      },
+      "birdies": {
+        "r1": 0,
+        "r2": 2,
+        "r3": 0,
+        "r4": 1,
+        "r5": 2
+      },
+      "ctp": [
+        1183
+      ],
+      "playingHcp": {
+        "ph1": 18,
+        "ph2": 18,
+        "ph3": 20,
+        "ph4": 17,
+        "ph5": 19
+      }
+    },
+    "32": {
+      "strokes": {
+        "s1": 75,
+        "s2": 78,
+        "s3": 79,
+        "s4": 84,
+        "s5": 94
+      },
+      "points": {
+        "h1": 27,
+        "h2": 31,
+        "h3": 22,
+        "h4": 44,
+        "h5": 44
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 3,
+        "r3": 3,
+        "r4": 0,
+        "r5": 1
+      },
+      "playingHcp": {
+        "ph1": 22,
+        "ph2": 20,
+        "ph3": 21,
+        "ph4": 22,
+        "ph5": 22
+      }
+    },
+    "17": {
+      "strokes": {
+        "s1": 80,
+        "s2": 73,
+        "s3": 102,
+        "s4": 75,
+        "s5": 81
+      },
+      "points": {
+        "h1": 22,
+        "h2": 22,
+        "h3": 33,
+        "h4": 43,
+        "h5": 25
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 0,
+        "r3": 0,
+        "r4": 3,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 22,
+        "ph2": 21,
+        "ph3": 23,
+        "ph4": 20,
+        "ph5": 23
+      }
+    },
+    "15": {
+      "strokes": {
+        "s1": 98,
+        "s2": 105,
+        "s3": 76,
+        "s4": 73,
+        "s5": 111
+      },
+      "points": {
+        "h1": 18,
+        "h2": 23,
+        "h3": 33,
+        "h4": 28,
+        "h5": 44
+      },
+      "birdies": {
+        "r1": 3,
+        "r2": 3,
+        "r3": 1,
+        "r4": 3,
+        "r5": 0
+      },
+      "ctp": [
+        849
+      ],
+      "playingHcp": {
+        "ph1": 23,
+        "ph2": 24,
+        "ph3": 24,
+        "ph4": 23,
+        "ph5": 24
+      }
+    },
+    "12": {
+      "strokes": {
+        "s1": 70,
+        "s2": 74,
+        "s3": 115,
+        "s4": 110,
+        "s5": 73
+      },
+      "points": {
+        "h1": 32,
+        "h2": 22,
+        "h3": 20,
+        "h4": 39,
+        "h5": 22
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 2,
+        "r3": 3,
+        "r4": 1,
+        "r5": 1
+      },
+      "playingHcp": {
+        "ph1": 25,
+        "ph2": 27,
+        "ph3": 26,
+        "ph4": 25,
+        "ph5": 25
+      }
+    },
+    "23": {
+      "strokes": {
+        "s1": 96,
+        "s2": 112,
+        "s3": 117,
+        "s4": 85,
+        "s5": 87
+      },
+      "points": {
+        "h1": 28,
+        "h2": 24,
+        "h3": 42,
+        "h4": 20,
+        "h5": 48
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 1,
+        "r3": 3,
+        "r4": 2,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 27,
+        "ph2": 24,
+        "ph3": 26,
+        "ph4": 26,
+        "ph5": 27
+      }
     },
     "29": {
       "strokes": {
@@ -1067,87 +1213,289 @@
         1110,
         1001,
         152
-      ]
+      ],
+      "playingHcp": {
+        "ph1": 24,
+        "ph2": 26,
+        "ph3": 24,
+        "ph4": 26,
+        "ph5": 26
+      }
     },
-    "30": {
+    "28": {
       "strokes": {
-        "s1": 105,
-        "s2": 85,
-        "s3": 77,
-        "s4": 99,
-        "s5": 78
+        "s1": 120,
+        "s2": 120,
+        "s3": 117,
+        "s4": 80,
+        "s5": 112
       },
       "points": {
-        "h1": 47,
-        "h2": 38,
-        "h3": 46,
-        "h4": 50,
-        "h5": 45
+        "h1": 23,
+        "h2": 36,
+        "h3": 50,
+        "h4": 39,
+        "h5": 23
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 2,
+        "r3": 1,
+        "r4": 1,
+        "r5": 1
+      },
+      "ctp": [
+        1023
+      ],
+      "playingHcp": {
+        "ph1": 28,
+        "ph2": 29,
+        "ph3": 26,
+        "ph4": 29,
+        "ph5": 27
+      }
+    },
+    "1": {
+      "strokes": {
+        "s1": 110,
+        "s2": 77,
+        "s3": 71,
+        "s4": 117,
+        "s5": 87
+      },
+      "points": {
+        "h1": 33,
+        "h2": 32,
+        "h3": 26,
+        "h4": 24,
+        "h5": 23
       },
       "birdies": {
         "r1": 3,
-        "r2": 1,
-        "r3": 3,
-        "r4": 3,
-        "r5": 2
-      },
-      "ctp": []
-    },
-    "31": {
-      "strokes": {
-        "s1": 110,
-        "s2": 87,
-        "s3": 119,
-        "s4": 119,
-        "s5": 103
-      },
-      "points": {
-        "h1": 49,
-        "h2": 33,
-        "h3": 35,
-        "h4": 46,
-        "h5": 22
-      },
-      "birdies": {
-        "r1": 2,
-        "r2": 1,
-        "r3": 2,
-        "r4": 2,
-        "r5": 2
-      },
-      "ctp": []
-    },
-    "32": {
-      "strokes": {
-        "s1": 75,
-        "s2": 78,
-        "s3": 79,
-        "s4": 84,
-        "s5": 94
-      },
-      "points": {
-        "h1": 27,
-        "h2": 31,
-        "h3": 22,
-        "h4": 44,
-        "h5": 44
-      },
-      "birdies": {
-        "r1": 2,
-        "r2": 3,
-        "r3": 3,
+        "r2": 0,
+        "r3": 0,
         "r4": 0,
         "r5": 1
       },
-      "ctp": []
+      "ctp": [
+        104,
+        1199,
+        457
+      ],
+      "playingHcp": {
+        "ph1": 34,
+        "ph2": 32,
+        "ph3": 34,
+        "ph4": 32,
+        "ph5": 33
+      }
+    },
+    "20": {
+      "strokes": {
+        "s1": 79,
+        "s2": 87,
+        "s3": 88,
+        "s4": 108,
+        "s5": 83
+      },
+      "points": {
+        "h1": 39,
+        "h2": 31,
+        "h3": 34,
+        "h4": 50,
+        "h5": 49
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 0,
+        "r3": 0,
+        "r4": 3,
+        "r5": 2
+      },
+      "ctp": [
+        317,
+        1354
+      ],
+      "playingHcp": {
+        "ph1": 37,
+        "ph2": 37,
+        "ph3": 35,
+        "ph4": 37,
+        "ph5": 36
+      }
     }
+  },
+  "drinkMatches": {
+    "d1": [
+      {
+        "p1": 15,
+        "p2": 7,
+        "winner": 2
+      },
+      {
+        "p1": 16,
+        "p2": 1,
+        "winner": 2
+      },
+      {
+        "p1": 31,
+        "p2": 27,
+        "winner": 2
+      },
+      {
+        "p1": 18,
+        "p2": 12,
+        "winner": 1
+      },
+      {
+        "p1": 17,
+        "p2": 2,
+        "winner": 2
+      },
+      {
+        "p1": 29,
+        "p2": 3,
+        "winner": 1
+      },
+      {
+        "p1": 14,
+        "p2": 4,
+        "winner": 2
+      },
+      {
+        "p1": 9,
+        "p2": 8,
+        "winner": 2
+      },
+      {
+        "p1": 6,
+        "p2": 25,
+        "winner": 2
+      },
+      {
+        "p1": 10,
+        "p2": 13,
+        "winner": 2
+      },
+      {
+        "p1": 19,
+        "p2": 22,
+        "winner": 2
+      },
+      {
+        "p1": 24,
+        "p2": 26,
+        "winner": 0
+      },
+      {
+        "p1": 21,
+        "p2": 30,
+        "winner": 2
+      },
+      {
+        "p1": 20,
+        "p2": 28,
+        "winner": 1
+      },
+      {
+        "p1": 23,
+        "p2": 32,
+        "winner": 1
+      },
+      {
+        "p1": 5,
+        "p2": 11,
+        "winner": 2
+      }
+    ],
+    "d2": [
+      {
+        "p1": 26,
+        "p2": 6,
+        "winner": 1
+      },
+      {
+        "p1": 21,
+        "p2": 14,
+        "winner": 2
+      },
+      {
+        "p1": 18,
+        "p2": 8,
+        "winner": 0
+      },
+      {
+        "p1": 3,
+        "p2": 4,
+        "winner": 2
+      },
+      {
+        "p1": 31,
+        "p2": 25,
+        "winner": 2
+      },
+      {
+        "p1": 27,
+        "p2": 5,
+        "winner": 2
+      },
+      {
+        "p1": 10,
+        "p2": 22,
+        "winner": 0
+      },
+      {
+        "p1": 2,
+        "p2": 24,
+        "winner": 2
+      },
+      {
+        "p1": 16,
+        "p2": 9,
+        "winner": 2
+      },
+      {
+        "p1": 13,
+        "p2": 19,
+        "winner": 1
+      },
+      {
+        "p1": 32,
+        "p2": 17,
+        "winner": 0
+      },
+      {
+        "p1": 15,
+        "p2": 11,
+        "winner": 2
+      },
+      {
+        "p1": 30,
+        "p2": 12,
+        "winner": 2
+      },
+      {
+        "p1": 23,
+        "p2": 29,
+        "winner": 0
+      },
+      {
+        "p1": 28,
+        "p2": 7,
+        "winner": 1
+      },
+      {
+        "p1": 1,
+        "p2": 20,
+        "winner": 1
+      }
+    ]
   }
 }
 </script>
 
 <script>
 (function () {
-  // Roster
   const PLAYERS = [
     { id: 6,  name: "Gísli Sigurbergsson",         room: 15, hcp: 7,    team: "H" },
     { id: 14, name: "Ívar Ásgrímsson",             room: 1,  hcp: 8,    team: "H" },
@@ -1183,13 +1531,9 @@
     { id: 20, name: "Sigurður Gunnarsson",         room: 11, hcp: 36,   team: "R" },
   ];
 
-  // Disambiguated short names (Sigurður St. etc.) for room labels
   const DISPLAY_NAMES = (function () {
     const groups = {};
-    PLAYERS.forEach(p => {
-      const first = p.name.split(" ")[0];
-      (groups[first] = groups[first] || []).push(p);
-    });
+    PLAYERS.forEach(p => { const f = p.name.split(" ")[0]; (groups[f] = groups[f] || []).push(p); });
     const map = {};
     Object.entries(groups).forEach(([first, members]) => {
       if (members.length === 1) { map[members[0].id] = first; return; }
@@ -1217,41 +1561,36 @@
     { num: 5, short: "D5", weekday: "Mánudagur",   date: "18. maí", course: "Brabazon" },
   ];
 
-  // ---------- Load snapshot data ----------
   const snapshot = (function () {
     try { return JSON.parse(document.getElementById("snapshot").textContent); }
-    catch (e) { return { lastUpdated: null, ryder: { hafn: 0, rest: 0 }, players: {} }; }
+    catch (e) { return { lastUpdated: null, ryder: { hafn: 0, rest: 0 }, players: {}, drinkMatches: { d1: [], d2: [] } }; }
   })();
+  if (!snapshot.drinkMatches) snapshot.drinkMatches = { d1: [], d2: [] };
 
-  function getPlayerData(id) {
-    return snapshot.players[id] || { strokes: {}, points: {}, birdies: {}, ctp: [] };
-  }
-  function getPoints(id)  { return getPlayerData(id).points  || {}; }
-  function getStrokes(id) { return getPlayerData(id).strokes || {}; }
-  function getBirdies(id) { return getPlayerData(id).birdies || {}; }
-  function getCtps(id)    { return getPlayerData(id).ctp     || []; }
+  function getPlayerData(id) { return snapshot.players[id] || {}; }
+  function getPoints(id)     { return getPlayerData(id).points     || {}; }
+  function getStrokes(id)    { return getPlayerData(id).strokes    || {}; }
+  function getBirdies(id)    { return getPlayerData(id).birdies    || {}; }
+  function getPlayingHcp(id) { return getPlayerData(id).playingHcp || {}; }
+  function getCtps(id)       { return getPlayerData(id).ctp        || []; }
 
-  // ---------- UI state (in-memory only) ----------
   const ui = {
     activeDay: 1,
     statsFilter: "all",
-    cardExpanded: { top3:false, rooms:false, strokes:false, birdies:false, ctpCm:false, ctpCount:false },
+    cardExpanded: { top3:false, rooms:false, strokes:false, birdies:false, ctpCm:false, ctpCount:false, drinks:false },
     sort: { col: null, dir: "asc" }
   };
-  // Restore from localStorage (per-viewer preferences)
   try {
     const saved = JSON.parse(localStorage.getItem("belfry_view_prefs") || "{}");
     if (saved.activeDay)   ui.activeDay = saved.activeDay;
     if (saved.statsFilter) ui.statsFilter = saved.statsFilter;
     if (saved.cardExpanded) Object.assign(ui.cardExpanded, saved.cardExpanded);
   } catch (e) {}
-  function saveUi() {
-    try { localStorage.setItem("belfry_view_prefs", JSON.stringify(ui)); } catch (e) {}
-  }
+  function saveUi() { try { localStorage.setItem("belfry_view_prefs", JSON.stringify(ui)); } catch (e) {} }
 
-  // ---------- Helpers ----------
   function asNum(v) { return (v == null || v === "") ? null : Number(v); }
   function fmt(v) { return v == null ? '<span class="empty">—</span>' : String(v); }
+  function fmtHcp(h) { return typeof h === "number" ? h.toFixed(1).replace(".", ",") : '<span class="empty">—</span>'; }
   function topN(arr, n) { const a = arr.filter(v => typeof v === "number"); a.sort((x,y) => y-x); return a.slice(0,n).reduce((s,v) => s+v, 0); }
   function sumNums(obj) { return Object.values(obj).filter(v => typeof v === "number").reduce((s,v) => s+v, 0); }
   function activeStatsDays() { return ui.statsFilter === "all" ? [1,2,3,4,5] : [Number(ui.statsFilter)]; }
@@ -1259,35 +1598,111 @@
   function filteredPoints(pts) { return activeStatsDays().reduce((s,d) => s + (typeof pts["h"+d] === "number" ? pts["h"+d] : 0), 0); }
   function filteredStrokes(st) { return activeStatsDays().reduce((s,d) => s + (typeof st["s"+d] === "number" ? st["s"+d] : 0), 0); }
   function filteredBirdies(fr) { return activeStatsDays().reduce((s,d) => s + (typeof fr["r"+d] === "number" ? fr["r"+d] : 0), 0); }
-  function filteredTop3(pts) {
-    const v = activeStatsDays().map(d => pts["h"+d]).filter(x => typeof x === "number");
-    v.sort((a,b) => b-a);
-    return v.slice(0,3).reduce((s,x) => s+x, 0);
-  }
-  function filteredRounds(obj, key) {
-    return activeStatsDays().filter(d => typeof obj[key + d] === "number").length;
-  }
+  function filteredTop3(pts) { const v = activeStatsDays().map(d => pts["h"+d]).filter(x => typeof x === "number"); v.sort((a,b) => b-a); return v.slice(0,3).reduce((s,x) => s+x, 0); }
+  function filteredRounds(obj, key) { return activeStatsDays().filter(d => typeof obj[key + d] === "number").length; }
   function bestCtp(list) { return (!list || list.length === 0) ? null : Math.min.apply(null, list); }
+  function playerName(id) { const p = PLAYERS.find(x => x.id === id); return p ? p.name : `#${id}`; }
 
-  // ---------- Sorting ----------
+  function drinkBalance(pid) {
+    let bal = 0;
+    (snapshot.drinkMatches.d1 || []).forEach(m => {
+      const stake = 1;
+      if (m.p1 === pid) bal += m.winner === 1 ? stake : (m.winner === 2 ? -stake : 0);
+      else if (m.p2 === pid) bal += m.winner === 2 ? stake : (m.winner === 1 ? -stake : 0);
+    });
+    (snapshot.drinkMatches.d2 || []).forEach(m => {
+      const stake = 2;
+      if (m.p1 === pid) bal += m.winner === 1 ? stake : (m.winner === 2 ? -stake : 0);
+      else if (m.p2 === pid) bal += m.winner === 2 ? stake : (m.winner === 1 ? -stake : 0);
+    });
+    return bal;
+  }
+  function drinksBreakdown(pid) {
+    const rows = [];
+    let total = 0;
+    ["d1", "d2"].forEach(dayKey => {
+      const stake = dayKey === "d1" ? 1 : 2;
+      (snapshot.drinkMatches[dayKey] || []).forEach(m => {
+        if (m.p1 !== pid && m.p2 !== pid) return;
+        const other = m.p1 === pid ? m.p2 : m.p1;
+        const otherName = DISPLAY_NAMES[other] || playerName(other);
+        const dayLabel = dayKey.toUpperCase();
+        if (m.winner === 0) {
+          rows.push({ cls: "tie", html: `<span class="day">${dayLabel}</span>= jafnt = ${otherName}` });
+        } else {
+          const won = (m.p1 === pid && m.winner === 1) || (m.p2 === pid && m.winner === 2);
+          if (won) { total += stake; rows.push({ cls: "win", html: `<span class="day">${dayLabel}</span>vann ${otherName} ← ${stake}🍺` }); }
+          else { total -= stake; rows.push({ cls: "loss", html: `<span class="day">${dayLabel}</span>tapaði fyrir ${otherName} → ${stake}🍺` }); }
+        }
+      });
+    });
+    if (rows.length === 0) return "";
+    const totalStr = total > 0 ? `+${total}` : String(total);
+    return rows.map(r => `<span class="row ${r.cls}">${r.html}</span>`).join("") + `<span class="total">Samtals: ${totalStr}🍺</span>`;
+  }
+
+  function getComparisonContext() {
+    if (ui.statsFilter === "all") {
+      let latest = 0;
+      PLAYERS.forEach(p => { const pts = getPoints(p.id); for (let d=1; d<=5; d++) if (typeof pts["h"+d] === "number" && d > latest) latest = d; });
+      if (latest < 2) return null;
+      return { currentDay: latest, previousDay: latest - 1, mode: "cumulative" };
+    }
+    const n = Number(ui.statsFilter);
+    if (!n || n < 2 || n > 5) return null;
+    return { currentDay: n, previousDay: n - 1, mode: "single" };
+  }
+  function daysForCompare(ctx, side) {
+    const target = side === "current" ? ctx.currentDay : ctx.previousDay;
+    if (ctx.mode === "cumulative") { const out = []; for (let d=1; d<=target; d++) out.push(d); return out; }
+    return [target];
+  }
+  function computeRankDeltas(scoreFn, sortAsc) {
+    const ctx = getComparisonContext();
+    if (!ctx) return new Map();
+    function rankAt(days) { return scoreFn(days).filter(r => r.value != null).sort((a,b) => sortAsc ? a.value - b.value : b.value - a.value); }
+    const cur = rankAt(daysForCompare(ctx, "current"));
+    const prev = rankAt(daysForCompare(ctx, "previous"));
+    const prevRank = new Map();
+    prev.forEach((r,i) => prevRank.set(r.id, i));
+    const out = new Map();
+    cur.forEach((r,i) => {
+      const prevIdx = prevRank.get(r.id);
+      if (prevIdx == null) out.set(r.id, { type: "new" });
+      else out.set(r.id, { value: prevIdx - i });
+    });
+    return out;
+  }
+  function scoreTop3Pts(days) { return PLAYERS.map(p => { const pts = getPoints(p.id); const vals = days.map(d => pts["h"+d]).filter(v => typeof v === "number"); vals.sort((a,b) => b-a); const t = vals.slice(0,3).reduce((s,v) => s+v, 0); return { id: p.id, value: t > 0 ? t : null }; }); }
+  function scoreRoomTotal(days) { const map = {}; PLAYERS.forEach(p => { const pts = getPoints(p.id); let total = 0, played = false; days.forEach(d => { if (typeof pts["h"+d] === "number") { total += pts["h"+d]; played = true; } }); if (!map[p.room]) map[p.room] = { value: 0, played: false }; map[p.room].value += total; if (played) map[p.room].played = true; }); return Object.entries(map).map(([room, v]) => ({ id: Number(room), value: v.played ? v.value : null })); }
+  function scoreStrokesTotal(days) { return PLAYERS.map(p => { const st = getStrokes(p.id); let total = 0, played = false; days.forEach(d => { if (typeof st["s"+d] === "number") { total += st["s"+d]; played = true; } }); return { id: p.id, value: played ? total : null }; }); }
+  function scoreBirdiesTotal(days) { return PLAYERS.map(p => { const fr = getBirdies(p.id); let total = 0; days.forEach(d => { if (typeof fr["r"+d] === "number") total += fr["r"+d]; }); return { id: p.id, value: total > 0 ? total : null }; }); }
+  function getRankDeltas() { return computeRankDeltas(scoreTop3Pts, false); }
+  function getRoomDeltas() { return computeRankDeltas(scoreRoomTotal, false); }
+  function getStrokesDeltas() { return computeRankDeltas(scoreStrokesTotal, true); }
+  function getBirdiesDeltas() { return computeRankDeltas(scoreBirdiesTotal, false); }
+  function rankDeltaHtml(d) { if (!d) return ""; if (d.type === "new") return '<span class="rank-delta new">★</span>'; const v = d.value; if (v > 0) return `<span class="rank-delta up">▲${v}</span>`; if (v < 0) return `<span class="rank-delta down">▼${-v}</span>`; return '<span class="rank-delta same">=</span>'; }
+  function getMovers() {
+    const ctx = getComparisonContext();
+    if (!ctx) return { up: [], down: [], currentDay: null, previousDay: null };
+    const all = PLAYERS.map(p => { const pts = getPoints(p.id); const cur = pts["h"+ctx.currentDay]; const prev = pts["h"+ctx.previousDay]; if (typeof cur !== "number" || typeof prev !== "number") return null; return { id: p.id, delta: cur - prev }; }).filter(x => x);
+    return {
+      up: all.filter(x => x.delta > 0).sort((a,b) => b.delta - a.delta).slice(0,5),
+      down: all.filter(x => x.delta < 0).sort((a,b) => a.delta - b.delta).slice(0,5),
+      currentDay: ctx.currentDay, previousDay: ctx.previousDay
+    };
+  }
+
   function sortValue(p, col) {
-    const pts = getPoints(p.id), st = getStrokes(p.id), fr = getBirdies(p.id), ctps = getCtps(p.id), d = ui.activeDay;
+    const pts = getPoints(p.id), st = getStrokes(p.id), fr = getBirdies(p.id), ctps = getCtps(p.id), ph = getPlayingHcp(p.id), d = ui.activeDay;
     switch (col) {
-      case "id": return p.id;
-      case "name": return p.name;
-      case "room": return p.room;
-      case "team": return p.team;
-      case "hcp": return p.hcp;
-      case "strokesDay": return asNum(st["s"+d]);
-      case "ptsDay": return asNum(pts["h"+d]);
-      case "fDay": return asNum(fr["r"+d]);
+      case "id": return p.id; case "name": return p.name; case "room": return p.room; case "team": return p.team; case "hcp": return p.hcp;
+      case "leikHcp": return asNum(ph["ph"+d]);
+      case "strokesDay": return asNum(st["s"+d]); case "ptsDay": return asNum(pts["h"+d]); case "fDay": return asNum(fr["r"+d]);
       case "top3": return topN(Object.values(pts), 3) || null;
-      case "totalPts": return sumNums(pts) || null;
-      case "totalStrokes": return sumNums(st) || null;
-      case "fugTotal": return sumNums(fr) || null;
-      case "ctpInput": return ctps.length > 0 ? ctps.join(",") : null;
-      case "ctpBest": return bestCtp(ctps);
-      case "ctpCount": return ctps.length || null;
+      case "totalPts": return sumNums(pts) || null; case "totalStrokes": return sumNums(st) || null; case "fugTotal": return sumNums(fr) || null;
+      case "ctpInput": return ctps.length > 0 ? ctps.join(",") : null; case "ctpBest": return bestCtp(ctps); case "ctpCount": return ctps.length || null;
+      case "drinks": return drinkBalance(p.id) || null;
       default: return p.id;
     }
   }
@@ -1298,8 +1713,7 @@
     return PLAYERS.slice().sort((a,b) => {
       const va = sortValue(a, col), vb = sortValue(b, col);
       if (va == null && vb == null) return a.id - b.id;
-      if (va == null) return 1;
-      if (vb == null) return -1;
+      if (va == null) return 1; if (vb == null) return -1;
       if (isStr) return va.localeCompare(vb, "is") * dir;
       return (va - vb) * dir;
     });
@@ -1308,30 +1722,39 @@
     document.querySelectorAll("#player-table thead th[data-sort]").forEach(th => {
       th.classList.remove("sort-asc", "sort-desc");
       const arrow = th.querySelector(".sort-arrow");
-      if (ui.sort.col === th.dataset.sort) {
-        th.classList.add(ui.sort.dir === "desc" ? "sort-desc" : "sort-asc");
-        arrow.textContent = ui.sort.dir === "desc" ? "↓" : "↑";
-      } else arrow.textContent = "↕";
+      if (ui.sort.col === th.dataset.sort) { th.classList.add(ui.sort.dir === "desc" ? "sort-desc" : "sort-asc"); arrow.textContent = ui.sort.dir === "desc" ? "↓" : "↑"; }
+      else arrow.textContent = "↕";
     });
   }
 
-  // ---------- Render player table ----------
   const tbody = document.querySelector("#player-table tbody");
   function buildRow(p) {
     const d = ui.activeDay;
-    const pts = getPoints(p.id), st = getStrokes(p.id), fr = getBirdies(p.id), ctps = getCtps(p.id);
+    const pts = getPoints(p.id), st = getStrokes(p.id), fr = getBirdies(p.id), ctps = getCtps(p.id), ph = getPlayingHcp(p.id);
+    let ptDeltaHtml = "";
+    if (d >= 2) {
+      const cur = pts["h"+d], prev = pts["h"+(d-1)];
+      if (typeof cur === "number" && typeof prev === "number") {
+        const delta = cur - prev;
+        if (delta > 0) ptDeltaHtml = ` <span class="day-delta up">+${delta}</span>`;
+        else if (delta < 0) ptDeltaHtml = ` <span class="day-delta down">${delta}</span>`;
+      }
+    }
     const tr = document.createElement("tr");
     tr.dataset.pid = p.id;
     const t3 = topN(Object.values(pts), 3);
     const tPts = sumNums(pts), tSt = sumNums(st), tF = sumNums(fr);
+    const drinks = drinkBalance(p.id);
+    const drinkCell = drinks === 0 ? '<span class="empty">—</span>' : (drinks > 0 ? `+${drinks}` : String(drinks));
     tr.innerHTML = `
       <td class="num">${p.id}</td>
       <td>${p.name}</td>
       <td class="num">${p.room}</td>
       <td><span class="badge ${p.team === "H" ? "hafn" : "rest"}">${p.team === "H" ? "Hafn." : "Rest"}</span></td>
-      <td class="num">${p.hcp}</td>
+      <td class="num">${fmtHcp(p.hcp)}</td>
+      <td class="num">${fmtHcp(ph["ph"+d])}</td>
       <td class="num group-start day-col">${fmt(st["s"+d])}</td>
-      <td class="num day-col">${fmt(pts["h"+d])}</td>
+      <td class="num day-col">${fmt(pts["h"+d])}${ptDeltaHtml}</td>
       <td class="num day-col">${fmt(fr["r"+d])}</td>
       <td class="num computed group-start">${t3 || '<span class="empty">—</span>'}</td>
       <td class="num computed">${tPts || '<span class="empty">—</span>'}</td>
@@ -1340,6 +1763,7 @@
       <td class="group-start">${ctps.length ? ctps.join(", ") : '<span class="empty">—</span>'}</td>
       <td class="num computed">${bestCtp(ctps) != null ? bestCtp(ctps) : '<span class="empty">—</span>'}</td>
       <td class="num computed">${ctps.length || '<span class="empty">—</span>'}</td>
+      <td class="num computed group-start">${drinkCell}</td>
     `;
     return tr;
   }
@@ -1351,8 +1775,8 @@
   document.querySelectorAll("#player-table thead th[data-sort]").forEach(th => {
     th.addEventListener("click", () => {
       const col = th.dataset.sort;
-      const startsDesc = ["strokesDay","ptsDay","fDay","top3","totalPts","fugTotal","ctpCount"].includes(col);
-      const startsAsc = ["totalStrokes","ctpBest"].includes(col);
+      const startsDesc = ["strokesDay","ptsDay","fDay","top3","totalPts","fugTotal","ctpCount","drinks"].includes(col);
+      const startsAsc = ["totalStrokes","ctpBest","leikHcp"].includes(col);
       const defaultDir = startsDesc ? "desc" : (startsAsc ? "asc" : "asc");
       if (ui.sort.col !== col) ui.sort = { col, dir: defaultDir };
       else if ((startsDesc && ui.sort.dir === "desc") || (!startsDesc && ui.sort.dir === "asc")) ui.sort.dir = ui.sort.dir === "asc" ? "desc" : "asc";
@@ -1361,7 +1785,6 @@
     });
   });
 
-  // ---------- Day tabs ----------
   function renderDayTabs() {
     const wrap = document.getElementById("day-tabs");
     wrap.innerHTML = "";
@@ -1370,48 +1793,95 @@
       if (d.num === ui.activeDay) btn.classList.add("active");
       btn.innerHTML = `<span class="num">${d.short}</span> · ${d.weekday.slice(0,3)}.`;
       btn.title = `${d.weekday} ${d.date} — ${d.course}`;
-      btn.addEventListener("click", () => {
-        ui.activeDay = d.num;
-        saveUi();
-        renderDayTabs();
-        renderDayMeta();
-        renderTable();
-      });
+      btn.addEventListener("click", () => { ui.activeDay = d.num; saveUi(); renderDayTabs(); renderDayMeta(); renderTable(); });
       wrap.appendChild(btn);
     });
   }
   function renderDayMeta() {
     const d = DAYS.find(x => x.num === ui.activeDay) || DAYS[0];
-    document.getElementById("day-meta").innerHTML = `
-      <strong>${d.weekday} ${d.date}</strong>
-      <span class="course-badge">${d.course}</span>
-      ${d.tag ? `<span class="course-badge ryder-tag">${d.tag}</span>` : ""}
-    `;
+    document.getElementById("day-meta").innerHTML = `<strong>${d.weekday} ${d.date}</strong><span class="course-badge">${d.course}</span>${d.tag ? `<span class="course-badge ryder-tag">${d.tag}</span>` : ""}`;
   }
 
-  // ---------- Leaderboards ----------
   const COLLAPSED = 5;
-  function lb(cardKey, targetId, rows, valueFmt) {
+  function lb(cardKey, targetId, rows, valueFmt, rankDeltas) {
     const ol = document.getElementById(targetId);
     ol.innerHTML = "";
     if (rows.length === 0) {
       ol.innerHTML = '<li><span></span><span class="name empty">Engin gögn enn</span><span></span></li>';
     } else {
       const limit = ui.cardExpanded[cardKey] ? rows.length : COLLAPSED;
-      rows.slice(0, limit).forEach((r, i) => {
+      rows.slice(0, limit).forEach((r,i) => {
         const li = document.createElement("li");
         if (i === 0) li.classList.add("gold");
-        li.innerHTML = `<span class="rank">${i+1}.</span><span class="name">${r.name}</span><span class="val">${valueFmt(r.value)}</span>`;
+        let deltaHtml = "";
+        if (rankDeltas && r.id != null && rankDeltas.has(r.id)) deltaHtml = rankDeltaHtml(rankDeltas.get(r.id));
+        li.innerHTML = `<span class="rank">${i+1}.</span><span class="name">${deltaHtml}${r.name}</span><span class="val">${valueFmt(r.value)}</span>`;
         ol.appendChild(li);
       });
     }
     const btn = document.querySelector(`.show-all-btn[data-card="${cardKey}"]`);
     if (btn) {
-      if (rows.length > COLLAPSED) {
-        btn.classList.add("visible");
-        btn.textContent = ui.cardExpanded[cardKey] ? `Sýna færri (${COLLAPSED})` : `Sýna alla (${rows.length})`;
-      } else btn.classList.remove("visible");
+      if (rows.length > COLLAPSED) { btn.classList.add("visible"); btn.textContent = ui.cardExpanded[cardKey] ? `Sýna færri (${COLLAPSED})` : `Sýna alla (${rows.length})`; }
+      else btn.classList.remove("visible");
     }
+  }
+  function renderMovers() {
+    const { up, down, currentDay, previousDay } = getMovers();
+    const tag = document.getElementById("movers-tag");
+    tag.textContent = (currentDay && previousDay) ? `D${previousDay} → D${currentDay}` : "bíður D2";
+    const upEl = document.getElementById("movers-up"), downEl = document.getElementById("movers-down");
+    upEl.innerHTML = ""; downEl.innerHTML = "";
+    if (up.length === 0) upEl.innerHTML = '<li class="empty-row">Engar hreyfingar</li>';
+    else up.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); li.innerHTML = `<span class="nm">${name}</span><span class="dl">+${r.delta}</span>`; upEl.appendChild(li); });
+    if (down.length === 0) downEl.innerHTML = '<li class="empty-row">Engar hreyfingar</li>';
+    else down.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); li.innerHTML = `<span class="nm">${name}</span><span class="dl">${r.delta}</span>`; downEl.appendChild(li); });
+  }
+  function renderDrinks() {
+    const all = PLAYERS.map(p => ({ id: p.id, value: drinkBalance(p.id) })).filter(r => r.value !== 0);
+    const upAll = all.filter(r => r.value > 0).sort((a,b) => b.value - a.value);
+    const downAll = all.filter(r => r.value < 0).sort((a,b) => a.value - b.value);
+    const expanded = !!ui.cardExpanded.drinks;
+    const limit = expanded ? Infinity : 5;
+    const up = upAll.slice(0, limit), down = downAll.slice(0, limit);
+    const upEl = document.getElementById("drinks-up"), downEl = document.getElementById("drinks-down");
+    upEl.innerHTML = ""; downEl.innerHTML = "";
+    if (up.length === 0) upEl.innerHTML = '<li class="empty-row">Engin inneign enn</li>';
+    else up.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); const tip = drinksBreakdown(r.id); li.innerHTML = `<span class="nm has-tip">${name}<span class="tip">${tip}</span></span><span class="dl">+${r.value}</span>`; upEl.appendChild(li); });
+    if (down.length === 0) downEl.innerHTML = '<li class="empty-row">Engin skuld enn</li>';
+    else down.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); const tip = drinksBreakdown(r.id); li.innerHTML = `<span class="nm has-tip">${name}<span class="tip">${tip}</span></span><span class="dl">${r.value}</span>`; downEl.appendChild(li); });
+    const btn = document.querySelector('.show-all-btn[data-card="drinks"]');
+    if (btn) {
+      const maxLen = Math.max(upAll.length, downAll.length);
+      if (maxLen > 5) { btn.classList.add("visible"); btn.textContent = expanded ? "Sýna færri (5)" : `Sýna alla (${maxLen})`; }
+      else btn.classList.remove("visible");
+    }
+  }
+  function renderDrinkMatches() {
+    const stakes = { d1: 1, d2: 2 };
+    ["d1", "d2"].forEach(day => {
+      const tbl = document.getElementById("drinks-" + day);
+      if (!tbl) return;
+      tbl.innerHTML = "";
+      const matches = snapshot.drinkMatches[day] || [];
+      if (matches.length === 0) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class="empty" colspan="3">Engin pör skráð enn</td>`;
+        tbl.appendChild(tr);
+        return;
+      }
+      matches.forEach(m => {
+        const tr = document.createElement("tr");
+        const aClass = m.winner === 1 ? "winner" : (m.winner === 2 ? "loser" : "");
+        const bClass = m.winner === 2 ? "winner" : (m.winner === 1 ? "loser" : "");
+        let flow;
+        if (m.winner === 0) flow = `<span class="flow tie">= jafnt =</span>`;
+        else if (m.winner === 1) flow = `<span class="flow">← <span class="drink">${stakes[day]}🍺</span></span>`;
+        else if (m.winner === 2) flow = `<span class="flow"><span class="drink">${stakes[day]}🍺</span> →</span>`;
+        else flow = `<span class="flow tie">— óúrslitið —</span>`;
+        tr.innerHTML = `<td class="name-a ${aClass}">${playerName(m.p1)}</td><td>${flow}</td><td class="name-b ${bClass}">${playerName(m.p2)}</td>`;
+        tbl.appendChild(tr);
+      });
+    });
   }
   function renderLeaderboards() {
     document.getElementById("top3-tag").innerHTML    = filterTagHtml();
@@ -1419,59 +1889,36 @@
     document.getElementById("strokes-tag").innerHTML = filterTagHtml();
     document.getElementById("birdies-tag").innerHTML = filterTagHtml();
 
-    const top3 = PLAYERS.map(p => ({
-      name: p.name,
-      value: filteredTop3(getPoints(p.id)),
-      played: filteredRounds(getPoints(p.id), "h")
-    })).filter(r => r.played > 0).sort((a,b) => b.value - a.value);
-    lb("top3", "lb-top3", top3, v => `${v} pts`);
+    const top3 = PLAYERS.map(p => ({ id: p.id, name: p.name, value: filteredTop3(getPoints(p.id)), played: filteredRounds(getPoints(p.id), "h") })).filter(r => r.played > 0).sort((a,b) => b.value - a.value);
+    lb("top3", "lb-top3", top3, v => `${v} pts`, getRankDeltas());
+    renderMovers();
+    renderDrinks();
+    renderDrinkMatches();
 
     const roomMap = {};
-    PLAYERS.forEach(p => {
-      const total = filteredPoints(getPoints(p.id));
-      const played = filteredRounds(getPoints(p.id), "h");
-      if (!roomMap[p.room]) roomMap[p.room] = { room: p.room, players: [], value: 0, played: 0 };
-      roomMap[p.room].players.push(p);
-      roomMap[p.room].value += total;
-      roomMap[p.room].played += played;
-    });
-    const rooms = Object.values(roomMap).filter(r => r.played > 0)
-      .map(r => ({ name: `H${r.room} ${r.players.map(p => DISPLAY_NAMES[p.id]).join("-")}`, value: r.value }))
-      .sort((a,b) => b.value - a.value);
-    lb("rooms", "lb-rooms", rooms, v => `${v} pts`);
+    PLAYERS.forEach(p => { const total = filteredPoints(getPoints(p.id)); const played = filteredRounds(getPoints(p.id), "h"); if (!roomMap[p.room]) roomMap[p.room] = { room: p.room, players: [], value: 0, played: 0 }; roomMap[p.room].players.push(p); roomMap[p.room].value += total; roomMap[p.room].played += played; });
+    const rooms = Object.values(roomMap).filter(r => r.played > 0).map(r => ({ id: r.room, name: `H${r.room} ${r.players.map(p => DISPLAY_NAMES[p.id]).join("-")}`, value: r.value })).sort((a,b) => b.value - a.value);
+    lb("rooms", "lb-rooms", rooms, v => `${v} pts`, getRoomDeltas());
 
-    const strokes = PLAYERS.map(p => ({
-      name: p.name,
-      value: filteredStrokes(getStrokes(p.id)),
-      played: filteredRounds(getStrokes(p.id), "s")
-    })).filter(r => r.played > 0).sort((a,b) => a.value - b.value);
-    lb("strokes", "lb-strokes", strokes, v => `${v} högg`);
+    const strokes = PLAYERS.map(p => ({ id: p.id, name: p.name, value: filteredStrokes(getStrokes(p.id)), played: filteredRounds(getStrokes(p.id), "s") })).filter(r => r.played > 0).sort((a,b) => a.value - b.value);
+    lb("strokes", "lb-strokes", strokes, v => `${v} högg`, getStrokesDeltas());
 
-    const birdies = PLAYERS.map(p => ({ name: p.name, value: filteredBirdies(getBirdies(p.id)) }))
-      .filter(r => r.value > 0).sort((a,b) => b.value - a.value);
-    lb("birdies", "lb-birdies", birdies, v => `${v}`);
+    const birdies = PLAYERS.map(p => ({ id: p.id, name: p.name, value: filteredBirdies(getBirdies(p.id)) })).filter(r => r.value > 0).sort((a,b) => b.value - a.value);
+    lb("birdies", "lb-birdies", birdies, v => `${v}`, getBirdiesDeltas());
 
-    const ctpCm = PLAYERS.map(p => ({ name: p.name, value: bestCtp(getCtps(p.id)) }))
-      .filter(r => typeof r.value === "number").sort((a,b) => a.value - b.value);
+    const ctpCm = PLAYERS.map(p => ({ name: p.name, value: bestCtp(getCtps(p.id)) })).filter(r => typeof r.value === "number").sort((a,b) => a.value - b.value);
     lb("ctpCm", "lb-ctp-cm", ctpCm, v => `${v} cm`);
 
-    const ctpCount = PLAYERS.map(p => ({ name: p.name, value: getCtps(p.id).length }))
-      .filter(r => r.value > 0).sort((a,b) => b.value - a.value);
+    const ctpCount = PLAYERS.map(p => ({ name: p.name, value: getCtps(p.id).length })).filter(r => r.value > 0).sort((a,b) => b.value - a.value);
     lb("ctpCount", "lb-ctp-count", ctpCount, v => `${v}×`);
 
     document.getElementById("ryder-hafn").textContent = snapshot.ryder.hafn || 0;
     document.getElementById("ryder-rest").textContent = snapshot.ryder.rest || 0;
   }
   document.querySelectorAll(".show-all-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const key = btn.dataset.card;
-      ui.cardExpanded[key] = !ui.cardExpanded[key];
-      saveUi();
-      renderLeaderboards();
-    });
+    btn.addEventListener("click", () => { const key = btn.dataset.card; ui.cardExpanded[key] = !ui.cardExpanded[key]; saveUi(); renderLeaderboards(); });
   });
 
-  // ---------- Stats filter ----------
   function renderStatsFilter() {
     const wrap = document.getElementById("stats-filter-tabs");
     wrap.innerHTML = "";
@@ -1479,17 +1926,11 @@
       const btn = document.createElement("button");
       if (ui.statsFilter === o.v) btn.classList.add("active");
       btn.textContent = o.l;
-      btn.addEventListener("click", () => {
-        ui.statsFilter = o.v;
-        saveUi();
-        renderStatsFilter();
-        renderLeaderboards();
-      });
+      btn.addEventListener("click", () => { ui.statsFilter = o.v; saveUi(); renderStatsFilter(); renderLeaderboards(); });
       wrap.appendChild(btn);
     });
   }
 
-  // ---------- Last updated label ----------
   function renderLastUpdated() {
     const el = document.getElementById("last-updated");
     if (!snapshot.lastUpdated) { el.textContent = "—"; return; }
@@ -1497,13 +1938,11 @@
       const d = new Date(snapshot.lastUpdated);
       const days = ["sunnudagur","mánudagur","þriðjudagur","miðvikudagur","fimmtudagur","föstudagur","laugardagur"];
       const months = ["jan","feb","mar","apr","maí","jún","júl","ágú","sep","okt","nóv","des"];
-      const hh = String(d.getHours()).padStart(2,"0");
-      const mm = String(d.getMinutes()).padStart(2,"0");
+      const hh = String(d.getHours()).padStart(2,"0"); const mm = String(d.getMinutes()).padStart(2,"0");
       el.textContent = `${days[d.getDay()]} ${d.getDate()}. ${months[d.getMonth()]} kl. ${hh}:${mm}`;
     } catch (e) { el.textContent = snapshot.lastUpdated; }
   }
 
-  // ---------- Init ----------
   renderLastUpdated();
   renderStatsFilter();
   renderDayTabs();
