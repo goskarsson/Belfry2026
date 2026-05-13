@@ -772,4 +772,77 @@ footer a { color: #1a3a5f; }
     document.getElementById("strokes-tag").innerHTML = filterTagHtml();
     document.getElementById("birdies-tag").innerHTML = filterTagHtml();
 
-    const top3 = PLAYERS.map(p => ({ id: p.id, name: p.name, value: filteredTop3(getPoints(p.id)), played: filteredRounds(getPoints(p.
+    const top3 = PLAYERS.map(p => ({ id: p.id, name: p.name, value: filteredTop3(getPoints(p.id)), played: filteredRounds(getPoints(p.id), "h") })).filter(r => r.played > 0).sort((a,b) => b.value - a.value);
+    lb("top3", "lb-top3", top3, v => `${v} pts`, getRankDeltas());
+    renderMovers();
+    renderDrinks();
+    renderDrinkMatches();
+    renderRyderMatches();
+
+    const roomMap = {};
+    PLAYERS.forEach(p => {
+      const total = filteredPoints(getPoints(p.id));
+      const played = filteredRounds(getPoints(p.id), "h");
+      if (!roomMap[p.room]) roomMap[p.room] = { room: p.room, players: [], value: 0, played: 0 };
+      roomMap[p.room].players.push(p);
+      roomMap[p.room].value += total;
+      roomMap[p.room].played += played;
+    });
+    const rooms = Object.values(roomMap).filter(r => r.played > 0)
+      .map(r => ({ id: r.room, name: `H${r.room} ${r.players.map(p => DISPLAY_NAMES[p.id]).join("-")}`, value: r.value }))
+      .sort((a,b) => b.value - a.value);
+    lb("rooms", "lb-rooms", rooms, v => `${v} pts`, getRoomDeltas());
+
+    const strokes = PLAYERS.map(p => ({ id: p.id, name: p.name, value: filteredStrokes(getStrokes(p.id)), played: filteredRounds(getStrokes(p.id), "s") })).filter(r => r.played > 0).sort((a,b) => a.value - b.value);
+    lb("strokes", "lb-strokes", strokes, v => `${v} högg`, getStrokesDeltas());
+
+    const birdies = PLAYERS.map(p => ({ id: p.id, name: p.name, value: filteredBirdies(getBirdies(p.id)) })).filter(r => r.value > 0).sort((a,b) => b.value - a.value);
+    lb("birdies", "lb-birdies", birdies, v => `${v}`, getBirdiesDeltas());
+
+    const ctpCm = PLAYERS.map(p => ({ id: p.id, name: p.name, value: bestCtp(getCtps(p.id)) })).filter(r => typeof r.value === "number").sort((a,b) => a.value - b.value);
+    lb("ctpCm", "lb-ctp-cm", ctpCm, v => `${v} cm`);
+
+    const ctpCount = PLAYERS.map(p => ({ id: p.id, name: p.name, value: getCtps(p.id).length })).filter(r => r.value > 0).sort((a,b) => b.value - a.value);
+    lb("ctpCount", "lb-ctp-count", ctpCount, v => `${v}×`);
+
+    document.getElementById("ryder-hafn").textContent = snapshot.ryder.hafn || 0;
+    document.getElementById("ryder-rest").textContent = snapshot.ryder.rest || 0;
+  }
+  document.querySelectorAll(".show-all-btn").forEach(btn => {
+    btn.addEventListener("click", () => { const key = btn.dataset.card; ui.cardExpanded[key] = !ui.cardExpanded[key]; saveUi(); renderLeaderboards(); });
+  });
+
+  function renderStatsFilter() {
+    const wrap = document.getElementById("stats-filter-tabs");
+    wrap.innerHTML = "";
+    [{v:"all",l:"Allir dagar"},{v:"1",l:"D1"},{v:"2",l:"D2"},{v:"3",l:"D3"},{v:"4",l:"D4"},{v:"5",l:"D5"}].forEach(o => {
+      const btn = document.createElement("button");
+      if (ui.statsFilter === o.v) btn.classList.add("active");
+      btn.textContent = o.l;
+      btn.addEventListener("click", () => { ui.statsFilter = o.v; saveUi(); renderStatsFilter(); renderLeaderboards(); });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function renderLastUpdated() {
+    const el = document.getElementById("last-updated");
+    if (!snapshot.lastUpdated) { el.textContent = "—"; return; }
+    try {
+      const d = new Date(snapshot.lastUpdated);
+      const days = ["sunnudagur","mánudagur","þriðjudagur","miðvikudagur","fimmtudagur","föstudagur","laugardagur"];
+      const months = ["jan","feb","mar","apr","maí","jún","júl","ágú","sep","okt","nóv","des"];
+      const hh = String(d.getHours()).padStart(2,"0"); const mm = String(d.getMinutes()).padStart(2,"0");
+      el.textContent = `${days[d.getDay()]} ${d.getDate()}. ${months[d.getMonth()]} kl. ${hh}:${mm}`;
+    } catch (e) { el.textContent = snapshot.lastUpdated; }
+  }
+
+  renderLastUpdated();
+  renderStatsFilter();
+  renderDayTabs();
+  renderDayMeta();
+  renderTable();
+  renderLeaderboards();
+})();
+</script>
+</body>
+</html>

@@ -550,4 +550,12 @@ footer a { color: #1a3a5f; }
     const achs = computeAchievements(p.id);
     const achHtml = achs.length
       ? achs.map(a => `<div class="achievement"><span class="icon">${a.icon}</span><span class="text">${a.text}<span class="sub">${a.sub}</span></span></div>`).join("")
-      : '<
+      : '<div class="achievement muted"><span class="icon">🔒</span><span class="text">Engin afrek enn<span class="sub">Spilaðu fleiri hringi!</span></span></div>';
+    document.getElementById("achievements").innerHTML = achHtml;
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
