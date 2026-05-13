@@ -1,0 +1,1742 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Belfry 2026 — Mín síða</title>
+<meta property="og:title" content="Belfry 2026 — Mín síða" />
+<meta property="og:description" content="Persónuleg tölfræði leikmanns úr Belfry 2026 mótinu." />
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; background: #f5f6f8; color: #1d2433; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1300px; margin: 0 auto; padding: 20px; }
+header.app-header { position: relative; color: #fff; padding: 28px 24px; border-radius: 14px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(26,58,95,.18); overflow: hidden; min-height: 120px; }
+header.app-header .header-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+header.app-header .header-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,38,66,.7) 0%, rgba(20,38,66,.4) 60%, rgba(20,38,66,.2) 100%); z-index: 1; }
+header.app-header .header-content { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+header.app-header h1 { margin: 0; font-size: 24px; letter-spacing: 0.3px; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
+header.app-header .sub { opacity: .95; margin-top: 4px; font-size: 13px; text-shadow: 0 1px 4px rgba(0,0,0,.4); }
+header.app-header .back { color: #fff; font-size: 13px; opacity: 0.9; text-decoration: none; padding: 6px 12px; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; background: rgba(0,0,0,.18); }
+header.app-header .back:hover { background: rgba(0,0,0,.32); }
+
+.player-picker { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.player-picker label { font-size: 13px; color: #5b6478; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+.player-picker select { padding: 8px 14px; border: 1px solid #d3d8e0; border-radius: 8px; background: #fff; font-size: 14px; font-weight: 500; cursor: pointer; min-width: 240px; }
+.player-picker select:focus { outline: none; border-color: #1a3a5f; box-shadow: 0 0 0 3px rgba(26,58,95,.1); }
+
+.profile-card { display: flex; align-items: center; gap: 18px; background: #fff; border: 1px solid #e8eaef; border-radius: 14px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.profile-card .avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #1a3a5f, #2c5680); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 700; flex-shrink: 0; }
+.profile-card .avatar.hafn { background: linear-gradient(135deg, #9b2d2d, #c14a4a); }
+.profile-card .avatar.rest { background: linear-gradient(135deg, #1e4880, #2c5680); }
+.profile-card h2 { margin: 0; font-size: 22px; }
+.profile-card .meta { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color: #5b6478; align-items: center; }
+.profile-card .meta strong { color: #1d2433; font-weight: 600; }
+.profile-card .meta .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
+.profile-card .meta .badge.hafn { background: #fcecec; color: #9b2d2d; }
+.profile-card .meta .badge.rest { background: #e8eef7; color: #1e4880; }
+
+.hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.hero-stat { background: #fff; border: 1px solid #e8eaef; border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.hero-stat .label { font-size: 11px; color: #5b6478; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.hero-stat .value { font-size: 32px; font-weight: 700; color: #1a3a5f; font-variant-numeric: tabular-nums; line-height: 1; }
+.hero-stat .value .unit { font-size: 14px; font-weight: 500; color: #98a0b0; margin-left: 4px; }
+.hero-stat .delta { font-size: 11px; color: #5b6478; margin-top: 4px; }
+
+.card { background: #fff; border: 1px solid #e8eaef; border-radius: 12px; padding: 16px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.card h3 { margin: 0 0 12px; font-size: 14px; font-weight: 600; color: #5b6478; text-transform: uppercase; letter-spacing: 0.4px; display: flex; align-items: center; gap: 8px; }
+.card h3 .icon { font-size: 18px; }
+
+.daily-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.daily-table th { background: #fafbfc; text-align: left; padding: 8px 10px; font-weight: 600; color: #5b6478; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; border-bottom: 1px solid #e8eaef; }
+.daily-table th.num { text-align: right; }
+.daily-table td { padding: 8px 10px; border-bottom: 1px solid #f0f1f4; vertical-align: middle; }
+.daily-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.daily-table tr:last-child td { border-bottom: 0; }
+.daily-table tr.total td { font-weight: 700; color: #1a3a5f; background: #fafbfc; }
+.daily-table .empty { color: #c3c8d2; }
+.daily-table .day-cell { font-weight: 600; }
+.daily-table .course-badge { display: inline-block; padding: 1px 8px; border-radius: 999px; background: #eef2f8; color: #1a3a5f; font-size: 11px; font-weight: 600; margin-left: 6px; }
+
+.charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.chart-wrap { position: relative; height: 240px; }
+
+.side-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.side-card { background: #fff; border: 1px solid #e8eaef; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.side-card h3 { margin: 0 0 12px; font-size: 13px; font-weight: 600; color: #5b6478; text-transform: uppercase; letter-spacing: 0.4px; display: flex; align-items: center; gap: 8px; }
+.side-card .big { font-size: 28px; font-weight: 700; color: #1a3a5f; font-variant-numeric: tabular-nums; margin-bottom: 6px; }
+.side-card .big .unit { font-size: 13px; font-weight: 500; color: #98a0b0; margin-left: 4px; }
+.side-card .small-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; border-bottom: 1px solid #f0f1f4; }
+.side-card .small-row:last-child { border: 0; }
+.side-card .small-row .lbl { color: #5b6478; }
+.side-card .small-row .val { font-weight: 600; font-variant-numeric: tabular-nums; }
+.side-card .empty-row { color: #c3c8d2; font-style: italic; font-size: 12px; padding: 4px 0; }
+
+.match-row { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid #f0f1f4; font-size: 13px; }
+.match-row:last-child { border: 0; }
+.match-row .day-tag { background: #eef2f8; color: #1a3a5f; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+.match-row.win .result { color: #1a7a3c; font-weight: 700; }
+.match-row.loss .result { color: #9b2d2d; font-weight: 700; }
+.match-row.tie .result { color: #98a0b0; font-style: italic; }
+
+.compare-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.compare-table th { background: #fafbfc; text-align: left; padding: 8px 10px; font-weight: 600; color: #5b6478; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; border-bottom: 1px solid #e8eaef; }
+.compare-table th.num { text-align: right; }
+.compare-table td { padding: 8px 10px; border-bottom: 1px solid #f0f1f4; vertical-align: middle; }
+.compare-table td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.compare-table .you { color: #1a3a5f; }
+.compare-table .field { color: #5b6478; }
+.compare-table .delta.pos { color: #1a7a3c; font-weight: 700; }
+.compare-table .delta.neg { color: #9b2d2d; font-weight: 700; }
+
+.achievements { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.achievement { background: linear-gradient(135deg, #fdf5e6, #fcecbc); border: 1px solid #e6cf9a; border-radius: 10px; padding: 10px 14px; font-size: 13px; display: flex; align-items: center; gap: 8px; min-width: 140px; }
+.achievement .icon { font-size: 22px; }
+.achievement .text { font-weight: 600; color: #8a6e3a; line-height: 1.2; }
+.achievement .text .sub { display: block; font-weight: 500; color: #b89466; font-size: 11px; margin-top: 2px; }
+.achievement.muted { background: #f5f6f8; border-color: #e8eaef; opacity: 0.5; }
+.achievement.muted .text { color: #98a0b0; }
+
+footer { text-align: center; color: #98a0b0; font-size: 12px; padding: 24px 0; margin-top: 16px; }
+footer a { color: #1a3a5f; }
+
+.name-link { color: inherit; text-decoration: none; cursor: pointer; }
+.name-link:hover { text-decoration: underline; color: #1a3a5f; }
+
+@media (max-width: 720px) {
+  header.app-header h1 { font-size: 20px; }
+  .wrap { padding: 12px; }
+  .hero-stat .value { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="app-header">
+    <svg class="header-bg" viewBox="0 0 1400 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a3a5f"/><stop offset="55%" stop-color="#4d6f96"/><stop offset="100%" stop-color="#dfb986"/></linearGradient>
+        <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a7045"/><stop offset="100%" stop-color="#2e4a2d"/></linearGradient>
+        <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2e4a2d"/><stop offset="100%" stop-color="#1c2e1c"/></linearGradient>
+        <linearGradient id="fairway" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3f6132"/><stop offset="100%" stop-color="#1c2e1c"/></linearGradient>
+        <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a6b96"/><stop offset="100%" stop-color="#1a3a5f"/></linearGradient>
+      </defs>
+      <rect width="1400" height="280" fill="url(#sky)"/>
+      <circle cx="1100" cy="105" r="55" fill="#ffe5b5" opacity="0.18"/>
+      <circle cx="1100" cy="105" r="38" fill="#fff3d4" opacity="0.32"/>
+      <path d="M0,175 Q150,145 350,162 Q480,170 560,160 L585,160 L585,135 L595,135 L595,128 L610,128 L610,135 L620,135 L620,160 L660,160 Q820,140 1050,160 T1400,170 L1400,280 L0,280 Z" fill="url(#hillFar)" opacity="0.92"/>
+      <rect x="595" y="128" width="15" height="32" fill="#3a4d52" opacity="0.55"/>
+      <polygon points="595,128 610,128 602.5,118" fill="#3a4d52" opacity="0.55"/>
+      <path d="M0,210 Q300,180 600,200 T1200,205 L1400,200 L1400,280 L0,280 Z" fill="url(#hillMid)"/>
+      <ellipse cx="950" cy="248" rx="220" ry="20" fill="url(#water)" opacity="0.85"/>
+      <path d="M0,245 Q260,225 540,235 Q680,240 800,242 L1080,243 Q1190,240 1280,238 T1400,237 L1400,280 L0,280 Z" fill="url(#fairway)"/>
+      <line x1="880" y1="180" x2="880" y2="215" stroke="#3d2818" stroke-width="1.5"/>
+      <path d="M880,180 L900,184 L880,189 Z" fill="#c19b56"/>
+    </svg>
+    <div class="header-overlay"></div>
+    <div class="header-content">
+      <div>
+        <h1>Belfry 2026 — Mín síða</h1>
+        <div class="sub">Persónuleg tölfræði · 14.–18. maí</div>
+      </div>
+      <a class="back" href="index.html">← Aðalmælaborð</a>
+    </div>
+  </header>
+
+  <div class="player-picker">
+    <label for="player-select">Veldu leikmann</label>
+    <select id="player-select"></select>
+  </div>
+
+  <div class="profile-card" id="profile-card"></div>
+
+  <div class="hero-stats" id="hero-stats"></div>
+
+  <div class="card">
+    <h3>📅 Dag fyrir dag</h3>
+    <table class="daily-table" id="daily-table"></table>
+  </div>
+
+  <div class="charts-grid">
+    <div class="card">
+      <h3>📈 Punkta-þróun</h3>
+      <div class="chart-wrap"><canvas id="ptsChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>🏆 Sæti yfir tíma (Belfry meistari)</h3>
+      <div class="chart-wrap"><canvas id="rankChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="side-grid">
+    <div class="side-card">
+      <h3><span class="icon">🐦</span> Fuglar</h3>
+      <div class="big" id="birdies-big">0</div>
+      <div id="birdies-breakdown"></div>
+    </div>
+    <div class="side-card">
+      <h3><span class="icon">🎯</span> Næst holu</h3>
+      <div class="big" id="ctp-big">—</div>
+      <div id="ctp-breakdown"></div>
+    </div>
+    <div class="side-card">
+      <h3><span class="icon">🍻</span> Drykkurinn</h3>
+      <div class="big" id="drinks-big">0</div>
+      <div id="drinks-breakdown"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📊 Samanburður við hópinn</h3>
+    <table class="compare-table">
+      <thead><tr><th>Metric</th><th class="num">Þú</th><th class="num">Meðaltal</th><th class="num">Munur</th></tr></thead>
+      <tbody id="compare-body"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>🏅 Verðlaunaskápur</h3>
+    <div class="achievements" id="achievements"></div>
+  </div>
+
+  <footer>Belfry 2026 — Hafnfirðingaferð · Mótsstjóri: Gummi Óskarsson · <a href="index.html">Aðalmælaborð</a></footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script type="application/json" id="snapshot">
+{
+  "lastUpdated": "2026-05-12T23:00:00",
+  "ryder": {
+    "hafn": 7,
+    "rest": 5
+  },
+  "players": {
+    "6": {
+      "strokes": {
+        "s1": 95,
+        "s2": 87,
+        "s3": 74,
+        "s4": 83,
+        "s5": 106
+      },
+      "points": {
+        "h1": 38,
+        "h2": 31,
+        "h3": 49,
+        "h4": 43,
+        "h5": 47
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 2,
+        "r3": 1,
+        "r4": 1,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 7,
+        "ph2": 6,
+        "ph3": 6,
+        "ph4": 6,
+        "ph5": 8
+      }
+    },
+    "14": {
+      "strokes": {
+        "s1": 73,
+        "s2": 113,
+        "s3": 111,
+        "s4": 111,
+        "s5": 76
+      },
+      "points": {
+        "h1": 21,
+        "h2": 43,
+        "h3": 39,
+        "h4": 24,
+        "h5": 33
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 1,
+        "r3": 3,
+        "r4": 1,
+        "r5": 3
+      },
+      "ctp": [
+        561,
+        204
+      ],
+      "playingHcp": {
+        "ph1": 7,
+        "ph2": 8,
+        "ph3": 9,
+        "ph4": 8,
+        "ph5": 10
+      }
+    },
+    "18": {
+      "strokes": {
+        "s1": 83,
+        "s2": 112,
+        "s3": 115,
+        "s4": 90,
+        "s5": 85
+      },
+      "points": {
+        "h1": 34,
+        "h2": 43,
+        "h3": 26,
+        "h4": 37,
+        "h5": 47
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 0,
+        "r3": 0,
+        "r4": 3,
+        "r5": 0
+      },
+      "ctp": [
+        1086
+      ],
+      "playingHcp": {
+        "ph1": 8,
+        "ph2": 8,
+        "ph3": 8,
+        "ph4": 7,
+        "ph5": 10
+      }
+    },
+    "8": {
+      "strokes": {
+        "s1": 105,
+        "s2": 70,
+        "s3": 113,
+        "s4": 116,
+        "s5": 77
+      },
+      "points": {
+        "h1": 35,
+        "h2": 39,
+        "h3": 25,
+        "h4": 36,
+        "h5": 45
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 3,
+        "r3": 0,
+        "r4": 2,
+        "r5": 1
+      },
+      "playingHcp": {
+        "ph1": 9,
+        "ph2": 10,
+        "ph3": 11,
+        "ph4": 9,
+        "ph5": 11
+      }
+    },
+    "4": {
+      "strokes": {
+        "s1": 115,
+        "s2": 74,
+        "s3": 72,
+        "s4": 112,
+        "s5": 84
+      },
+      "points": {
+        "h1": 36,
+        "h2": 23,
+        "h3": 32,
+        "h4": 24,
+        "h5": 42
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 3,
+        "r3": 2,
+        "r4": 1,
+        "r5": 2
+      },
+      "ctp": [
+        596,
+        1487,
+        1449
+      ],
+      "playingHcp": {
+        "ph1": 12,
+        "ph2": 10,
+        "ph3": 13,
+        "ph4": 11,
+        "ph5": 12
+      }
+    },
+    "31": {
+      "strokes": {
+        "s1": 110,
+        "s2": 87,
+        "s3": 119,
+        "s4": 119,
+        "s5": 103
+      },
+      "points": {
+        "h1": 49,
+        "h2": 33,
+        "h3": 35,
+        "h4": 46,
+        "h5": 22
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 1,
+        "r3": 2,
+        "r4": 2,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 12,
+        "ph2": 12,
+        "ph3": 11,
+        "ph4": 10,
+        "ph5": 11
+      }
+    },
+    "25": {
+      "strokes": {
+        "s1": 86,
+        "s2": 81,
+        "s3": 107,
+        "s4": 86,
+        "s5": 72
+      },
+      "points": {
+        "h1": 24,
+        "h2": 45,
+        "h3": 40,
+        "h4": 38,
+        "h5": 45
+      },
+      "birdies": {
+        "r1": 0,
+        "r2": 3,
+        "r3": 1,
+        "r4": 2,
+        "r5": 0
+      },
+      "playingHcp": {
+        "ph1": 15,
+        "ph2": 13,
+        "ph3": 13,
+        "ph4": 15,
+        "ph5": 13
+      }
+    },
+    "27": {
+      "strokes": {
+        "s1": 82,
+        "s2": 96,
+        "s3": 112,
+        "s4": 94,
+        "s5": 113
+      },
+      "points": {
+        "h1": 29,
+        "h2": 37,
+        "h3": 43,
+        "h4": 18,
+        "h5": 37
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 1,
+        "r3": 3,
+        "r4": 2,
+        "r5": 3
+      },
+      "ctp": [
+        487,
+        1096,
+        1019
+      ],
+      "playingHcp": {
+        "ph1": 15,
+        "ph2": 12,
+        "ph3": 12,
+        "ph4": 15,
+        "ph5": 12
+      }
+    },
+    "5": {
+      "strokes": {
+        "s1": 111,
+        "s2": 74,
+        "s3": 108,
+        "s4": 110,
+        "s5": 80
+      },
+      "points": {
+        "h1": 33,
+        "h2": 28,
+        "h3": 47,
+        "h4": 42,
+        "h5": 35
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 2,
+        "r3": 0,
+        "r4": 1,
+        "r5": 0
+      },
+      "playingHcp": {
+        "ph1": 15,
+        "ph2": 14,
+        "ph3": 16,
+        "ph4": 15,
+        "ph5": 14
+      }
+    },
+    "10": {
+      "strokes": {
+        "s1": 89,
+        "s2": 85,
+        "s3": 73,
+        "s4": 85,
+        "s5": 106
+      },
+      "points": {
+        "h1": 23,
+        "h2": 23,
+        "h3": 49,
+        "h4": 22,
+        "h5": 26
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 3,
+        "r3": 1,
+        "r4": 2,
+        "r5": 3
+      },
+      "playingHcp": {
+        "ph1": 13,
+        "ph2": 13,
+        "ph3": 15,
+        "ph4": 16,
+        "ph5": 13
+      }
+    },
+    "2": {
+      "strokes": {
+        "s1": 115,
+        "s2": 111,
+        "s3": 114,
+        "s4": 104,
+        "s5": 96
+      },
+      "points": {
+        "h1": 32,
+        "h2": 46,
+        "h3": 35,
+        "h4": 18,
+        "h5": 28
+      },
+      "birdies": {
+        "r1": 3,
+        "r2": 2,
+        "r3": 2,
+        "r4": 1,
+        "r5": 1
+      },
+      "playingHcp": {
+        "ph1": 16,
+        "ph2": 14,
+        "ph3": 15,
+        "ph4": 14,
+        "ph5": 15
+      }
+    },
+    "16": {
+      "strokes": {
+        "s1": 86,
+        "s2": 120,
+        "s3": 120,
+        "s4": 99,
+        "s5": 88
+      },
+      "points": {
+        "h1": 45,
+        "h2": 49,
+        "h3": 27,
+        "h4": 30,
+        "h5": 36
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 0,
+        "r3": 0,
+        "r4": 2,
+        "r5": 0
+      },
+      "ctp": [
+        1079,
+        1137
+      ],
+      "playingHcp": {
+        "ph1": 18,
+        "ph2": 17,
+        "ph3": 19,
+        "ph4": 16,
+        "ph5": 17
+      }
+    },
+    "9": {
+      "strokes": {
+        "s1": 76,
+        "s2": 110,
+        "s3": 89,
+        "s4": 110,
+        "s5": 102
+      },
+      "points": {
+        "h1": 30,
+        "h2": 27,
+        "h3": 41,
+        "h4": 28,
+        "h5": 18
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 3,
+        "r3": 0,
+        "r4": 0,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 17,
+        "ph2": 18,
+        "ph3": 19,
+        "ph4": 18,
+        "ph5": 19
+      }
+    },
+    "11": {
+      "strokes": {
+        "s1": 104,
+        "s2": 118,
+        "s3": 116,
+        "s4": 114,
+        "s5": 82
+      },
+      "points": {
+        "h1": 37,
+        "h2": 43,
+        "h3": 41,
+        "h4": 46,
+        "h5": 46
+      },
+      "birdies": {
+        "r1": 0,
+        "r2": 1,
+        "r3": 1,
+        "r4": 0,
+        "r5": 2
+      },
+      "ctp": [
+        521,
+        1255,
+        501
+      ],
+      "playingHcp": {
+        "ph1": 26,
+        "ph2": 23,
+        "ph3": 25,
+        "ph4": 24,
+        "ph5": 25
+      }
+    },
+    "30": {
+      "strokes": {
+        "s1": 105,
+        "s2": 85,
+        "s3": 77,
+        "s4": 99,
+        "s5": 78
+      },
+      "points": {
+        "h1": 47,
+        "h2": 38,
+        "h3": 46,
+        "h4": 50,
+        "h5": 45
+      },
+      "birdies": {
+        "r1": 3,
+        "r2": 1,
+        "r3": 3,
+        "r4": 3,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 25,
+        "ph2": 24,
+        "ph3": 23,
+        "ph4": 23,
+        "ph5": 23
+      }
+    },
+    "7": {
+      "strokes": {
+        "s1": 97,
+        "s2": 107,
+        "s3": 95,
+        "s4": 93,
+        "s5": 84
+      },
+      "points": {
+        "h1": 26,
+        "h2": 50,
+        "h3": 49,
+        "h4": 23,
+        "h5": 21
+      },
+      "birdies": {
+        "r1": 0,
+        "r2": 1,
+        "r3": 1,
+        "r4": 3,
+        "r5": 0
+      },
+      "ctp": [
+        1008,
+        1133,
+        564
+      ],
+      "playingHcp": {
+        "ph1": 32,
+        "ph2": 32,
+        "ph3": 32,
+        "ph4": 33,
+        "ph5": 34
+      }
+    },
+    "26": {
+      "strokes": {
+        "s1": 70,
+        "s2": 103,
+        "s3": 104,
+        "s4": 113,
+        "s5": 116
+      },
+      "points": {
+        "h1": 30,
+        "h2": 41,
+        "h3": 45,
+        "h4": 22,
+        "h5": 39
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 0,
+        "r3": 2,
+        "r4": 2,
+        "r5": 3
+      },
+      "ctp": [
+        655,
+        1185,
+        310
+      ],
+      "playingHcp": {
+        "ph1": 6,
+        "ph2": 6,
+        "ph3": 3,
+        "ph4": 6,
+        "ph5": 4
+      }
+    },
+    "21": {
+      "strokes": {
+        "s1": 86,
+        "s2": 80,
+        "s3": 117,
+        "s4": 98,
+        "s5": 105
+      },
+      "points": {
+        "h1": 45,
+        "h2": 18,
+        "h3": 25,
+        "h4": 22,
+        "h5": 27
+      },
+      "birdies": {
+        "r1": 0,
+        "r2": 2,
+        "r3": 1,
+        "r4": 3,
+        "r5": 1
+      },
+      "ctp": [
+        131,
+        782
+      ],
+      "playingHcp": {
+        "ph1": 6,
+        "ph2": 7,
+        "ph3": 8,
+        "ph4": 6,
+        "ph5": 7
+      }
+    },
+    "3": {
+      "strokes": {
+        "s1": 91,
+        "s2": 76,
+        "s3": 75,
+        "s4": 94,
+        "s5": 76
+      },
+      "points": {
+        "h1": 40,
+        "h2": 40,
+        "h3": 34,
+        "h4": 20,
+        "h5": 47
+      },
+      "birdies": {
+        "r1": 0,
+        "r2": 3,
+        "r3": 0,
+        "r4": 2,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 10,
+        "ph2": 11,
+        "ph3": 10,
+        "ph4": 10,
+        "ph5": 9
+      }
+    },
+    "22": {
+      "strokes": {
+        "s1": 83,
+        "s2": 113,
+        "s3": 85,
+        "s4": 112,
+        "s5": 76
+      },
+      "points": {
+        "h1": 40,
+        "h2": 44,
+        "h3": 27,
+        "h4": 33,
+        "h5": 28
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 3,
+        "r3": 0,
+        "r4": 1,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 13,
+        "ph2": 17,
+        "ph3": 17,
+        "ph4": 16,
+        "ph5": 15
+      }
+    },
+    "24": {
+      "strokes": {
+        "s1": 84,
+        "s2": 84,
+        "s3": 71,
+        "s4": 112,
+        "s5": 82
+      },
+      "points": {
+        "h1": 43,
+        "h2": 39,
+        "h3": 35,
+        "h4": 22,
+        "h5": 35
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 3,
+        "r3": 2,
+        "r4": 0,
+        "r5": 0
+      },
+      "playingHcp": {
+        "ph1": 16,
+        "ph2": 15,
+        "ph3": 17,
+        "ph4": 17,
+        "ph5": 15
+      }
+    },
+    "13": {
+      "strokes": {
+        "s1": 106,
+        "s2": 106,
+        "s3": 100,
+        "s4": 85,
+        "s5": 120
+      },
+      "points": {
+        "h1": 48,
+        "h2": 44,
+        "h3": 30,
+        "h4": 24,
+        "h5": 24
+      },
+      "birdies": {
+        "r1": 3,
+        "r2": 2,
+        "r3": 3,
+        "r4": 3,
+        "r5": 3
+      },
+      "playingHcp": {
+        "ph1": 20,
+        "ph2": 20,
+        "ph3": 18,
+        "ph4": 20,
+        "ph5": 20
+      }
+    },
+    "19": {
+      "strokes": {
+        "s1": 86,
+        "s2": 78,
+        "s3": 92,
+        "s4": 74,
+        "s5": 85
+      },
+      "points": {
+        "h1": 41,
+        "h2": 36,
+        "h3": 28,
+        "h4": 46,
+        "h5": 37
+      },
+      "birdies": {
+        "r1": 0,
+        "r2": 2,
+        "r3": 0,
+        "r4": 1,
+        "r5": 2
+      },
+      "ctp": [
+        1183
+      ],
+      "playingHcp": {
+        "ph1": 18,
+        "ph2": 18,
+        "ph3": 20,
+        "ph4": 17,
+        "ph5": 19
+      }
+    },
+    "32": {
+      "strokes": {
+        "s1": 75,
+        "s2": 78,
+        "s3": 79,
+        "s4": 84,
+        "s5": 94
+      },
+      "points": {
+        "h1": 27,
+        "h2": 31,
+        "h3": 22,
+        "h4": 44,
+        "h5": 44
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 3,
+        "r3": 3,
+        "r4": 0,
+        "r5": 1
+      },
+      "playingHcp": {
+        "ph1": 22,
+        "ph2": 20,
+        "ph3": 21,
+        "ph4": 22,
+        "ph5": 22
+      }
+    },
+    "17": {
+      "strokes": {
+        "s1": 80,
+        "s2": 73,
+        "s3": 102,
+        "s4": 75,
+        "s5": 81
+      },
+      "points": {
+        "h1": 22,
+        "h2": 22,
+        "h3": 33,
+        "h4": 43,
+        "h5": 25
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 0,
+        "r3": 0,
+        "r4": 3,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 22,
+        "ph2": 21,
+        "ph3": 23,
+        "ph4": 20,
+        "ph5": 23
+      }
+    },
+    "15": {
+      "strokes": {
+        "s1": 98,
+        "s2": 105,
+        "s3": 76,
+        "s4": 73,
+        "s5": 111
+      },
+      "points": {
+        "h1": 18,
+        "h2": 23,
+        "h3": 33,
+        "h4": 28,
+        "h5": 44
+      },
+      "birdies": {
+        "r1": 3,
+        "r2": 3,
+        "r3": 1,
+        "r4": 3,
+        "r5": 0
+      },
+      "ctp": [
+        849
+      ],
+      "playingHcp": {
+        "ph1": 23,
+        "ph2": 24,
+        "ph3": 24,
+        "ph4": 23,
+        "ph5": 24
+      }
+    },
+    "12": {
+      "strokes": {
+        "s1": 70,
+        "s2": 74,
+        "s3": 115,
+        "s4": 110,
+        "s5": 73
+      },
+      "points": {
+        "h1": 32,
+        "h2": 22,
+        "h3": 20,
+        "h4": 39,
+        "h5": 22
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 2,
+        "r3": 3,
+        "r4": 1,
+        "r5": 1
+      },
+      "playingHcp": {
+        "ph1": 25,
+        "ph2": 27,
+        "ph3": 26,
+        "ph4": 25,
+        "ph5": 25
+      }
+    },
+    "23": {
+      "strokes": {
+        "s1": 96,
+        "s2": 112,
+        "s3": 117,
+        "s4": 85,
+        "s5": 87
+      },
+      "points": {
+        "h1": 28,
+        "h2": 24,
+        "h3": 42,
+        "h4": 20,
+        "h5": 48
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 1,
+        "r3": 3,
+        "r4": 2,
+        "r5": 2
+      },
+      "playingHcp": {
+        "ph1": 27,
+        "ph2": 24,
+        "ph3": 26,
+        "ph4": 26,
+        "ph5": 27
+      }
+    },
+    "29": {
+      "strokes": {
+        "s1": 109,
+        "s2": 119,
+        "s3": 74,
+        "s4": 99,
+        "s5": 96
+      },
+      "points": {
+        "h1": 30,
+        "h2": 42,
+        "h3": 49,
+        "h4": 43,
+        "h5": 33
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 0,
+        "r3": 0,
+        "r4": 3,
+        "r5": 1
+      },
+      "ctp": [
+        1110,
+        1001,
+        152
+      ],
+      "playingHcp": {
+        "ph1": 24,
+        "ph2": 26,
+        "ph3": 24,
+        "ph4": 26,
+        "ph5": 26
+      }
+    },
+    "28": {
+      "strokes": {
+        "s1": 120,
+        "s2": 120,
+        "s3": 117,
+        "s4": 80,
+        "s5": 112
+      },
+      "points": {
+        "h1": 23,
+        "h2": 36,
+        "h3": 50,
+        "h4": 39,
+        "h5": 23
+      },
+      "birdies": {
+        "r1": 1,
+        "r2": 2,
+        "r3": 1,
+        "r4": 1,
+        "r5": 1
+      },
+      "ctp": [
+        1023
+      ],
+      "playingHcp": {
+        "ph1": 28,
+        "ph2": 29,
+        "ph3": 26,
+        "ph4": 29,
+        "ph5": 27
+      }
+    },
+    "1": {
+      "strokes": {
+        "s1": 110,
+        "s2": 77,
+        "s3": 71,
+        "s4": 117,
+        "s5": 87
+      },
+      "points": {
+        "h1": 33,
+        "h2": 32,
+        "h3": 26,
+        "h4": 24,
+        "h5": 23
+      },
+      "birdies": {
+        "r1": 3,
+        "r2": 0,
+        "r3": 0,
+        "r4": 0,
+        "r5": 1
+      },
+      "ctp": [
+        104,
+        1199,
+        457
+      ],
+      "playingHcp": {
+        "ph1": 34,
+        "ph2": 32,
+        "ph3": 34,
+        "ph4": 32,
+        "ph5": 33
+      }
+    },
+    "20": {
+      "strokes": {
+        "s1": 79,
+        "s2": 87,
+        "s3": 88,
+        "s4": 108,
+        "s5": 83
+      },
+      "points": {
+        "h1": 39,
+        "h2": 31,
+        "h3": 34,
+        "h4": 50,
+        "h5": 49
+      },
+      "birdies": {
+        "r1": 2,
+        "r2": 0,
+        "r3": 0,
+        "r4": 3,
+        "r5": 2
+      },
+      "ctp": [
+        317,
+        1354
+      ],
+      "playingHcp": {
+        "ph1": 37,
+        "ph2": 37,
+        "ph3": 35,
+        "ph4": 37,
+        "ph5": 36
+      }
+    }
+  },
+  "drinkMatches": {
+    "d1": [
+      {
+        "p1": 15,
+        "p2": 7,
+        "winner": 2
+      },
+      {
+        "p1": 16,
+        "p2": 1,
+        "winner": 2
+      },
+      {
+        "p1": 31,
+        "p2": 27,
+        "winner": 2
+      },
+      {
+        "p1": 18,
+        "p2": 12,
+        "winner": 1
+      },
+      {
+        "p1": 17,
+        "p2": 2,
+        "winner": 2
+      },
+      {
+        "p1": 29,
+        "p2": 3,
+        "winner": 1
+      },
+      {
+        "p1": 14,
+        "p2": 4,
+        "winner": 2
+      },
+      {
+        "p1": 9,
+        "p2": 8,
+        "winner": 2
+      },
+      {
+        "p1": 6,
+        "p2": 25,
+        "winner": 2
+      },
+      {
+        "p1": 10,
+        "p2": 13,
+        "winner": 2
+      },
+      {
+        "p1": 19,
+        "p2": 22,
+        "winner": 2
+      },
+      {
+        "p1": 24,
+        "p2": 26,
+        "winner": 0
+      },
+      {
+        "p1": 21,
+        "p2": 30,
+        "winner": 2
+      },
+      {
+        "p1": 20,
+        "p2": 28,
+        "winner": 1
+      },
+      {
+        "p1": 23,
+        "p2": 32,
+        "winner": 1
+      },
+      {
+        "p1": 5,
+        "p2": 11,
+        "winner": 2
+      }
+    ],
+    "d2": [
+      {
+        "p1": 26,
+        "p2": 6,
+        "winner": 1
+      },
+      {
+        "p1": 21,
+        "p2": 14,
+        "winner": 2
+      },
+      {
+        "p1": 18,
+        "p2": 8,
+        "winner": 0
+      },
+      {
+        "p1": 3,
+        "p2": 4,
+        "winner": 2
+      },
+      {
+        "p1": 31,
+        "p2": 25,
+        "winner": 2
+      },
+      {
+        "p1": 27,
+        "p2": 5,
+        "winner": 2
+      },
+      {
+        "p1": 10,
+        "p2": 22,
+        "winner": 0
+      },
+      {
+        "p1": 2,
+        "p2": 24,
+        "winner": 2
+      },
+      {
+        "p1": 16,
+        "p2": 9,
+        "winner": 2
+      },
+      {
+        "p1": 13,
+        "p2": 19,
+        "winner": 1
+      },
+      {
+        "p1": 32,
+        "p2": 17,
+        "winner": 0
+      },
+      {
+        "p1": 15,
+        "p2": 11,
+        "winner": 2
+      },
+      {
+        "p1": 30,
+        "p2": 12,
+        "winner": 2
+      },
+      {
+        "p1": 23,
+        "p2": 29,
+        "winner": 0
+      },
+      {
+        "p1": 28,
+        "p2": 7,
+        "winner": 1
+      },
+      {
+        "p1": 1,
+        "p2": 20,
+        "winner": 1
+      }
+    ]
+  }
+}
+</script>
+
+<script>
+(function () {
+  const PLAYERS = [
+    { id: 6,  name: "Gísli Sigurbergsson",         room: 15, hcp: 7,    team: "H" },
+    { id: 14, name: "Ívar Ásgrímsson",             room: 1,  hcp: 8,    team: "H" },
+    { id: 18, name: "Rúnar Guðjónsson",            room: 1,  hcp: 8,    team: "H" },
+    { id: 8,  name: "Guðmundur Örn Óskarsson",     room: 9,  hcp: 10,   team: "H" },
+    { id: 4,  name: "Björn Þorfinnsson",           room: 14, hcp: 11,   team: "H" },
+    { id: 31, name: "Tryggvi Jónsson",             room: 8,  hcp: 12,   team: "H" },
+    { id: 25, name: "Sturla Jónsson",              room: 8,  hcp: 13,   team: "H" },
+    { id: 27, name: "Þorgils Ragnarsson",          room: 15, hcp: 13,   team: "H" },
+    { id: 5,  name: "Friðleifur Hallgrímsson",     room: 13, hcp: 13.7, team: "H" },
+    { id: 10, name: "Henning Freyr Henningsson",   room: 16, hcp: 15,   team: "H" },
+    { id: 2,  name: "Ásgeir Ólafsson",             room: 16, hcp: 16,   team: "H" },
+    { id: 16, name: "Reynir Kristjánsson",         room: 10, hcp: 18,   team: "H" },
+    { id: 9,  name: "Haraldur Sæmundsson",         room: 13, hcp: 18.2, team: "H" },
+    { id: 11, name: "Hörður Pétursson",            room: 10, hcp: 24,   team: "H" },
+    { id: 30, name: "Þorvaldur Ólafsson",          room: 14, hcp: 24.2, team: "H" },
+    { id: 7,  name: "Gísli Þór Magnússon",         room: 9,  hcp: 33,   team: "H" },
+    { id: 26, name: "Sveinn Bjarnason",            room: 2,  hcp: 5,    team: "R" },
+    { id: 21, name: "Sigurður Páll Steindórsson",  room: 3,  hcp: 7.9,  team: "R" },
+    { id: 3,  name: "Bjartmar Halldórsson",        room: 4,  hcp: 10,   team: "R" },
+    { id: 22, name: "Sigurður Sigurjónsson",       room: 12, hcp: 15,   team: "R" },
+    { id: 24, name: "Steinþór Óli Hilmarsson",     room: 5,  hcp: 16,   team: "R" },
+    { id: 13, name: "Ingvar Rafn Gunnarsson",      room: 3,  hcp: 18.9, team: "R" },
+    { id: 19, name: "Sigurður Guðjón Jónsson",     room: 7,  hcp: 18.9, team: "R" },
+    { id: 32, name: "Valur Oddgeir Bjarnason",     room: 6,  hcp: 20.6, team: "R" },
+    { id: 17, name: "Rúnar D. Bjarnason",          room: 2,  hcp: 21.2, team: "R" },
+    { id: 15, name: "Jón Jónsson",                 room: 5,  hcp: 23.4, team: "R" },
+    { id: 12, name: "Ingþór Björgvinsson",         room: 4,  hcp: 25,   team: "R" },
+    { id: 23, name: "Skapti Valsson",              room: 12, hcp: 25,   team: "R" },
+    { id: 29, name: "Þorsteinn Lárus Vigfússon",   room: 7,  hcp: 25,   team: "R" },
+    { id: 28, name: "Þóroddur Bjarnason",          room: 6,  hcp: 27.5, team: "R" },
+    { id: 1,  name: "Ásgeir Kr Sigurðsson",        room: 11, hcp: 34,   team: "R" },
+    { id: 20, name: "Sigurður Gunnarsson",         room: 11, hcp: 36,   team: "R" },
+  ];
+  const DAYS = [
+    { num: 1, short: "D1", weekday: "Fim.", date: "14. maí", course: "Brabazon" },
+    { num: 2, short: "D2", weekday: "Fös.", date: "15. maí", course: "Derby" },
+    { num: 3, short: "D3", weekday: "Lau.", date: "16. maí", course: "Brabazon" },
+    { num: 4, short: "D4", weekday: "Sun.", date: "17. maí", course: "PGA National" },
+    { num: 5, short: "D5", weekday: "Mán.", date: "18. maí", course: "Brabazon" },
+  ];
+
+  const snapshot = JSON.parse(document.getElementById("snapshot").textContent);
+  if (!snapshot.drinkMatches) snapshot.drinkMatches = { d1: [], d2: [] };
+
+  function getData(id) { return snapshot.players[id] || {}; }
+  function getPts(id)  { return getData(id).points     || {}; }
+  function getSt(id)   { return getData(id).strokes    || {}; }
+  function getFr(id)   { return getData(id).birdies    || {}; }
+  function getPh(id)   { return getData(id).playingHcp || {}; }
+  function getCtp(id)  { return getData(id).ctp        || []; }
+  function fmtHcp(h)   { return typeof h === "number" ? h.toFixed(1).replace(".", ",") : "—"; }
+  function num(v)      { return typeof v === "number" ? v : 0; }
+  function fmtNum(v)   { return typeof v === "number" ? v : "—"; }
+  function fmtDelta(v) { if (typeof v !== "number") return ""; return v > 0 ? `+${v}` : String(v); }
+  function playerName(id) { const p = PLAYERS.find(x => x.id === id); return p ? p.name : `#${id}`; }
+  function nameLink(id, name) { return id != null ? `<a class="name-link" href="?player=${id}">${name}</a>` : name; }
+  function initials(name) {
+    return name.split(" ").slice(0, 2).map(s => s[0]).join("").toUpperCase();
+  }
+
+  // ---------- Top 3 & rank computation ----------
+  function top3PtsUpTo(pid, maxDay) {
+    const pts = getPts(pid);
+    const vals = [];
+    for (let d = 1; d <= maxDay; d++) if (typeof pts["h"+d] === "number") vals.push(pts["h"+d]);
+    vals.sort((a, b) => b - a);
+    return vals.slice(0, 3).reduce((s, v) => s + v, 0);
+  }
+  function rankAt(pid, maxDay) {
+    const myScore = top3PtsUpTo(pid, maxDay);
+    if (myScore === 0) return null;
+    const all = PLAYERS.map(p => ({ id: p.id, value: top3PtsUpTo(p.id, maxDay) }))
+      .filter(r => r.value > 0)
+      .sort((a, b) => b.value - a.value);
+    const idx = all.findIndex(r => r.id === pid);
+    return idx >= 0 ? idx + 1 : null;
+  }
+  function drinkBalance(pid) {
+    let bal = 0;
+    (snapshot.drinkMatches.d1 || []).forEach(m => {
+      if (m.p1 === pid) bal += m.winner === 1 ? 1 : (m.winner === 2 ? -1 : 0);
+      else if (m.p2 === pid) bal += m.winner === 2 ? 1 : (m.winner === 1 ? -1 : 0);
+    });
+    (snapshot.drinkMatches.d2 || []).forEach(m => {
+      if (m.p1 === pid) bal += m.winner === 1 ? 2 : (m.winner === 2 ? -2 : 0);
+      else if (m.p2 === pid) bal += m.winner === 2 ? 2 : (m.winner === 1 ? -2 : 0);
+    });
+    return bal;
+  }
+
+  // ---------- URL & selector handling ----------
+  const select = document.getElementById("player-select");
+  PLAYERS.slice().sort((a, b) => a.name.localeCompare(b.name, "is")).forEach(p => {
+    const opt = document.createElement("option");
+    opt.value = p.id; opt.textContent = p.name;
+    select.appendChild(opt);
+  });
+  const urlParams = new URLSearchParams(window.location.search);
+  let currentId = Number(urlParams.get("player")) || (function() { try { return Number(localStorage.getItem("belfry_player_id")) || 8; } catch (e) { return 8; } })();
+  if (!PLAYERS.find(p => p.id === currentId)) currentId = 8; // Guðmundur as default
+  select.value = currentId;
+  select.addEventListener("change", () => {
+    currentId = Number(select.value);
+    try { localStorage.setItem("belfry_player_id", currentId); } catch (e) {}
+    const newUrl = new URL(window.location);
+    newUrl.searchParams.set("player", currentId);
+    history.replaceState(null, "", newUrl);
+    render();
+  });
+
+  // ---------- Chart.js charts ----------
+  let ptsChart = null, rankChart = null;
+  function renderCharts(pid) {
+    const ptsRow = getPts(pid);
+    const days = DAYS.map(d => d.short);
+    const myPts = DAYS.map(d => typeof ptsRow["h"+d.num] === "number" ? ptsRow["h"+d.num] : null);
+    const avgPts = DAYS.map(d => {
+      const vals = PLAYERS.map(p => getPts(p.id)["h"+d.num]).filter(v => typeof v === "number");
+      return vals.length ? Math.round(vals.reduce((s,v) => s+v, 0) / vals.length * 10) / 10 : null;
+    });
+    if (ptsChart) ptsChart.destroy();
+    ptsChart = new Chart(document.getElementById("ptsChart"), {
+      type: "line",
+      data: {
+        labels: days,
+        datasets: [
+          { label: "Þú", data: myPts, borderColor: "#1a3a5f", backgroundColor: "rgba(26,58,95,.1)", borderWidth: 3, pointRadius: 5, pointBackgroundColor: "#1a3a5f", tension: 0.2, spanGaps: true },
+          { label: "Meðaltal hóps", data: avgPts, borderColor: "#c19b56", backgroundColor: "rgba(193,155,86,.05)", borderDash: [6, 4], borderWidth: 2, pointRadius: 3, pointBackgroundColor: "#c19b56", tension: 0.2, spanGaps: true }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: "bottom", labels: { boxWidth: 14, font: { size: 12 } } } },
+        scales: { y: { beginAtZero: true, ticks: { font: { size: 11 } }, title: { display: true, text: "Stableford punktar" } }, x: { ticks: { font: { size: 11 } } } }
+      }
+    });
+
+    // Rank chart
+    const myRanks = DAYS.map(d => rankAt(pid, d.num));
+    if (rankChart) rankChart.destroy();
+    rankChart = new Chart(document.getElementById("rankChart"), {
+      type: "line",
+      data: {
+        labels: days,
+        datasets: [
+          { label: "Sæti (Top 3 pts)", data: myRanks, borderColor: "#9b2d2d", backgroundColor: "rgba(155,45,45,.1)", borderWidth: 3, pointRadius: 6, pointBackgroundColor: "#9b2d2d", tension: 0.2, spanGaps: true }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { reverse: true, suggestedMin: 1, suggestedMax: 32, ticks: { stepSize: 4, callback: v => Math.round(v), font: { size: 11 } }, title: { display: true, text: "Sæti (1 = efstur)" } },
+          x: { ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  // ---------- Achievements ----------
+  function computeAchievements(pid) {
+    const list = [];
+    const ptsRow = getPts(pid), frRow = getFr(pid), ctps = getCtp(pid);
+    const totalPts = Object.values(ptsRow).filter(v => typeof v === "number").reduce((s,v)=>s+v,0);
+    const totalFugla = Object.values(frRow).filter(v => typeof v === "number").reduce((s,v)=>s+v,0);
+    const rank = rankAt(pid, 5);
+    const drinks = drinkBalance(pid);
+    // Top 3 finish
+    if (rank === 1) list.push({ icon: "🥇", text: "Belfry meistari", sub: "1. sæti í Top 3 punkta" });
+    else if (rank === 2) list.push({ icon: "🥈", text: "2. sæti", sub: "í Top 3 punkta" });
+    else if (rank === 3) list.push({ icon: "🥉", text: "3. sæti", sub: "í Top 3 punkta" });
+    // Birdies
+    if (totalFugla >= 10) list.push({ icon: "🐦", text: `${totalFugla} fuglar`, sub: "Fuglasöngvari!" });
+    else if (totalFugla >= 5) list.push({ icon: "🐦", text: `${totalFugla} fuglar`, sub: "Fín fugla-uppskera" });
+    // CTP wins
+    if (ctps.length >= 3) list.push({ icon: "🎯", text: `${ctps.length}× næst holu`, sub: "Holumeistari" });
+    else if (ctps.length >= 1) {
+      const best = Math.min.apply(null, ctps);
+      list.push({ icon: "🎯", text: `${best} cm`, sub: "besta CTP mæling" });
+    }
+    // Drinks
+    if (drinks >= 3) list.push({ icon: "🍻", text: `+${drinks} drykkir`, sub: "Allir kaupa á þig" });
+    else if (drinks <= -3) list.push({ icon: "😅", text: `${drinks} drykkir`, sub: "Kannski betra að sleppa næsta hring..." });
+    // Improvement
+    const pts = [1,2,3,4,5].map(d => ptsRow["h"+d]);
+    const improved = pts.filter((v, i) => i > 0 && typeof v === "number" && typeof pts[i-1] === "number" && v > pts[i-1]).length;
+    if (improved >= 3) list.push({ icon: "🔥", text: `${improved} bætinga-dagar í röð`, sub: "Heit form" });
+    // Streak / consistency
+    const played = pts.filter(v => typeof v === "number").length;
+    if (played === 5) list.push({ icon: "✅", text: "Allir 5 hringir", sub: "Mætti alla daga" });
+    // Best single-day score
+    const bestPts = Math.max(0, ...pts.filter(v => typeof v === "number"));
+    if (bestPts >= 38) list.push({ icon: "⭐", text: `${bestPts} punkta hringur`, sub: "Persónulegt met" });
+    return list;
+  }
+
+  // ---------- Render ----------
+  function render() {
+    const p = PLAYERS.find(x => x.id === currentId);
+    if (!p) return;
+    const ptsRow = getPts(p.id), stRow = getSt(p.id), frRow = getFr(p.id), phRow = getPh(p.id), ctps = getCtp(p.id);
+    const totalPts = Object.values(ptsRow).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
+    const totalSt = Object.values(stRow).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
+    const totalFugla = Object.values(frRow).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
+    const top3 = top3PtsUpTo(p.id, 5);
+    const myRank = rankAt(p.id, 5);
+    const drinks = drinkBalance(p.id);
+    const teamClass = p.team === "H" ? "hafn" : "rest";
+    const teamLabel = p.team === "H" ? "Hafnarfjörður" : "Restin";
+
+    // Profile
+    document.getElementById("profile-card").innerHTML = `
+      <div class="avatar ${teamClass}">${initials(p.name)}</div>
+      <div class="info">
+        <h2>${p.name}</h2>
+        <div class="meta">
+          <span class="badge ${teamClass}">${teamLabel}</span>
+          <span>Herbergi <strong>${p.room}</strong></span>
+          <span>Forgjöf <strong>${fmtHcp(p.hcp)}</strong></span>
+        </div>
+      </div>
+    `;
+
+    // Hero stats
+    document.getElementById("hero-stats").innerHTML = `
+      <div class="hero-stat"><div class="label">Σ Punktar</div><div class="value">${totalPts || "—"}<span class="unit">${totalPts ? "pts" : ""}</span></div></div>
+      <div class="hero-stat"><div class="label">Top 3 pts</div><div class="value">${top3 || "—"}</div><div class="delta">Belfry meistari grundvöllur</div></div>
+      <div class="hero-stat"><div class="label">Sæti</div><div class="value">${myRank ? "#" + myRank : "—"}<span class="unit">${myRank ? "/ " + PLAYERS.length : ""}</span></div></div>
+      <div class="hero-stat"><div class="label">🍻 Staða</div><div class="value">${drinks > 0 ? "+" + drinks : (drinks < 0 ? drinks : "0")}<span class="unit">drykkir</span></div></div>
+    `;
+
+    // Daily table
+    const dailyTbl = document.getElementById("daily-table");
+    dailyTbl.innerHTML = `
+      <thead><tr><th>Dagur</th><th>Völlur</th><th class="num">Leikfgj.</th><th class="num">Högg</th><th class="num">Punktar</th><th class="num">Fuglar</th></tr></thead>
+      <tbody>
+        ${DAYS.map(d => {
+          const ph = phRow["ph"+d.num], st = stRow["s"+d.num], pts = ptsRow["h"+d.num], fr = frRow["r"+d.num];
+          const fmt = v => typeof v === "number" ? v : '<span class="empty">—</span>';
+          return `<tr>
+            <td><span class="day-cell">${d.short}</span> · ${d.weekday} ${d.date}</td>
+            <td>${d.course}</td>
+            <td class="num">${fmtHcp(ph)}</td>
+            <td class="num">${fmt(st)}</td>
+            <td class="num">${fmt(pts)}</td>
+            <td class="num">${fmt(fr)}</td>
+          </tr>`;
+        }).join("")}
+        <tr class="total">
+          <td colspan="3">Samtals (allir hringir)</td>
+          <td class="num">${totalSt || "—"}</td>
+          <td class="num">${totalPts || "—"}</td>
+          <td class="num">${totalFugla || "—"}</td>
+        </tr>
+      </tbody>
+    `;
+
+    renderCharts(p.id);
+
+    // Birdies breakdown
+    document.getElementById("birdies-big").innerHTML = `${totalFugla || 0}<span class="unit">fuglar</span>`;
+    document.getElementById("birdies-breakdown").innerHTML = DAYS.map(d => {
+      const fr = frRow["r"+d.num];
+      return typeof fr === "number" && fr > 0 ?
+        `<div class="small-row"><span class="lbl">${d.short} · ${d.course}</span><span class="val">${fr}</span></div>` : "";
+    }).join("") || '<div class="empty-row">Engir fuglar enn skráðir</div>';
+
+    // CTP breakdown
+    const bestCtp = ctps.length ? Math.min.apply(null, ctps) : null;
+    document.getElementById("ctp-big").innerHTML = bestCtp != null ? `${bestCtp}<span class="unit">cm besta</span>` : "—";
+    document.getElementById("ctp-breakdown").innerHTML = ctps.length
+      ? ctps.sort((a,b) => a-b).map((cm, i) => `<div class="small-row"><span class="lbl">Mæling ${i+1}</span><span class="val">${cm} cm</span></div>`).join("")
+      : '<div class="empty-row">Engar mælingar enn</div>';
+
+    // Drinks breakdown for this player
+    document.getElementById("drinks-big").innerHTML = `${drinks > 0 ? "+" + drinks : drinks}<span class="unit">drykkir</span>`;
+    const drinkRows = [];
+    [["d1", 1], ["d2", 2]].forEach(([k, stake]) => {
+      (snapshot.drinkMatches[k] || []).forEach(m => {
+        if (m.p1 !== p.id && m.p2 !== p.id) return;
+        const other = m.p1 === p.id ? m.p2 : m.p1;
+        const otherLink = nameLink(other, playerName(other));
+        let cls = "tie", txt;
+        if (m.winner === 0) { txt = `= jafnt = ${otherLink}`; }
+        else {
+          const won = (m.p1 === p.id && m.winner === 1) || (m.p2 === p.id && m.winner === 2);
+          cls = won ? "win" : "loss";
+          txt = won ? `vann ${otherLink} · +${stake}🍺` : `tapaði fyrir ${otherLink} · -${stake}🍺`;
+        }
+        drinkRows.push(`<div class="match-row ${cls}"><span class="day-tag">${k.toUpperCase()}</span><span class="result">${txt}</span></div>`);
+      });
+    });
+    document.getElementById("drinks-breakdown").innerHTML = drinkRows.length ? drinkRows.join("") : '<div class="empty-row">Engin pör skráð enn</div>';
+
+    // Comparison with field
+    const cmpRows = [];
+    function fieldAvg(getter) {
+      const vals = PLAYERS.map(p => getter(p.id)).filter(v => typeof v === "number" && !isNaN(v) && v > 0);
+      return vals.length ? Math.round(vals.reduce((s,v) => s+v, 0) / vals.length * 10) / 10 : null;
+    }
+    function compRow(label, you, avg, betterIsHigher) {
+      if (you == null || avg == null) return "";
+      const delta = Math.round((you - avg) * 10) / 10;
+      const isBetter = betterIsHigher ? delta > 0 : delta < 0;
+      const cls = delta === 0 ? "" : (isBetter ? "pos" : "neg");
+      const sign = delta > 0 ? "+" : "";
+      return `<tr><td>${label}</td><td class="num you">${you}</td><td class="num field">${avg}</td><td class="num delta ${cls}">${sign}${delta}</td></tr>`;
+    }
+    cmpRows.push(compRow("Σ punktar", totalPts || null, fieldAvg(id => {
+      const r = getPts(id); return Object.values(r).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
+    }), true));
+    cmpRows.push(compRow("Top 3 pts", top3 || null, fieldAvg(id => top3PtsUpTo(id, 5)), true));
+    cmpRows.push(compRow("Σ högg", totalSt || null, fieldAvg(id => {
+      const r = getSt(id); return Object.values(r).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
+    }), false));
+    cmpRows.push(compRow("Σ fuglar", totalFugla || null, fieldAvg(id => {
+      const r = getFr(id); return Object.values(r).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
+    }), true));
+    document.getElementById("compare-body").innerHTML = cmpRows.filter(Boolean).join("") || '<tr><td colspan="4" class="empty">Engin gögn enn</td></tr>';
+
+    // Achievements
+    const achs = computeAchievements(p.id);
+    const achHtml = achs.length
+      ? achs.map(a => `<div class="achievement"><span class="icon">${a.icon}</span><span class="text">${a.text}<span class="sub">${a.sub}</span></span></div>`).join("")
+      : '<div class="achievement muted"><span class="icon">🔒</span><span class="text">Engin afrek enn<span class="sub">Spilaðu fleiri hringi!</span></span></div>';
+    document.getElementById("achievements").innerHTML = achHtml;
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -17,6 +17,9 @@ header.app-header .header-overlay { position: absolute; inset: 0; background: li
 header.app-header .header-content { position: relative; z-index: 2; }
 header.app-header h1 { margin: 0; font-size: 28px; letter-spacing: 0.3px; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
 header.app-header .sub { opacity: .95; margin-top: 6px; font-size: 14px; text-shadow: 0 1px 4px rgba(0,0,0,.4); }
+header.app-header .header-content { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+header.app-header .my-page-btn { color: #fff; font-size: 13px; text-decoration: none; padding: 8px 16px; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; background: rgba(0,0,0,.18); font-weight: 600; transition: background .15s; white-space: nowrap; }
+header.app-header .my-page-btn:hover { background: rgba(0,0,0,.32); }
 
 .ryder-banner { background: #fff; border: 1px solid #e8eaef; border-radius: 14px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
 .ryder-banner .banner-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
@@ -80,6 +83,9 @@ header.app-header .sub { opacity: .95; margin-top: 6px; font-size: 14px; text-sh
 .movers .col.up li .dl { color: #1a7a3c; }
 .movers .col.down li .dl { color: #9b2d2d; }
 .movers .empty-row { color: #c3c8d2; font-style: italic; font-size: 12px; padding: 4px 0; }
+
+.name-link { color: inherit; text-decoration: none; cursor: pointer; }
+.name-link:hover { text-decoration: underline; color: #1a3a5f; }
 
 .has-tip { position: relative; cursor: help; }
 .has-tip .tip { position: absolute; bottom: calc(100% + 6px); left: 0; background: #1a3a5f; color: #fff; padding: 10px 12px; border-radius: 8px; font-size: 12px; line-height: 1.5; font-weight: 500; white-space: nowrap; max-width: 280px; opacity: 0; pointer-events: none; transition: opacity .15s; z-index: 9999; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
@@ -187,8 +193,11 @@ footer a { color: #1a3a5f; }
     </svg>
     <div class="header-overlay"></div>
     <div class="header-content">
-      <h1>Belfry 2026 — Lifandi staðan</h1>
-      <div class="sub">14.–18. maí · 32 leikmenn · Síðast uppfært: <span id="last-updated">—</span></div>
+      <div>
+        <h1>Belfry 2026 — Lifandi staðan</h1>
+        <div class="sub">14.–18. maí · 32 leikmenn · Síðast uppfært: <span id="last-updated">—</span></div>
+      </div>
+      <a class="my-page-btn" href="player.html">Mín síða →</a>
     </div>
   </header>
 
@@ -1602,6 +1611,7 @@ footer a { color: #1a3a5f; }
   function filteredRounds(obj, key) { return activeStatsDays().filter(d => typeof obj[key + d] === "number").length; }
   function bestCtp(list) { return (!list || list.length === 0) ? null : Math.min.apply(null, list); }
   function playerName(id) { const p = PLAYERS.find(x => x.id === id); return p ? p.name : `#${id}`; }
+  function nameLink(id, name) { return id != null ? `<a class="name-link" href="player.html?player=${id}">${name}</a>` : name; }
 
   function drinkBalance(pid) {
     let bal = 0;
@@ -1748,7 +1758,7 @@ footer a { color: #1a3a5f; }
     const drinkCell = drinks === 0 ? '<span class="empty">—</span>' : (drinks > 0 ? `+${drinks}` : String(drinks));
     tr.innerHTML = `
       <td class="num">${p.id}</td>
-      <td>${p.name}</td>
+      <td>${nameLink(p.id, p.name)}</td>
       <td class="num">${p.room}</td>
       <td><span class="badge ${p.team === "H" ? "hafn" : "rest"}">${p.team === "H" ? "Hafn." : "Rest"}</span></td>
       <td class="num">${fmtHcp(p.hcp)}</td>
@@ -1815,7 +1825,10 @@ footer a { color: #1a3a5f; }
         if (i === 0) li.classList.add("gold");
         let deltaHtml = "";
         if (rankDeltas && r.id != null && rankDeltas.has(r.id)) deltaHtml = rankDeltaHtml(rankDeltas.get(r.id));
-        li.innerHTML = `<span class="rank">${i+1}.</span><span class="name">${deltaHtml}${r.name}</span><span class="val">${valueFmt(r.value)}</span>`;
+        // Wrap individual player names in a link, but skip room rows (which have multiple players)
+        const isPlayerRow = r.id != null && PLAYERS.some(p => p.id === r.id);
+        const displayName = isPlayerRow ? nameLink(r.id, r.name) : r.name;
+        li.innerHTML = `<span class="rank">${i+1}.</span><span class="name">${deltaHtml}${displayName}</span><span class="val">${valueFmt(r.value)}</span>`;
         ol.appendChild(li);
       });
     }
@@ -1832,9 +1845,9 @@ footer a { color: #1a3a5f; }
     const upEl = document.getElementById("movers-up"), downEl = document.getElementById("movers-down");
     upEl.innerHTML = ""; downEl.innerHTML = "";
     if (up.length === 0) upEl.innerHTML = '<li class="empty-row">Engar hreyfingar</li>';
-    else up.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); li.innerHTML = `<span class="nm">${name}</span><span class="dl">+${r.delta}</span>`; upEl.appendChild(li); });
+    else up.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); li.innerHTML = `<span class="nm">${nameLink(r.id, name)}</span><span class="dl">+${r.delta}</span>`; upEl.appendChild(li); });
     if (down.length === 0) downEl.innerHTML = '<li class="empty-row">Engar hreyfingar</li>';
-    else down.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); li.innerHTML = `<span class="nm">${name}</span><span class="dl">${r.delta}</span>`; downEl.appendChild(li); });
+    else down.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); li.innerHTML = `<span class="nm">${nameLink(r.id, name)}</span><span class="dl">${r.delta}</span>`; downEl.appendChild(li); });
   }
   function renderDrinks() {
     const all = PLAYERS.map(p => ({ id: p.id, value: drinkBalance(p.id) })).filter(r => r.value !== 0);
@@ -1846,9 +1859,9 @@ footer a { color: #1a3a5f; }
     const upEl = document.getElementById("drinks-up"), downEl = document.getElementById("drinks-down");
     upEl.innerHTML = ""; downEl.innerHTML = "";
     if (up.length === 0) upEl.innerHTML = '<li class="empty-row">Engin inneign enn</li>';
-    else up.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); const tip = drinksBreakdown(r.id); li.innerHTML = `<span class="nm has-tip">${name}<span class="tip">${tip}</span></span><span class="dl">+${r.value}</span>`; upEl.appendChild(li); });
+    else up.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); const tip = drinksBreakdown(r.id); li.innerHTML = `<span class="nm has-tip">${nameLink(r.id, name)}<span class="tip">${tip}</span></span><span class="dl">+${r.value}</span>`; upEl.appendChild(li); });
     if (down.length === 0) downEl.innerHTML = '<li class="empty-row">Engin skuld enn</li>';
-    else down.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); const tip = drinksBreakdown(r.id); li.innerHTML = `<span class="nm has-tip">${name}<span class="tip">${tip}</span></span><span class="dl">${r.value}</span>`; downEl.appendChild(li); });
+    else down.forEach(r => { const li = document.createElement("li"); const name = DISPLAY_NAMES[r.id] || playerName(r.id); const tip = drinksBreakdown(r.id); li.innerHTML = `<span class="nm has-tip">${nameLink(r.id, name)}<span class="tip">${tip}</span></span><span class="dl">${r.value}</span>`; downEl.appendChild(li); });
     const btn = document.querySelector('.show-all-btn[data-card="drinks"]');
     if (btn) {
       const maxLen = Math.max(upAll.length, downAll.length);
@@ -1878,7 +1891,7 @@ footer a { color: #1a3a5f; }
         else if (m.winner === 1) flow = `<span class="flow">← <span class="drink">${stakes[day]}🍺</span></span>`;
         else if (m.winner === 2) flow = `<span class="flow"><span class="drink">${stakes[day]}🍺</span> →</span>`;
         else flow = `<span class="flow tie">— óúrslitið —</span>`;
-        tr.innerHTML = `<td class="name-a ${aClass}">${playerName(m.p1)}</td><td>${flow}</td><td class="name-b ${bClass}">${playerName(m.p2)}</td>`;
+        tr.innerHTML = `<td class="name-a ${aClass}">${nameLink(m.p1, playerName(m.p1))}</td><td>${flow}</td><td class="name-b ${bClass}">${nameLink(m.p2, playerName(m.p2))}</td>`;
         tbl.appendChild(tr);
       });
     });
@@ -1906,10 +1919,10 @@ footer a { color: #1a3a5f; }
     const birdies = PLAYERS.map(p => ({ id: p.id, name: p.name, value: filteredBirdies(getBirdies(p.id)) })).filter(r => r.value > 0).sort((a,b) => b.value - a.value);
     lb("birdies", "lb-birdies", birdies, v => `${v}`, getBirdiesDeltas());
 
-    const ctpCm = PLAYERS.map(p => ({ name: p.name, value: bestCtp(getCtps(p.id)) })).filter(r => typeof r.value === "number").sort((a,b) => a.value - b.value);
+    const ctpCm = PLAYERS.map(p => ({ id: p.id, name: p.name, value: bestCtp(getCtps(p.id)) })).filter(r => typeof r.value === "number").sort((a,b) => a.value - b.value);
     lb("ctpCm", "lb-ctp-cm", ctpCm, v => `${v} cm`);
 
-    const ctpCount = PLAYERS.map(p => ({ name: p.name, value: getCtps(p.id).length })).filter(r => r.value > 0).sort((a,b) => b.value - a.value);
+    const ctpCount = PLAYERS.map(p => ({ id: p.id, name: p.name, value: getCtps(p.id).length })).filter(r => r.value > 0).sort((a,b) => b.value - a.value);
     lb("ctpCount", "lb-ctp-count", ctpCount, v => `${v}×`);
 
     document.getElementById("ryder-hafn").textContent = snapshot.ryder.hafn || 0;

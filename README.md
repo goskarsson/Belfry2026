@@ -4,10 +4,41 @@ Read-only útgáfa af Belfry 2026 mælaborðinu, ætluð til að hýsa á GitHub
 
 ## Skrár
 
-- `index.html` — Mælaborðið sjálft (eitt sjálfstætt skjal, engar ytri kröfur)
+- `index.html` — Aðalmælaborðið (lifandi staða, allir leikmenn, allar keppnir)
+- `player.html` — Persónuleg síða leikmanns (velja leikmann og sjá hans tölfræði)
 - `README.md` — Þessi skrá
 
-## Hvað sýnir mælaborðið?
+## Hlekkur fyrir hvern leikmann
+
+Á `player.html` er dropdown til að velja leikmann, en það er líka stuðningur við deep-link í URL:
+
+```
+https://goskarsson.github.io/Belfry2026/player.html?player=8
+```
+
+Hver leikmaður getur bookmark-að sína slóð (settu rétt ID í URL-ið) og fer þá beint á sína síðu.
+
+Player IDs (úr Excel-skjalinu):
+- 1 Ásgeir Kr · 2 Ásgeir Ólafsson · 3 Bjartmar · 4 Björn · 5 Friðleifur · 6 Gísli S · 7 Gísli Þ
+- 8 Guðmundur · 9 Haraldur · 10 Henning · 11 Hörður · 12 Ingþór · 13 Ingvar · 14 Ívar
+- 15 Jón · 16 Reynir · 17 Rúnar D · 18 Rúnar G · 19 Sigurður Guðjón · 20 Sigurður Gunnarsson
+- 21 Sigurður Páll · 22 Sigurður S · 23 Skapti · 24 Steinþór · 25 Sturla · 26 Sveinn
+- 27 Þorgils · 28 Þóroddur · 29 Þorsteinn · 30 Þorvaldur · 31 Tryggvi · 32 Valur
+
+## Hvað sýnir player.html (mín síða)?
+
+**Persónuleg síða leikmanns** — opnast með "Mín síða" hnappinum efst á aðalsíðunni eða með beinum hlekk.
+
+- **Profile-spjald**: nafn, lið-merki, herbergi, forgjöf, persónulegt initial-tákn
+- **Hero-tölfræði**: Σ punktar · Top 3 pts · Sæti í meistarakeppni · 🍻 Drykkjastaða
+- **Dag-fyrir-dag tafla**: D1-D5 með völlur, Leikforgjöf, Högg, Punktar, Fuglar + summu-röð
+- **Línurit "Punkta-þróun"**: punktar leikmanns vs meðaltal hóps á hverjum degi
+- **Línurit "Sæti yfir tíma"**: hvar leikmaður stóð í Belfry meistari-röðun eftir hvern hring (1 efst)
+- **Hliðarkeppnir** (3 spjöld): 🐦 Fuglar með daglegri sundurliðun · 🎯 CTP-mælingar · 🍻 Drykkurinn (öll pörin)
+- **Samanburður við hópinn**: Σ punktar, Top 3 pts, Σ högg, Σ fuglar — sýnt á móti meðaltali
+- **Verðlaunaskápur**: sjálfvirk afreks-merki (🥇 ef í topp 3, 🐦 fyrir 5+ fugla, 🎯 fyrir CTP-vinninga, 🔥 fyrir bætingarstrik, ⭐ fyrir 38+ punkta hring osfrv.)
+
+## Hvað sýnir aðalmælaborðið (index.html)?
 
 **Efst:**
 - Belfry-þema haus með kvöldhimni, hæðum, klúbbhús-skuggamynd, vatnshættu og fána
