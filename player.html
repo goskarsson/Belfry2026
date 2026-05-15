@@ -265,7 +265,7 @@ footer a { color: #1a3a5f; }
         "ph2": 3
       },
       "ctp": [
-        400
+        { "day": 1, "course": "Brabazon", "hole": 12, "cm": 400 }
       ]
     },
     "19": {
@@ -286,7 +286,7 @@ footer a { color: #1a3a5f; }
         "ph2": 14
       },
       "ctp": [
-        230
+        { "day": 1, "course": "Brabazon", "hole": 7, "cm": 230 }
       ]
     },
     "2": {
@@ -343,7 +343,7 @@ footer a { color: #1a3a5f; }
         "ph2": 20
       },
       "ctp": [
-        450
+        { "day": 1, "course": "Brabazon", "hole": 14, "cm": 450 }
       ]
     },
     "31": {
@@ -400,7 +400,7 @@ footer a { color: #1a3a5f; }
         "ph2": 25
       },
       "ctp": [
-        99
+        { "day": 2, "course": "Derby", "hole": 3, "cm": 99 }
       ]
     },
     "16": {
@@ -439,7 +439,7 @@ footer a { color: #1a3a5f; }
         "ph2": 5
       },
       "ctp": [
-        230
+        { "day": 2, "course": "Derby", "hole": 7, "cm": 230 }
       ]
     },
     "18": {
@@ -478,7 +478,7 @@ footer a { color: #1a3a5f; }
         "ph2": 21
       },
       "ctp": [
-        230
+        { "day": 2, "course": "Derby", "hole": 16, "cm": 230 }
       ]
     },
     "32": {
@@ -715,7 +715,7 @@ footer a { color: #1a3a5f; }
         "ph2": 15
       },
       "ctp": [
-        320
+        { "day": 2, "course": "Derby", "hole": 11, "cm": 320 }
       ]
     },
     "4": {
@@ -1172,8 +1172,12 @@ footer a { color: #1a3a5f; }
     // CTP wins
     if (ctps.length >= 3) list.push({ icon: "🎯", text: `${ctps.length}× næst holu`, sub: "Holumeistari" });
     else if (ctps.length >= 1) {
-      const best = Math.min.apply(null, ctps);
-      list.push({ icon: "🎯", text: `${best} cm`, sub: "besta CTP mæling" });
+      const getCm = x => typeof x === "number" ? x : (x && typeof x.cm === "number" ? x.cm : null);
+      const cms = ctps.map(getCm).filter(v => typeof v === "number");
+      if (cms.length) {
+        const best = Math.min.apply(null, cms);
+        list.push({ icon: "🎯", text: `${best} cm`, sub: "besta CTP mæling" });
+      }
     }
     // Drinks
     if (drinks >= 3) list.push({ icon: "🍻", text: `+${drinks} drykkir`, sub: "Allir kaupa á þig" });
@@ -1263,10 +1267,20 @@ footer a { color: #1a3a5f; }
     }).join("") || '<div class="empty-row">Engir fuglar enn skráðir</div>';
 
     // CTP breakdown
-    const bestCtp = ctps.length ? Math.min.apply(null, ctps) : null;
+    const ctpCm = x => typeof x === "number" ? x : (x && typeof x.cm === "number" ? x.cm : null);
+    const cmList = ctps.map(ctpCm).filter(v => typeof v === "number");
+    const bestCtp = cmList.length ? Math.min.apply(null, cmList) : null;
     document.getElementById("ctp-big").innerHTML = bestCtp != null ? `${bestCtp}<span class="unit">cm besta</span>` : "—";
     document.getElementById("ctp-breakdown").innerHTML = ctps.length
-      ? ctps.sort((a,b) => a-b).map((cm, i) => `<div class="small-row"><span class="lbl">Mæling ${i+1}</span><span class="val">${cm} cm</span></div>`).join("")
+      ? ctps.slice().sort((a,b) => ctpCm(a) - ctpCm(b)).map(x => {
+          const cm = ctpCm(x);
+          if (typeof x === "number") return `<div class="small-row"><span class="lbl">Mæling</span><span class="val">${cm} cm</span></div>`;
+          const parts = [];
+          if (x.day) parts.push("D" + x.day);
+          if (x.course) parts.push(x.course);
+          if (x.hole) parts.push("holu " + x.hole);
+          return `<div class="small-row"><span class="lbl">${parts.join(" · ")}</span><span class="val">${cm} cm</span></div>`;
+        }).join("")
       : '<div class="empty-row">Engar mælingar enn</div>';
 
     // Drinks breakdown for this player
