@@ -137,7 +137,7 @@ footer a { color: #1a3a5f; }
     <div class="header-content">
       <div>
         <h1>Belfry 2026 — Mín síða</h1>
-        <div class="sub">Persónuleg tölfræði · 14.–18. maí</div>
+        <div class="sub">Persónuleg tölfræði · 14.–18. maí · Síðast uppfært: <span id="last-updated">—</span></div>
       </div>
       <a class="back" href="index.html">← Aðalmælaborð</a>
     </div>
@@ -1003,6 +1003,19 @@ footer a { color: #1a3a5f; }
 
   const snapshot = JSON.parse(document.getElementById("snapshot").textContent);
   if (!snapshot.drinkMatches) snapshot.drinkMatches = { d1: [], d2: [] };
+
+  // Render "Síðast uppfært"
+  (function() {
+    const el = document.getElementById("last-updated");
+    if (!el || !snapshot.lastUpdated) return;
+    try {
+      const d = new Date(snapshot.lastUpdated);
+      const days = ["sunnudagur","mánudagur","þriðjudagur","miðvikudagur","fimmtudagur","föstudagur","laugardagur"];
+      const months = ["jan","feb","mar","apr","maí","jún","júl","ágú","sep","okt","nóv","des"];
+      const hh = String(d.getHours()).padStart(2,"0"); const mm = String(d.getMinutes()).padStart(2,"0");
+      el.textContent = `${days[d.getDay()]} ${d.getDate()}. ${months[d.getMonth()]} kl. ${hh}:${mm}`;
+    } catch (e) { el.textContent = snapshot.lastUpdated; }
+  })();
 
   function getData(id) { return snapshot.players[id] || {}; }
   function getPts(id)  { return getData(id).points     || {}; }

@@ -1171,8 +1171,26 @@ footer a { color: #1a3a5f; }
   function fmtLeikHcp(h) { return typeof h === "number" ? String(Math.round(h)) : '<span class="empty">—</span>'; }
   function topN(arr, n) { const a = arr.filter(v => typeof v === "number"); a.sort((x,y) => y-x); return a.slice(0,n).reduce((s,v) => s+v, 0); }
   function sumNums(obj) { return Object.values(obj).filter(v => typeof v === "number").reduce((s,v) => s+v, 0); }
-  function activeStatsDays() { return ui.statsFilter === "all" ? [1,2,3,4,5] : [Number(ui.statsFilter)]; }
-  function filterTagHtml() { return ui.statsFilter === "all" ? '<span class="all-tag">5 dagar</span>' : `<span class="filter-tag">D${ui.statsFilter} eingöngu</span>`; }
+  // Returns array of day numbers where at least one player has played (any data)
+  function playedDays() {
+    const out = [];
+    for (let d = 1; d <= 5; d++) {
+      const any = PLAYERS.some(p => {
+        const pts = getPoints(p.id), st = getStrokes(p.id);
+        return typeof pts["h"+d] === "number" || typeof st["s"+d] === "number";
+      });
+      if (any) out.push(d);
+    }
+    return out.length ? out : [1,2,3,4,5];
+  }
+  function activeStatsDays() { return ui.statsFilter === "all" ? playedDays() : [Number(ui.statsFilter)]; }
+  function filterTagHtml() {
+    if (ui.statsFilter === "all") {
+      const n = playedDays().length;
+      return `<span class="all-tag">${n} ${n === 1 ? "dagur" : "dagar"}</span>`;
+    }
+    return `<span class="filter-tag">D${ui.statsFilter} eingöngu</span>`;
+  }
   function filteredPoints(pts) { return activeStatsDays().reduce((s,d) => s + (typeof pts["h"+d] === "number" ? pts["h"+d] : 0), 0); }
   function filteredStrokes(st) { return activeStatsDays().reduce((s,d) => s + (typeof st["s"+d] === "number" ? st["s"+d] : 0), 0); }
   function filteredBirdies(fr) { return activeStatsDays().reduce((s,d) => s + (typeof fr["r"+d] === "number" ? fr["r"+d] : 0), 0); }
