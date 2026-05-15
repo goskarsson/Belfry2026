@@ -60,6 +60,31 @@ header.app-header .my-page-btn:hover { background: rgba(0,0,0,.32); }
 .lb li:last-child { border-bottom: 0; }
 .lb .rank { color: #98a0b0; font-weight: 600; font-size: 13px; }
 .lb .name { font-weight: 500; }
+.lb .name .lb-sub { display: block; font-weight: 400; color: #98a0b0; font-size: 11px; margin-top: 1px; }
+.form-icon { font-size: 13px; margin-left: 5px; cursor: help; vertical-align: middle; }
+.day-winners { list-style: none; padding: 0; margin: 0; }
+.day-winners li { display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f1f4; font-size: 13px; }
+.day-winners li:last-child { border-bottom: 0; }
+.day-winners .day-pill { font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 6px; background: #eef2f8; color: #1a3a5f; text-align: center; }
+.day-winners .day-pill.done { background: #c19b56; color: #fff; }
+.day-winners .day-pill.pending { background: #f0f1f4; color: #98a0b0; }
+.day-winners .info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.day-winners .info .name { font-weight: 600; color: #1a3a5f; }
+.day-winners .info .sub { font-size: 11px; color: #98a0b0; }
+.day-winners .pts { font-weight: 700; color: #1a3a5f; font-variant-numeric: tabular-nums; font-size: 14px; }
+.day-winners .pending-text { color: #c3c8d2; font-style: italic; font-size: 13px; }
+.team-race { display: flex; flex-direction: column; gap: 10px; padding: 4px 0; }
+.team-race .row { display: grid; grid-template-columns: 110px 1fr auto; gap: 10px; align-items: center; font-size: 13px; }
+.team-race .row .lbl { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+.team-race .row.hafn .lbl { color: #9b2d2d; }
+.team-race .row.rest .lbl { color: #1e4880; }
+.team-race .bar { background: #f0f1f4; border-radius: 999px; height: 18px; position: relative; overflow: hidden; }
+.team-race .bar .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; transition: width .3s; }
+.team-race .row.hafn .fill { background: linear-gradient(90deg, #c14a4a, #9b2d2d); }
+.team-race .row.rest .fill { background: linear-gradient(90deg, #2c5680, #1e4880); }
+.team-race .val { font-weight: 700; color: #1d2433; font-variant-numeric: tabular-nums; font-size: 14px; min-width: 90px; text-align: right; }
+.team-race .val .sub { display: block; font-size: 10px; color: #98a0b0; font-weight: 500; margin-top: 1px; }
+.team-race .lead-tag { display: inline-block; margin-left: 6px; padding: 2px 6px; border-radius: 999px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; background: #c19b56; color: #fff; vertical-align: middle; }
 .lb .val { font-weight: 600; color: #1a3a5f; font-variant-numeric: tabular-nums; }
 .lb .gold .rank { color: #c19b56; }
 .lb .gold .name { color: #c19b56; font-weight: 700; }
@@ -229,6 +254,14 @@ footer a { color: #1a3a5f; }
 
   <div class="grid">
     <div class="card">
+      <h2><span class="icon">🥇</span> Sigurvegari dagsins <span class="all-tag">öll 5</span></h2>
+      <ol class="day-winners" id="day-winners"></ol>
+    </div>
+    <div class="card">
+      <h2><span class="icon">🏳️</span> Liðakeppni Stableford <span id="teamstb-tag"></span></h2>
+      <div class="team-race" id="team-race"></div>
+    </div>
+    <div class="card">
       <h2><span class="icon">🏆</span> Belfry 2026 meistarinn <span id="top3-tag"></span></h2>
       <ol class="lb" id="lb-top3"></ol>
       <button class="show-all-btn" data-card="top3">Sýna alla</button>
@@ -379,7 +412,7 @@ footer a { color: #1a3a5f; }
         "ph2": 3
       },
       "ctp": [
-        400
+        { "day": 1, "course": "Brabazon", "hole": 12, "cm": 400 }
       ]
     },
     "19": {
@@ -400,7 +433,7 @@ footer a { color: #1a3a5f; }
         "ph2": 14
       },
       "ctp": [
-        230
+        { "day": 1, "course": "Brabazon", "hole": 7, "cm": 230 }
       ]
     },
     "2": {
@@ -457,7 +490,7 @@ footer a { color: #1a3a5f; }
         "ph2": 20
       },
       "ctp": [
-        450
+        { "day": 1, "course": "Brabazon", "hole": 14, "cm": 450 }
       ]
     },
     "31": {
@@ -514,7 +547,7 @@ footer a { color: #1a3a5f; }
         "ph2": 25
       },
       "ctp": [
-        99
+        { "day": 2, "course": "Derby", "hole": 3, "cm": 99 }
       ]
     },
     "16": {
@@ -553,7 +586,7 @@ footer a { color: #1a3a5f; }
         "ph2": 5
       },
       "ctp": [
-        230
+        { "day": 2, "course": "Derby", "hole": 7, "cm": 230 }
       ]
     },
     "18": {
@@ -592,7 +625,7 @@ footer a { color: #1a3a5f; }
         "ph2": 21
       },
       "ctp": [
-        230
+        { "day": 2, "course": "Derby", "hole": 16, "cm": 230 }
       ]
     },
     "32": {
@@ -829,7 +862,7 @@ footer a { color: #1a3a5f; }
         "ph2": 15
       },
       "ctp": [
-        320
+        { "day": 2, "course": "Derby", "hole": 11, "cm": 320 }
       ]
     },
     "4": {
@@ -1196,7 +1229,37 @@ footer a { color: #1a3a5f; }
   function filteredBirdies(fr) { return activeStatsDays().reduce((s,d) => s + (typeof fr["r"+d] === "number" ? fr["r"+d] : 0), 0); }
   function filteredTop3(pts) { const v = activeStatsDays().map(d => pts["h"+d]).filter(x => typeof x === "number"); v.sort((a,b) => b-a); return v.slice(0,3).reduce((s,x) => s+x, 0); }
   function filteredRounds(obj, key) { return activeStatsDays().filter(d => typeof obj[key + d] === "number").length; }
-  function bestCtp(list) { return (!list || list.length === 0) ? null : Math.min.apply(null, list); }
+  function ctpCm(x) { return typeof x === "number" ? x : (x && typeof x.cm === "number" ? x.cm : null); }
+  function bestCtp(list) {
+    if (!list || list.length === 0) return null;
+    const cms = list.map(ctpCm).filter(v => typeof v === "number");
+    return cms.length ? Math.min.apply(null, cms) : null;
+  }
+  function formIcon(pid) {
+    const pts = getPoints(pid);
+    const st = getStrokes(pid);
+    // Only count days where the player completed the round (has both points AND strokes)
+    const played = [];
+    for (let d = 1; d <= 5; d++) {
+      if (typeof pts["h"+d] === "number" && typeof st["s"+d] === "number") played.push({ d, v: pts["h"+d] });
+    }
+    if (played.length < 2) return "";
+    const last = played[played.length - 1], prev = played[played.length - 2];
+    if (last.v > prev.v) return `<span class="form-icon hot" title="Bætti sig D${prev.d}→D${last.d} (${prev.v} → ${last.v})">🔥</span>`;
+    if (last.v < prev.v) return `<span class="form-icon cold" title="Versnaði D${prev.d}→D${last.d} (${prev.v} → ${last.v})">❄️</span>`;
+    return "";
+  }
+  function bestCtpEntry(list) {
+    if (!list || list.length === 0) return null;
+    let best = null;
+    for (const x of list) {
+      const cm = ctpCm(x);
+      if (typeof cm !== "number") continue;
+      const entry = typeof x === "number" ? { cm: x } : x;
+      if (best === null || cm < best.cm) best = entry;
+    }
+    return best;
+  }
   function playerName(id) { const p = PLAYERS.find(x => x.id === id); return p ? p.name : `#${id}`; }
   function nameLink(id, name) { return id != null ? `<a class="name-link" href="player.html?player=${id}">${name}</a>` : name; }
 
@@ -1318,7 +1381,16 @@ footer a { color: #1a3a5f; }
   function getMovers() {
     const ctx = getComparisonContext();
     if (!ctx) return { up: [], down: [], currentDay: null, previousDay: null };
-    const all = PLAYERS.map(p => { const pts = getPoints(p.id); const cur = pts["h"+ctx.currentDay]; const prev = pts["h"+ctx.previousDay]; if (typeof cur !== "number" || typeof prev !== "number") return null; return { id: p.id, delta: cur - prev }; }).filter(x => x);
+    const all = PLAYERS.map(p => {
+      const pts = getPoints(p.id);
+      const st = getStrokes(p.id);
+      const cur = pts["h"+ctx.currentDay];
+      const prev = pts["h"+ctx.previousDay];
+      // Require both points AND strokes for both days (excludes players who didn't play, or partial rounds)
+      if (typeof cur !== "number" || typeof prev !== "number") return null;
+      if (typeof st["s"+ctx.currentDay] !== "number" || typeof st["s"+ctx.previousDay] !== "number") return null;
+      return { id: p.id, delta: cur - prev };
+    }).filter(x => x);
     return {
       up: all.filter(x => x.delta > 0).sort((a,b) => b.delta - a.delta).slice(0,5),
       down: all.filter(x => x.delta < 0).sort((a,b) => a.delta - b.delta).slice(0,5),
@@ -1334,7 +1406,7 @@ footer a { color: #1a3a5f; }
       case "strokesDay": return asNum(st["s"+d]); case "ptsDay": return asNum(pts["h"+d]); case "fDay": return asNum(fr["r"+d]);
       case "top3": return topN(Object.values(pts), 3) || null;
       case "totalPts": return sumNums(pts) || null; case "totalStrokes": return sumNums(st) || null; case "fugTotal": return sumNums(fr) || null;
-      case "ctpInput": return ctps.length > 0 ? ctps.join(",") : null; case "ctpBest": return bestCtp(ctps); case "ctpCount": return ctps.length || null;
+      case "ctpInput": return ctps.length > 0 ? ctps.map(x => ctpCm(x)).filter(v => v != null).join(",") : null; case "ctpBest": return bestCtp(ctps); case "ctpCount": return ctps.length || null;
       case "drinks": return drinkBalance(p.id) || null;
       default: return p.id;
     }
@@ -1381,7 +1453,7 @@ footer a { color: #1a3a5f; }
     const drinkCell = drinks === 0 ? '<span class="empty">—</span>' : (drinks > 0 ? `+${drinks}` : String(drinks));
     tr.innerHTML = `
       <td class="num">${p.id}</td>
-      <td>${nameLink(p.id, p.name)}</td>
+      <td>${nameLink(p.id, p.name)}${formIcon(p.id)}</td>
       <td class="num">${p.room}</td>
       <td><span class="badge ${p.team === "H" ? "hafn" : "rest"}">${p.team === "H" ? "Hafn." : "Aðrir"}</span></td>
       <td class="num">${fmtHcp(p.hcp)}</td>
@@ -1393,7 +1465,7 @@ footer a { color: #1a3a5f; }
       <td class="num computed">${tPts || '<span class="empty">—</span>'}</td>
       <td class="num computed">${tSt || '<span class="empty">—</span>'}</td>
       <td class="num computed">${tF || '<span class="empty">—</span>'}</td>
-      <td class="group-start">${ctps.length ? ctps.join(", ") : '<span class="empty">—</span>'}</td>
+      <td class="group-start">${ctps.length ? ctps.map(x => { const cm = ctpCm(x); if (typeof x === "number") return cm + " cm"; const lbl = []; if (x.day) lbl.push("D"+x.day); if (x.hole) lbl.push("h"+x.hole); return cm + " cm (" + lbl.join(" ") + ")"; }).join("; ") : '<span class="empty">—</span>'}</td>
       <td class="num computed">${bestCtp(ctps) != null ? bestCtp(ctps) : '<span class="empty">—</span>'}</td>
       <td class="num computed">${ctps.length || '<span class="empty">—</span>'}</td>
       <td class="num computed group-start">${drinkCell}</td>
@@ -1451,7 +1523,8 @@ footer a { color: #1a3a5f; }
         // Wrap individual player names in a link, but skip room rows (which have multiple players)
         const isPlayerRow = r.id != null && PLAYERS.some(p => p.id === r.id);
         const displayName = isPlayerRow ? nameLink(r.id, r.name) : r.name;
-        li.innerHTML = `<span class="rank">${i+1}.</span><span class="name">${deltaHtml}${displayName}</span><span class="val">${valueFmt(r.value)}</span>`;
+        const subHtml = r.sub ? `<span class="lb-sub">${r.sub}</span>` : "";
+        li.innerHTML = `<span class="rank">${i+1}.</span><span class="name">${deltaHtml}${displayName}${subHtml}</span><span class="val">${valueFmt(r.value)}</span>`;
         ol.appendChild(li);
       });
     }
@@ -1564,11 +1637,63 @@ footer a { color: #1a3a5f; }
       });
     });
   }
+  const COURSE_BY_DAY = { 1: "Brabazon", 2: "Derby", 3: "Brabazon", 4: "PGA National", 5: "Brabazon" };
+  const DATE_BY_DAY   = { 1: "14. maí", 2: "15. maí", 3: "16. maí", 4: "17. maí", 5: "18. maí" };
+  function renderDayWinners() {
+    const ul = document.getElementById("day-winners");
+    if (!ul) return;
+    ul.innerHTML = "";
+    for (let d = 1; d <= 5; d++) {
+      const scores = PLAYERS.map(p => ({ id: p.id, name: p.name, v: getPoints(p.id)["h"+d] })).filter(r => typeof r.v === "number");
+      const winner = scores.length ? scores.reduce((a,b) => b.v > a.v ? b : a) : null;
+      const li = document.createElement("li");
+      if (winner) {
+        li.innerHTML = `<span class="day-pill done">D${d}</span><div class="info"><span class="name">${nameLink(winner.id, winner.name)}</span><span class="sub">${COURSE_BY_DAY[d]} · ${DATE_BY_DAY[d]}</span></div><span class="pts">${winner.v} pts</span>`;
+      } else {
+        li.innerHTML = `<span class="day-pill pending">D${d}</span><div class="info"><span class="pending-text">bíður</span><span class="sub">${COURSE_BY_DAY[d]} · ${DATE_BY_DAY[d]}</span></div><span></span>`;
+      }
+      ul.appendChild(li);
+    }
+  }
+  function renderTeamStableford() {
+    const wrap = document.getElementById("team-race");
+    const tag = document.getElementById("teamstb-tag");
+    if (!wrap) return;
+    if (tag) tag.innerHTML = filterTagHtml();
+    let hafnSum = 0, restSum = 0, hafnPlayed = 0, restPlayed = 0;
+    PLAYERS.forEach(p => {
+      const total = filteredPoints(getPoints(p.id));
+      const played = filteredRounds(getPoints(p.id), "h");
+      if (p.team === "H") { hafnSum += total; hafnPlayed += played; }
+      else { restSum += total; restPlayed += played; }
+    });
+    const max = Math.max(hafnSum, restSum) || 1;
+    const hafnPct = Math.round(hafnSum / max * 100);
+    const restPct = Math.round(restSum / max * 100);
+    const hafnLead = hafnSum > restSum ? '<span class="lead-tag">leiðir</span>' : '';
+    const restLead = restSum > hafnSum ? '<span class="lead-tag">leiðir</span>' : '';
+    const hafnAvg = hafnPlayed ? (hafnSum / hafnPlayed).toFixed(1).replace(".", ",") : "—";
+    const restAvg = restPlayed ? (restSum / restPlayed).toFixed(1).replace(".", ",") : "—";
+    wrap.innerHTML = `
+      <div class="row hafn">
+        <span class="lbl">Hafnarfjörður${hafnLead}</span>
+        <div class="bar"><div class="fill" style="width:${hafnPct}%"></div></div>
+        <div class="val">${hafnSum} pts<span class="sub">⌀ ${hafnAvg}/hringur</span></div>
+      </div>
+      <div class="row rest">
+        <span class="lbl">Aðrir${restLead}</span>
+        <div class="bar"><div class="fill" style="width:${restPct}%"></div></div>
+        <div class="val">${restSum} pts<span class="sub">⌀ ${restAvg}/hringur</span></div>
+      </div>
+    `;
+  }
   function renderLeaderboards() {
     document.getElementById("top3-tag").innerHTML    = filterTagHtml();
     document.getElementById("rooms-tag").innerHTML   = filterTagHtml();
     document.getElementById("strokes-tag").innerHTML = filterTagHtml();
     document.getElementById("birdies-tag").innerHTML = filterTagHtml();
+    renderDayWinners();
+    renderTeamStableford();
 
     const top3 = PLAYERS.map(p => ({ id: p.id, name: p.name, value: filteredTop3(getPoints(p.id)), played: filteredRounds(getPoints(p.id), "h") })).filter(r => r.played > 0).sort((a,b) => b.value - a.value);
     lb("top3", "lb-top3", top3, v => `${v} pts`, getRankDeltas());
@@ -1595,14 +1720,44 @@ footer a { color: #1a3a5f; }
     const strokes = PLAYERS.map(p => ({ id: p.id, name: p.name, value: filteredStrokes(getStrokes(p.id)), played: filteredRounds(getStrokes(p.id), "s") })).filter(r => r.played > 0 && (ui.statsFilter !== "all" || r.played === _strokeDays.length)).sort((a,b) => a.value - b.value);
     lb("strokes", "lb-strokes", strokes, v => `${v} högg`, getStrokesDeltas());
 
-    const birdies = PLAYERS.map(p => ({ id: p.id, name: p.name, value: filteredBirdies(getBirdies(p.id)) })).filter(r => r.value > 0).sort((a,b) => b.value - a.value);
+    const birdies = PLAYERS.map(p => {
+      const fr = getBirdies(p.id);
+      const value = filteredBirdies(fr);
+      if (value === 0) return null;
+      const days = activeStatsDays();
+      const subs = days.map(d => {
+        const n = fr["r"+d];
+        return (typeof n === "number" && n > 0) ? `D${d} · ${COURSE_BY_DAY[d]}: ${n}` : null;
+      }).filter(Boolean);
+      return { id: p.id, name: p.name, value, sub: subs.join(" · ") };
+    }).filter(r => r && r.value > 0).sort((a,b) => b.value - a.value);
     lb("birdies", "lb-birdies", birdies, v => `${v}`, getBirdiesDeltas());
 
-    const ctpCm = PLAYERS.map(p => ({ name: p.name, value: bestCtp(getCtps(p.id)) })).filter(r => typeof r.value === "number").sort((a,b) => a.value - b.value);
-    lb("ctpCm", "lb-ctp-cm", ctpCm, v => `${v} cm`);
+    const ctpRows = PLAYERS.map(p => {
+      const entry = bestCtpEntry(getCtps(p.id));
+      if (!entry) return null;
+      const parts = [];
+      if (entry.day) parts.push("D" + entry.day);
+      if (entry.course) parts.push(entry.course);
+      if (entry.hole) parts.push("holu " + entry.hole);
+      return { id: p.id, name: p.name, value: entry.cm, sub: parts.join(" · ") };
+    }).filter(r => r && typeof r.value === "number").sort((a,b) => a.value - b.value);
+    lb("ctpCm", "lb-ctp-cm", ctpRows, v => `${v} cm`);
 
-    const ctpCount = PLAYERS.map(p => ({ name: p.name, value: getCtps(p.id).length })).filter(r => r.value > 0).sort((a,b) => b.value - a.value);
-    lb("ctpCount", "lb-ctp-count", ctpCount, v => `${v}×`);
+    const ctpCountRows = PLAYERS.map(p => {
+      const list = getCtps(p.id);
+      if (list.length === 0) return null;
+      const subs = list.map(x => {
+        const parts = [];
+        if (x.day) parts.push("D" + x.day);
+        if (x.course) parts.push(x.course);
+        if (x.hole) parts.push("holu " + x.hole);
+        if (parts.length === 0) return ctpCm(x) + " cm";
+        return parts.join(" · ") + " (" + ctpCm(x) + " cm)";
+      });
+      return { id: p.id, name: p.name, value: list.length, sub: subs.join(" · ") };
+    }).filter(r => r && r.value > 0).sort((a,b) => b.value - a.value);
+    lb("ctpCount", "lb-ctp-count", ctpCountRows, v => `${v}×`);
 
     document.getElementById("ryder-hafn").textContent = snapshot.ryder.hafn || 0;
     document.getElementById("ryder-rest").textContent = snapshot.ryder.rest || 0;

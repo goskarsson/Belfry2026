@@ -35,6 +35,7 @@ header.app-header .back:hover { background: rgba(0,0,0,.32); }
 .profile-card .meta .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
 .profile-card .meta .badge.hafn { background: #fcecec; color: #9b2d2d; }
 .profile-card .meta .badge.rest { background: #e8eef7; color: #1e4880; }
+.form-icon { font-size: 14px; margin-left: 6px; cursor: help; vertical-align: middle; }
 
 .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
 .hero-stat { background: #fff; border: 1px solid #e8eaef; border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
@@ -1051,6 +1052,20 @@ footer a { color: #1a3a5f; }
     const idx = all.findIndex(r => r.id === pid);
     return idx >= 0 ? idx + 1 : null;
   }
+  function formIcon(pid) {
+    const pts = getPts(pid);
+    const st = getSt(pid);
+    // Only count days where the player completed the round (has both points AND strokes)
+    const played = [];
+    for (let d = 1; d <= 5; d++) {
+      if (typeof pts["h"+d] === "number" && typeof st["s"+d] === "number") played.push({ d, v: pts["h"+d] });
+    }
+    if (played.length < 2) return "";
+    const last = played[played.length - 1], prev = played[played.length - 2];
+    if (last.v > prev.v) return `<span class="form-icon hot" title="Bætti sig D${prev.d}→D${last.d} (${prev.v} → ${last.v})">🔥</span>`;
+    if (last.v < prev.v) return `<span class="form-icon cold" title="Versnaði D${prev.d}→D${last.d} (${prev.v} → ${last.v})">❄️</span>`;
+    return "";
+  }
   function isTeamMatch(m) { return m && (m.a1 != null || m.a2 != null || m.b1 != null || m.b2 != null); }
   function teamA(m) { return [m.a1, m.a2].filter(x => x != null); }
   function teamB(m) { return [m.b1, m.b2].filter(x => x != null); }
@@ -1107,11 +1122,17 @@ footer a { color: #1a3a5f; }
 
   // ---------- Chart.js charts ----------
   let ptsChart = null, rankChart = null;
+  // Helper: which days have any player data?
+  function playedDayNums() {
+    return DAYS.filter(d => PLAYERS.some(pp => typeof getPts(pp.id)["h"+d.num] === "number" || typeof getSt(pp.id)["s"+d.num] === "number")).map(d => d.num);
+  }
   function renderCharts(pid) {
     const ptsRow = getPts(pid);
-    const days = DAYS.map(d => d.short);
-    const myPts = DAYS.map(d => typeof ptsRow["h"+d.num] === "number" ? ptsRow["h"+d.num] : null);
-    const avgPts = DAYS.map(d => {
+    const playedNums = playedDayNums();
+    const chartDays = playedNums.length ? DAYS.filter(d => playedNums.includes(d.num)) : DAYS;
+    const days = chartDays.map(d => d.short);
+    const myPts = chartDays.map(d => typeof ptsRow["h"+d.num] === "number" ? ptsRow["h"+d.num] : null);
+    const avgPts = chartDays.map(d => {
       const vals = PLAYERS.map(p => getPts(p.id)["h"+d.num]).filter(v => typeof v === "number");
       return vals.length ? Math.round(vals.reduce((s,v) => s+v, 0) / vals.length * 10) / 10 : null;
     });
@@ -1132,8 +1153,8 @@ footer a { color: #1a3a5f; }
       }
     });
 
-    // Rank chart
-    const myRanks = DAYS.map(d => rankAt(pid, d.num));
+    // Rank chart - only show played days
+    const myRanks = chartDays.map(d => rankAt(pid, d.num));
     if (rankChart) rankChart.destroy();
     rankChart = new Chart(document.getElementById("rankChart"), {
       type: "line",
@@ -1213,7 +1234,7 @@ footer a { color: #1a3a5f; }
     document.getElementById("profile-card").innerHTML = `
       <div class="avatar ${teamClass}">${initials(p.name)}</div>
       <div class="info">
-        <h2>${p.name}</h2>
+        <h2>${p.name}${formIcon(p.id)}</h2>
         <div class="meta">
           <span class="badge ${teamClass}">${teamLabel}</span>
           <span>Herbergi <strong>${p.room}</strong></span>
