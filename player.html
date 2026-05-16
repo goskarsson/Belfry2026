@@ -1198,6 +1198,10 @@ footer a { color: #1a3a5f; }
     { id: 1,  name: "Ásgeir Kr Sigurðsson",        room: 11, hcp: 34.2, team: "R" },
     { id: 20, name: "Sigurður Gunnarsson",         room: 11, hcp: 36,   team: "R" },
   ];
+  // Players withdrawn from individual competition mid-tournament (Ryder/Drykkurinn unaffected)
+  const WITHDRAWN_FROM = { 2: 2 }; // Ásgeir Ólafsson withdrew from Day 2
+  function isWD(pid, day) { return WITHDRAWN_FROM[pid] != null && day >= WITHDRAWN_FROM[pid]; }
+
   const DAYS = [
     { num: 1, short: "D1", weekday: "Fim.", date: "14. maí", course: "Brabazon" },
     { num: 2, short: "D2", weekday: "Fös.", date: "15. maí", course: "Derby" },
@@ -1257,7 +1261,7 @@ footer a { color: #1a3a5f; }
   function top3PtsUpTo(pid, maxDay) {
     const pts = getPts(pid);
     const vals = [];
-    for (let d = 1; d <= maxDay; d++) if (typeof pts["h"+d] === "number") vals.push(pts["h"+d]);
+    for (let d = 1; d <= maxDay; d++) if (!isWD(pid, d) && typeof pts["h"+d] === "number") vals.push(pts["h"+d]);
     vals.sort((a, b) => b - a);
     return vals.slice(0, 3).reduce((s, v) => s + v, 0);
   }
@@ -1351,7 +1355,7 @@ footer a { color: #1a3a5f; }
     const days = chartDays.map(d => d.short);
     const myPts = chartDays.map(d => typeof ptsRow["h"+d.num] === "number" ? ptsRow["h"+d.num] : null);
     const avgPts = chartDays.map(d => {
-      const vals = PLAYERS.map(p => getPts(p.id)["h"+d.num]).filter(v => typeof v === "number");
+      const vals = PLAYERS.filter(p => !isWD(p.id, d.num)).map(p => getPts(p.id)["h"+d.num]).filter(v => typeof v === "number");
       return vals.length ? Math.round(vals.reduce((s,v) => s+v, 0) / vals.length * 10) / 10 : null;
     });
     if (ptsChart) ptsChart.destroy();
@@ -1439,9 +1443,11 @@ footer a { color: #1a3a5f; }
     const p = PLAYERS.find(x => x.id === currentId);
     if (!p) return;
     const ptsRow = getPts(p.id), stRow = getSt(p.id), frRow = getFr(p.id), phRow = getPh(p.id), ctps = getCtp(p.id);
-    const totalPts = Object.values(ptsRow).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
-    const totalSt = Object.values(stRow).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
-    const totalFugla = Object.values(frRow).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
+    const wdFrom = WITHDRAWN_FROM[p.id];
+    // Totals only count non-withdrawn days
+    const totalPts = DAYS.filter(d => !isWD(p.id, d.num)).map(d => ptsRow["h"+d.num]).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
+    const totalSt  = DAYS.filter(d => !isWD(p.id, d.num)).map(d => stRow["s"+d.num]).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
+    const totalFugla = DAYS.filter(d => !isWD(p.id, d.num)).map(d => frRow["r"+d.num]).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
     const top3 = top3PtsUpTo(p.id, 5);
     const myRank = rankAt(p.id, 5);
     const drinks = drinkBalance(p.id);
@@ -1457,6 +1463,7 @@ footer a { color: #1a3a5f; }
           <span class="badge ${teamClass}">${teamLabel}</span>
           <span>Herbergi <strong>${p.room}</strong></span>
           <span>Forgjöf <strong>${fmtHcp(p.hcp)}</strong></span>
+          ${wdFrom ? `<span style="background:#fdf5e6;color:#c19b56;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;">WD frá D${wdFrom}</span>` : ""}
         </div>
       </div>
     `;
@@ -1475,15 +1482,17 @@ footer a { color: #1a3a5f; }
       <thead><tr><th>Dagur</th><th>Völlur</th><th class="num">Leikfgj.</th><th class="num">Högg</th><th class="num">Punktar</th><th class="num">Fuglar</th></tr></thead>
       <tbody>
         ${DAYS.map(d => {
+          const wd = isWD(p.id, d.num);
           const ph = phRow["ph"+d.num], st = stRow["s"+d.num], pts = ptsRow["h"+d.num], fr = frRow["r"+d.num];
           const fmt = v => typeof v === "number" ? v : '<span class="empty">—</span>';
-          return `<tr>
-            <td><span class="day-cell">${d.short}</span> · ${d.weekday} ${d.date}</td>
+          const wdCell = '<span class="empty" title="Dró sig úr keppni">WD</span>';
+          return `<tr${wd ? ' style="opacity:0.5"' : ""}>
+            <td><span class="day-cell">${d.short}</span> · ${d.weekday} ${d.date}${wd ? ' <span style="font-size:10px;color:#c19b56;font-weight:700">WD</span>' : ""}</td>
             <td>${d.course}</td>
-            <td class="num">${fmtLeikHcp(ph)}</td>
-            <td class="num">${fmt(st)}</td>
-            <td class="num">${fmt(pts)}</td>
-            <td class="num">${fmt(fr)}</td>
+            <td class="num">${wd ? wdCell : fmtLeikHcp(ph)}</td>
+            <td class="num">${wd ? wdCell : fmt(st)}</td>
+            <td class="num">${wd ? wdCell : fmt(pts)}</td>
+            <td class="num">${wd ? wdCell : fmt(fr)}</td>
           </tr>`;
         }).join("")}
         <tr class="total">

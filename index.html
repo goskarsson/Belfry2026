@@ -1345,6 +1345,16 @@ footer a { color: #1a3a5f; }
     { id: 20, name: "Sigurður Gunnarsson",         room: 11, hcp: 36,   team: "R" },
   ];
 
+  // Players who withdrew from individual competition mid-tournament.
+  // Key = player id, value = first day they are withdrawn from (inclusive).
+  // Ryder and Drykkurinn are NOT affected.
+  const WITHDRAWN_FROM = { 2: 2 }; // Ásgeir Ólafsson withdrew D2+
+  function isWD(pid, day) { return WITHDRAWN_FROM[pid] != null && day >= WITHDRAWN_FROM[pid]; }
+  // Filtered data objects for individual competition (strips withdrawn days)
+  function ptsFiltered(id) { const o = getPoints(id); if (!WITHDRAWN_FROM[id]) return o; const r={}; for(let d=1;d<=5;d++) if(!isWD(id,d)&&o["h"+d]!=null) r["h"+d]=o["h"+d]; return r; }
+  function stFiltered(id)  { const o = getStrokes(id); if (!WITHDRAWN_FROM[id]) return o; const r={}; for(let d=1;d<=5;d++) if(!isWD(id,d)&&o["s"+d]!=null) r["s"+d]=o["s"+d]; return r; }
+  function frFiltered(id)  { const o = getBirdies(id); if (!WITHDRAWN_FROM[id]) return o; const r={}; for(let d=1;d<=5;d++) if(!isWD(id,d)&&o["r"+d]!=null) r["r"+d]=o["r"+d]; return r; }
+
   const DISPLAY_NAMES = (function () {
     const groups = {};
     PLAYERS.forEach(p => { const f = p.name.split(" ")[0]; (groups[f] = groups[f] || []).push(p); });
@@ -1587,10 +1597,10 @@ footer a { color: #1a3a5f; }
     });
     return out;
   }
-  function scoreTop3Pts(days) { return PLAYERS.map(p => { const pts = getPoints(p.id); const vals = days.map(d => pts["h"+d]).filter(v => typeof v === "number"); vals.sort((a,b) => b-a); const t = vals.slice(0,3).reduce((s,v) => s+v, 0); return { id: p.id, value: t > 0 ? t : null }; }); }
-  function scoreRoomTotal(days) { const map = {}; PLAYERS.forEach(p => { const pts = getPoints(p.id); let total = 0, played = false; days.forEach(d => { if (typeof pts["h"+d] === "number") { total += pts["h"+d]; played = true; } }); if (!map[p.room]) map[p.room] = { value: 0, played: false }; map[p.room].value += total; if (played) map[p.room].played = true; }); return Object.entries(map).map(([room, v]) => ({ id: Number(room), value: v.played ? v.value : null })); }
-  function scoreStrokesTotal(days) { return PLAYERS.map(p => { const st = getStrokes(p.id); let total = 0, played = false; days.forEach(d => { if (typeof st["s"+d] === "number") { total += st["s"+d]; played = true; } }); return { id: p.id, value: played ? total : null }; }); }
-  function scoreBirdiesTotal(days) { return PLAYERS.map(p => { const fr = getBirdies(p.id); let total = 0; days.forEach(d => { if (typeof fr["r"+d] === "number") total += fr["r"+d]; }); return { id: p.id, value: total > 0 ? total : null }; }); }
+  function scoreTop3Pts(days) { return PLAYERS.map(p => { const pts = getPoints(p.id); const vals = days.filter(d => !isWD(p.id,d)).map(d => pts["h"+d]).filter(v => typeof v === "number"); vals.sort((a,b) => b-a); const t = vals.slice(0,3).reduce((s,v) => s+v, 0); return { id: p.id, value: t > 0 ? t : null }; }); }
+  function scoreRoomTotal(days) { const map = {}; PLAYERS.forEach(p => { const pts = getPoints(p.id); let total = 0, played = false; days.filter(d => !isWD(p.id,d)).forEach(d => { if (typeof pts["h"+d] === "number") { total += pts["h"+d]; played = true; } }); if (!map[p.room]) map[p.room] = { value: 0, played: false }; map[p.room].value += total; if (played) map[p.room].played = true; }); return Object.entries(map).map(([room, v]) => ({ id: Number(room), value: v.played ? v.value : null })); }
+  function scoreStrokesTotal(days) { return PLAYERS.map(p => { const st = getStrokes(p.id); let total = 0, played = false; days.filter(d => !isWD(p.id,d)).forEach(d => { if (typeof st["s"+d] === "number") { total += st["s"+d]; played = true; } }); return { id: p.id, value: played ? total : null }; }); }
+  function scoreBirdiesTotal(days) { return PLAYERS.map(p => { const fr = getBirdies(p.id); let total = 0; days.filter(d => !isWD(p.id,d)).forEach(d => { if (typeof fr["r"+d] === "number") total += fr["r"+d]; }); return { id: p.id, value: total > 0 ? total : null }; }); }
   function getRankDeltas() { return computeRankDeltas(scoreTop3Pts, false); }
   function getRoomDeltas() { return computeRankDeltas(scoreRoomTotal, false); }
   function getStrokesDeltas() { return computeRankDeltas(scoreStrokesTotal, true); }
@@ -1602,6 +1612,8 @@ footer a { color: #1a3a5f; }
     const all = PLAYERS.map(p => {
       const pts = getPoints(p.id);
       const st = getStrokes(p.id);
+      // Exclude players withdrawn for either comparison day
+      if (isWD(p.id, ctx.currentDay) || isWD(p.id, ctx.previousDay)) return null;
       const cur = pts["h"+ctx.currentDay];
       const prev = pts["h"+ctx.previousDay];
       // Require both points AND strokes for both days (excludes players who didn't play, or partial rounds)
@@ -1654,8 +1666,9 @@ footer a { color: #1a3a5f; }
   function buildRow(p) {
     const d = ui.activeDay;
     const pts = getPoints(p.id), st = getStrokes(p.id), fr = getBirdies(p.id), ctps = getCtps(p.id), ph = getPlayingHcp(p.id);
+    const wd = isWD(p.id, d);
     let ptDeltaHtml = "";
-    if (d >= 2) {
+    if (!wd && d >= 2 && !isWD(p.id, d-1)) {
       const cur = pts["h"+d], prev = pts["h"+(d-1)];
       if (typeof cur === "number" && typeof prev === "number") {
         const delta = cur - prev;
@@ -1665,20 +1678,24 @@ footer a { color: #1a3a5f; }
     }
     const tr = document.createElement("tr");
     tr.dataset.pid = p.id;
-    const t3 = topN(Object.values(pts), 3);
-    const tPts = sumNums(pts), tSt = sumNums(st), tF = sumNums(fr);
+    if (wd) tr.style.opacity = "0.55";
+    // Use filtered stats (excluding withdrawn days) for cumulative columns
+    const ptsF = ptsFiltered(p.id), stF = stFiltered(p.id), frF = frFiltered(p.id);
+    const t3 = topN(Object.values(ptsF), 3);
+    const tPts = sumNums(ptsF), tSt = sumNums(stF), tF = sumNums(frF);
     const drinks = drinkBalance(p.id);
     const drinkCell = drinks === 0 ? '<span class="empty">—</span>' : (drinks > 0 ? `+${drinks}` : String(drinks));
+    const wdCell = '<span class="empty" title="Dró sig úr">WD</span>';
     tr.innerHTML = `
       <td class="num">${p.id}</td>
-      <td>${nameLink(p.id, p.name)}${formIcon(p.id)}</td>
+      <td>${nameLink(p.id, p.name)}${wd ? ' <span style="font-size:10px;color:#c19b56;font-weight:700">WD</span>' : formIcon(p.id)}</td>
       <td class="num">${p.room}</td>
       <td><span class="badge ${p.team === "H" ? "hafn" : "rest"}">${p.team === "H" ? "Hafn." : "Aðrir"}</span></td>
       <td class="num">${fmtHcp(p.hcp)}</td>
-      <td class="num">${fmtLeikHcp(ph["ph"+d])}</td>
-      <td class="num group-start day-col">${fmt(st["s"+d])}</td>
-      <td class="num day-col">${fmt(pts["h"+d])}${ptDeltaHtml}</td>
-      <td class="num day-col">${fmt(fr["r"+d])}</td>
+      <td class="num">${wd ? wdCell : fmtLeikHcp(ph["ph"+d])}</td>
+      <td class="num group-start day-col">${wd ? wdCell : fmt(st["s"+d])}</td>
+      <td class="num day-col">${wd ? wdCell : fmt(pts["h"+d])+ptDeltaHtml}</td>
+      <td class="num day-col">${wd ? wdCell : fmt(fr["r"+d])}</td>
       <td class="num computed group-start">${t3 || '<span class="empty">—</span>'}</td>
       <td class="num computed">${tPts || '<span class="empty">—</span>'}</td>
       <td class="num computed">${tSt || '<span class="empty">—</span>'}</td>
