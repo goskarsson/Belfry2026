@@ -36,6 +36,7 @@ header.app-header .back:hover { background: rgba(0,0,0,.32); }
 .profile-card .meta .badge.hafn { background: #fcecec; color: #9b2d2d; }
 .profile-card .meta .badge.rest { background: #e8eef7; color: #1e4880; }
 .form-icon { font-size: 14px; margin-left: 6px; cursor: help; vertical-align: middle; }
+.eagle-icon { font-size: 14px; margin-left: 5px; cursor: help; vertical-align: middle; filter: drop-shadow(0 1px 2px rgba(193,155,86,.6)); }
 
 .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
 .hero-stat { background: #fff; border: 1px solid #e8eaef; border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
@@ -342,12 +343,15 @@ footer a { color: #1a3a5f; }
       "birdies": {
         "r1": 0,
         "r2": 0,
-        "r3": 3
+        "r3": 4
       },
       "playingHcp": {
         "ph1": 9,
         "ph2": 8,
         "ph3": 9
+      },
+      "eagles": {
+        "e3": 1
       }
     },
     "22": {
@@ -795,7 +799,7 @@ footer a { color: #1a3a5f; }
       "birdies": {
         "r1": 0,
         "r2": 0,
-        "r3": 1
+        "r3": 2
       },
       "playingHcp": {
         "ph1": 20,
@@ -804,7 +808,10 @@ footer a { color: #1a3a5f; }
       },
       "ctp": [
         { "day": 3, "course": "Brabazon", "hole": 7, "cm": 235 }
-      ]
+      ],
+      "eagles": {
+        "e3": 1
+      }
     },
     "25": {
       "points": {
@@ -1224,13 +1231,27 @@ footer a { color: #1a3a5f; }
   function getFr(id)   { return getData(id).birdies    || {}; }
   function getPh(id)   { return getData(id).playingHcp || {}; }
   function getCtp(id)  { return getData(id).ctp        || []; }
+  function getEagles(id) { return getData(id).eagles || {}; }
+  function totalEagles(id) {
+    const e = getEagles(id);
+    return Object.values(e).filter(v => typeof v === "number").reduce((s,v) => s+v, 0);
+  }
+  function eagleIcon(id) {
+    const total = totalEagles(id);
+    if (total === 0) return "";
+    const e = getEagles(id);
+    const parts = [];
+    for (let d = 1; d <= 5; d++) if (e["e"+d]) parts.push(`${e["e"+d]} D${d}`);
+    const title = total === 1 ? "1 örn" : `${total} ernir`;
+    return `<span class="eagle-icon" title="${title} (${parts.join(", ")})">🦅</span>`;
+  }
   function fmtHcp(h)   { return typeof h === "number" ? h.toFixed(1).replace(".", ",") : "—"; }
   function fmtLeikHcp(h){ return typeof h === "number" ? String(Math.round(h)) : "—"; }
   function num(v)      { return typeof v === "number" ? v : 0; }
   function fmtNum(v)   { return typeof v === "number" ? v : "—"; }
   function fmtDelta(v) { if (typeof v !== "number") return ""; return v > 0 ? `+${v}` : String(v); }
   function playerName(id) { const p = PLAYERS.find(x => x.id === id); return p ? p.name : `#${id}`; }
-  function nameLink(id, name) { return id != null ? `<a class="name-link" href="?player=${id}">${name}</a>` : name; }
+  function nameLink(id, name) { return id != null ? `<a class="name-link" href="?player=${id}">${name}</a>${eagleIcon(id)}` : name; }
   function initials(name) {
     return name.split(" ").slice(0, 2).map(s => s[0]).join("").toUpperCase();
   }
@@ -1434,7 +1455,7 @@ footer a { color: #1a3a5f; }
     document.getElementById("profile-card").innerHTML = `
       <div class="avatar ${teamClass}">${initials(p.name)}</div>
       <div class="info">
-        <h2>${p.name}${formIcon(p.id)}</h2>
+        <h2>${p.name}${eagleIcon(p.id)}${formIcon(p.id)}</h2>
         <div class="meta">
           <span class="badge ${teamClass}">${teamLabel}</span>
           <span>Herbergi <strong>${p.room}</strong></span>
